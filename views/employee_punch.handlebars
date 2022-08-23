@@ -1,0 +1,66 @@
+<div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
+
+    <div class="card text-center" style="width: 25rem;">
+        <div class="card-body">
+            <h5 class="card-title">Summary</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Welcome back!</h6>
+            <hr>
+
+            <div class='row'>
+                {{!-- {{#each }} --}}
+             
+                    <br>
+                    <p class="card-text"> Working Hours: </p>
+                    {{!-- <h3 class="card-text"> {{working_hours}} </h3> --}}
+
+                    <p class="card-text">Hourly Rate: </p>
+                    {{!-- <h3 class="card-text">{{hourly_rate}}</h3> --}}
+
+                    <p class="card-text">Total Salary: </p>
+                    {{!-- <h3 class="card-text">{{total_salary}}</h3> --}}
+
+                    <br>
+                    <br>
+      
+                {{!-- {{/each}} --}}
+            </div>
+
+            <hr>
+
+            <button type="button" class="btn btn-primary btn-ml">Punch In</button>
+            <button type="button" class="btn btn-secondary btn-ml">Punch Out</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- below announcement box can add later-->
+<!--  announcement alert box 
+<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <img src="..." class="rounded me-2" alt="...">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+  </div>
+</div>
+
+<script>
+    const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+if (toastTrigger) {
+  toastTrigger.addEventListener('click', () => {
+    const toast = new bootstrap.Toast(toastLiveExample)
+
+    toast.show()
+  })
+}
+</script>
+-->
