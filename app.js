@@ -73,12 +73,12 @@ app.get("/company_login", (req, res) => {
     res.render("company_login");
 })
 
-app.get("/company_summary", (req,res) => {
+app.get("/company_summary", (req, res) => {
     res.type(".html");
     res.render("company_summary");
 })
 
-app.get("/company_calendar", (req, res) =>{
+app.get("/company_calendar", (req, res) => {
     res.type(".html");
     res.render("company_calendar");
 })
@@ -86,14 +86,14 @@ app.get("/company_calendar", (req, res) =>{
 
 
 //set up node router
-app.use("/api/company", new nodeRouterCompany(new nodeServiceCompany(fs, knex), express).router());
+app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express).router());
 
 app.use("/api/employee", new nodeRouterEmployee(new nodeServiceEmployee(fs, knex), express).router());
 
 app.listen(port, () => {
     console.log(
         `app listening to port ${port}
-    company site: http://localhost:${port}/api/company
+    company site: http://localhost:${port}/biz
     employee site: http://localhost:${port}/api/employee
     root site: http://localhost:${port} `)
 });
