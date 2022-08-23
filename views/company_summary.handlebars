@@ -1,0 +1,23 @@
+<!--Search bar-->
+<nav class="navbar bg-light d-flex justify-content-center align-items-center fixed-top">
+    <div class="container-fluid">
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<br>
+
+<!--Each employee information-->
+<div class='row'>
+    {{!-- {{#each employee}} --}}
+    <div class="col-4">
+        <br>
+        <h1> {{name}} </h1>
+        <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
+        <a href=""> <i class="fa-solid fa-calendar-days fa-xl"></i></a>
+        <a href=""> <i class="fa-solid fa-user-pen fa-xl"></i></a>
+    </div>
+    {{!-- {{/each}} --}}
+</div>

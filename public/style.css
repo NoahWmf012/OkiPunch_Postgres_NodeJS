@@ -1,0 +1,14 @@
+.wrapper input[type="text"] {
+    position: relative; 
+}
+
+.wrapper input {
+    font-family: 'FontAwesome';
+}
+
+.wrapper:before {
+    font-family: 'FontAwesome';
+    position: relative;
+    left: -5px;
+}
+
