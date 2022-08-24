@@ -7,23 +7,18 @@ class nodeRouterCompany {
     }
     router() {
         let router = this.express.Router();
-        router.get("/showworkers", this.showAll.bind(this));
-        router.get("/showone/:id", this.showOne.bind(this)); //employ_information
-        router.post("/worker/addnew", this.addNew.bind(this));
-        router.get("/worker/:id/calendar", this.showCalendar.bind(this));
-        router.get("/worker/:id/info", this.showInfo.bind(this));
-        router.put("/worker/:id/info", this.updateInfo.bind(this));
-        router.delete("/worker/:id/info", this.deleteOne.bind(this));
+        router.get("/showworkers", this.showAll.bind(this)); //employ
+        router.post("/worker/addnew", this.addNew.bind(this)); //employ , employ_information
+        router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
+        router.put("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
+        router.get("/worker/:id/info", this.showInfo.bind(this)); //employ_information
+        router.put("/worker/:id/info", this.updateInfo.bind(this)); //employ_information
+        router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information
         return router;
     }
 
     async showAll(req, res) {
         var data = await this.noteServiceCompany.showWorkers("getAll employees")
-        res.json(data);
-    }
-
-    async showOne(req, res) {
-        var data = await this.noteServiceCompany.showOneWorker(null, req.params.id)
         res.json(data);
     }
 
@@ -34,6 +29,11 @@ class nodeRouterCompany {
 
     async showCalendar(req, res) {
         var data = await this.noteServiceCompany.showWorkerCanlendar();
+        res.json(data);
+    }
+
+    async updateCalendar(req, res) {
+        var data = await this.noteServiceCompany.updateWorkerCanlendar();
         res.json(data);
     }
 

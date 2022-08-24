@@ -12,11 +12,6 @@ class nodeServiceCompany {
         return this.knex("employee");
     }
 
-    // /biz/showone/:id (GET)
-    showOneWorker(company, user) {
-        return this.knex("employee_information").where('employee_id', user);
-    }
-
     //  /biz/worker/addnew (POST)
     addNewWorker(company, body) {
 
@@ -27,9 +22,14 @@ class nodeServiceCompany {
 
     }
 
+    // /biz/worker/:id/calendar (PUT)
+    updateWorkerCanlendar(company, user) {
+
+    }
+
     // /biz/worker/:id/info (GET)
     showWorkerDayRecord(company, user) {
-
+        return this.knex("employee_information").where('employee_id', user);
     }
 
     // /biz/worker/:id/info (PUT)
