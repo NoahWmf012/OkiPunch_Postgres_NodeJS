@@ -19,7 +19,7 @@ class nodeServiceCompany {
 
     // /biz/worker/:id/calendar (GET)
     showWorkerCanlendar(company, user) {
-
+        return this.knex("attendance").where('employee_id', user);
     }
 
     // /biz/worker/:id/calendar (PUT)
@@ -39,7 +39,7 @@ class nodeServiceCompany {
 
     // /biz/worker/:id/info (DELETE)
     layoffWorker(company, user) {
-
+        return this.knex("employee").update('active_status', 'layoff').where('id', user);
     }
 }
 

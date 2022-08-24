@@ -10,7 +10,7 @@ class nodeRouterCompany {
         router.get("/showworkers", this.showAll.bind(this)); //employ
         router.post("/worker/addnew", this.addNew.bind(this)); //employ , employ_information
         router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
-        router.put("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
+        router.put("/worker/:id/calendar", this.updateCalendar.bind(this)); //attendance
         router.get("/worker/:id/info", this.showInfo.bind(this)); //employ_information
         router.put("/worker/:id/info", this.updateInfo.bind(this)); //employ_information
         router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information
@@ -28,7 +28,7 @@ class nodeRouterCompany {
     }
 
     async showCalendar(req, res) {
-        var data = await this.noteServiceCompany.showWorkerCanlendar();
+        var data = await this.noteServiceCompany.showWorkerCanlendar(null, req.params.id);
         res.json(data);
     }
 
@@ -48,7 +48,7 @@ class nodeRouterCompany {
     }
 
     async deleteOne(req, res) {
-        var data = await this.noteServiceCompany.layoffWorker();
+        var data = await this.noteServiceCompany.layoffWorker(null, req.params.id);
         res.json(data);
     }
 }
