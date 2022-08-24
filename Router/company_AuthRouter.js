@@ -20,7 +20,7 @@ class AuthRouter {
 
     router() {
         let router = this.express.Router();
-        router.get(
+        /* router.get(
             "/auth/facebook",
             this.isNotLogged,
             this.passport.authenticate("facebook", {
@@ -50,7 +50,7 @@ class AuthRouter {
                 successRedirect: "/",
                 failureRedirect: "/login",
             })
-        );
+        ); */
 
         router.post(
             "/signup",

@@ -7,40 +7,39 @@ class nodeServiceCompany {
         new Promise((resolve, reject) => { });
     }
 
-    show(user) {
-        // return this.knex("users")
-        //     .select("notes.content", "notes.id")
-        //     .join("notes", "users.id", "notes.user_id")
-        //     .where("username", user);
+    // /biz/showworkers (GET)
+    showWorkers(company) {
+        return this.knex("employee");
     }
 
-    add(content, user) {
-        // return this.knex("users")
-        //     .select("id")
-        //     .where("username", user)
-        //     .first()
-        //     .then((data) => {
-        //         return this.knex("notes").insert({
-        //             user_id: data.id,
-        //             content: content,
-        //         });
-        //     });
+    // /biz/showone/:id (GET)
+    showOneWorker(company, user) {
+        return this.knex("employee_information").where('employee_id', user);
     }
 
-    update(index, content, user) {
-        // return this.knex("users")
-        //     .select("id")
-        //     .where("username", user)
-        //     .first()
-        //     .then(() => {
-        //         return this.knex("notes").where("id", index).update({
-        //             content: content,
-        //         });
-        //     });
+    //  /biz/worker/addnew (POST)
+    addNewWorker(company, body) {
+
     }
 
-    remove(index) {
-        // return this.knex("notes").where("id", index).del();
+    // /biz/worker/:id/calendar (GET)
+    showWorkerCanlendar(company, user) {
+
+    }
+
+    // /biz/worker/:id/info (GET)
+    showWorkerDayRecord(company, user) {
+
+    }
+
+    // /biz/worker/:id/info (PUT)
+    updateWorkerInfo(company, body) {
+
+    }
+
+    // /biz/worker/:id/info (DELETE)
+    layoffWorker(company, user) {
+
     }
 }
 
