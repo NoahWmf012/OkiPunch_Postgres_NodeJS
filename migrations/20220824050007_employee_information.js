@@ -8,9 +8,9 @@ exports.up = function (knex) {
         table.string("fName");
         table.string("lName");
         table.string("alias");
-        table.string("phone_number");
+        table.integer("phone_number");
         table.string("address");
-        table.enum("gender");
+        table.enu('gender', ['male', 'female'])
         table.date("date_of_birth");
         table.binary("image_icon");
         table.timestamps(true, true);

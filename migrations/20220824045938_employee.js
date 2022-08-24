@@ -5,7 +5,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('employee', (table) => {
         table.increments();
-        table.string("department_id");
+        table.integer("department_id");
         table.string("title");
         table.decimal("salary");
         table.string("active_status")
