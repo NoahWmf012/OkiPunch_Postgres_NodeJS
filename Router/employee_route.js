@@ -7,8 +7,8 @@ class nodeRouterEmployee {
         let router = this.express.Router();
         router.get("/", this.get.bind(this));
         router.post("/", this.post.bind(this));
-        // router.put("/", this.put.bind(this));
-        // router.delete("/", this.delete.bind(this));
+        router.put("/", this.put.bind(this));
+        router.delete("/", this.delete.bind(this));
         return router;
     }
 
@@ -23,12 +23,12 @@ class nodeRouterEmployee {
     }
 
     //PUT method
-    post(req, res) {
+    put(req, res) {
         return this.nodeServiceEmployee;
     }
 
     //DELETE method
-    post(req, res) {
+    delete(req, res) {
         return this.nodeServiceEmployee;
     }
 }

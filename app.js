@@ -49,52 +49,52 @@ setupPassport(app, bcrypt, passport, knex);
 app.get("/", (req, res) => {
     res.type(".html");
     res.render("index");
-})
+});
 
 app.get("/path", (req, res) => {
     res.type(".html");
     res.render("path");
-})
+});
 
 app.get("/employee_login", (req, res) => {
     res.type(".html");
     res.render("employee_login");
-})
+});
 
 app.get("/employee_register", (req, res) => {
     res.type(".html");
     res.render("employee_register");
-})
+});
 
 app.get("/employee_punch", (req, res) => {
     res.type(".html");
     res.render("employee_punch");
-})
+});
 
 app.get("/employee_calendar", (req, res) => {
     res.type(".html");
     res.render("employee_calendar");
-})
+});
 
 app.get("/employee_information", (req, res) => {
     res.type(".html");
     res.render("employee_information");
-})
+});
 
 app.get("/company_login", (req, res) => {
     res.type(".html");
     res.render("company_login");
-})
+});
 
 app.get("/company_summary", (req, res) => {
     res.type(".html");
     res.render("company_summary");
-})
+});
 
 app.get("/company_calendar", (req, res) => {
     res.type(".html");
     res.render("company_calendar");
-})
+});
 
 
 

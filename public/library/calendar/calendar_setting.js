@@ -1,22 +1,31 @@
 var today = new Date();
 
-//knex input here//
 var events = [{
-    id: "required-id-1",
-    name: "New Year",
-    date: "Wed Jan 01 2020 00:00:00 GMT-0800 (Pacific Standard Time)",
-    type: "holiday",
-    everyYear: true
-},
-{
-    id: "required-id-2",
-    name: "Valentine's Day",
-    date: "Fri Aug 01 2022 00:00:00 GMT-0800 (Pacific Standard Time)",
-    type: "holiday",
-    everyYear: true,
-    color: "#222"
-},
-{
+    id: "imwyx6S",
+    name: "Event #3",
+    description: "Lorem ipsum dolor sit amet.",
+    date: today.getMonth() + 1 + "/18/" + today.getFullYear(),
+    type: "event"
+}, {
+    id: "9jU6g6f",
+    name: "Holiday #1",
+    description: "Lorem ipsum dolor sit amet.",
+    date: today.getMonth() + 1 + "/10/" + today.getFullYear(),
+    type: "holiday"
+}, {
+    id: "0g5G6ja",
+    name: "Event #1",
+    description: "Lorem ipsum dolor sit amet.",
+    date: [today.getMonth() + 1 + "/2/" + today.getFullYear(), today.getMonth() + 1 + "/5/" + today.getFullYear()],
+    type: "event",
+    everyYear: !0
+}, {
+    id: "y2u7UaF",
+    name: "Holiday #3",
+    description: "Lorem ipsum dolor sit amet.",
+    date: today.getMonth() + 1 + "/23/" + today.getFullYear(),
+    type: "holiday"
+}, {
     id: "dsu7HUc",
     name: "Birthday #1",
     description: "Lorem ipsum dolor sit amet.",
@@ -36,6 +45,10 @@ var week_date = [];
 
 var curAdd, curRmv;
 
+function getRandom(a) {
+    return Math.floor(Math.random() * a);
+}
+
 function getWeeksInMonth(a, b) {
     var c = [], d = new Date(b, a, 1), e = new Date(b, a + 1, 0), f = e.getDate();
     var g = 1;
@@ -54,17 +67,17 @@ function getWeeksInMonth(a, b) {
 
 week_date = getWeeksInMonth(today.getMonth(), today.getFullYear())[2];
 
-//predefine information enter here//
+//add knex here
 $(document).ready(function () {
     $("#evoCalendar").evoCalendar({
-        format: "MM dd, yyyy",
+        format: "yyyy/mm/dd", // default format: MM dd, yyyy
         titleFormat: "MM",
         calendarEvents: [{
-            id: "d8jai7s",
-            name: "Author's Birthday",
-            description: "Author's note: Thank you for using EvoCalendar! :)",
-            date: "February/15/1999",
-            type: "birthday",
+            id: "001",//staff_id
+            name: "Author's Birthday",//"Punctual", "Late", "Absence"
+            description: "Author's note: Thank you for using EvoCalendar! :)",//additional information e.g.late/absence reason
+            date: "2022/08/24", //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
+            type: "birthday", //"punctual", "late", "absence"
             everyYear: !0
         }, {
             id: "sKn89hi",
@@ -85,20 +98,11 @@ $(document).ready(function () {
             name: "Event #2",
             date: today,
             type: "event"
-        },
-        {
-            id: "in8bha4",
-            name: "coding",
-            date: today,
-            type: "event",
-            description: "Coding everyday",
         }]
     });
-
     $("[data-set-theme]").click(function (b) {
         a(b.target);
     });
-
     $("#addBtn").click(function (a) {
         curAdd = getRandom(events.length);
         $("#evoCalendar").evoCalendar("addCalendarEvent", events[curAdd]);
@@ -115,7 +119,6 @@ $(document).ready(function () {
         if (0 === active_events.length) a.target.disabled = !0;
         if (events.length > 0) $("#addBtn").prop("disabled", !1);
     });
-
     a($("[data-set-theme]")[defaultTheme]);
     function a(a) {
         var b = a.dataset.setTheme;
@@ -137,19 +140,16 @@ $(document).ready(function () {
         var c = b.data().settings;
         showSettingsSample(c);
     });
-
     $("[data-method]").on("click", function (a) {
         var b = $(a.target).closest("[data-method]");
         var c = b.data().method;
         showMethodSample(c);
     });
-
     $("[data-event]").on("click", function (a) {
         var b = $(a.target).closest("[data-event]");
         var c = b.data().event;
         showEventSample(c);
     });
-
 });
 
 function showSettingsSample(a) {
@@ -301,3 +301,8 @@ $('[data-go*="#"]').on("click", function (a) {
         scrollTop: c
     }, 500);
 });
+
+//change theme
+// $('#evoCalendar').evoCalendar({
+//     theme: 'Orange Coral'
+// })
