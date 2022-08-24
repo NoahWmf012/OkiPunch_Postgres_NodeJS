@@ -1,5 +1,3 @@
-var defaultTheme = getRandom(4);
-
 var today = new Date();
 
 var events = [ {

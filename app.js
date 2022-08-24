@@ -51,6 +51,11 @@ app.get("/", (req, res) => {
     res.render("index");
 })
 
+app.get("/path", (req, res) => {
+    res.type(".html");
+    res.render("path");
+})
+
 app.get("/employee_login", (req, res) => {
     res.type(".html");
     res.render("employee_login");
