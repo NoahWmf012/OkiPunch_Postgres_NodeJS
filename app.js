@@ -2,8 +2,10 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-
-const fs = require('fs');
+const passport = require('passport');
+const setupPassport = require("./passport");
+const bcrypt = require("bcrypt");
+const session = require('express-session');
 
 const { engine } = require('express-handlebars');
 
@@ -35,7 +37,13 @@ app.engine("handlebars", engine({ defaultLayout: 'main' }));
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-
+//set up passport
+app.use(session({
+    secret: 'supersecret',
+    resave: false,
+    saveUninitialized: true,
+}));
+setupPassport(app, bcrypt, passport, knex);
 
 //express server
 app.get("/", (req, res) => {
