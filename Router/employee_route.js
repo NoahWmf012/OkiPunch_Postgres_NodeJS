@@ -1,6 +1,6 @@
 class nodeRouterEmployee {
-    constructor(noteServiceEmployee, express) {
-        this.noteServiceEmployee = noteServiceEmployee;
+    constructor(nodeServiceEmployee, express) {
+        this.nodeServiceEmployee = nodeServiceEmployee;
         this.express = express;
     }
     router() {
@@ -14,22 +14,22 @@ class nodeRouterEmployee {
 
     //GET method
     get(req, res) {
-        return this.noteServiceEmployee
+        return this.nodeServiceEmployee;
     }
 
     //POST method
     post(req, res) {
-        // return this.noteServiceEmployee
+        return this.nodeServiceEmployee;
     }
 
     //PUT method
     post(req, res) {
-        // return this.noteServiceEmployee
+        return this.nodeServiceEmployee;
     }
 
     //DELETE method
     post(req, res) {
-        // return this.noteServiceEmployee
+        return this.nodeServiceEmployee;
     }
 }
 

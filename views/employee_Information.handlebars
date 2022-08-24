@@ -1,0 +1,45 @@
+{{!-- nav bar --}}
+<nav class="navbar bg-light d-flex justify-content-center align-items-center fixed-top">
+    <div class="container-fluid">
+        <a href=""><i class="fa-solid fa-chevron-left fa-xl"></i></a>
+        <p class="position-absolute top-50 start-50 translate-middle">Employee Information</p>
+    </div>
+</nav>
+<br>
+
+
+
+<!--Each employee information-->
+<div class='row'>
+    {{!-- {{#each employee}} --}}
+    <div>
+        <div class="text-center">
+            <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
+            <br>
+            <h1> name: {{name}} </h1>
+            <br>
+            <h2 class="text-secondary"> title: {{title}} </h2>
+            <br>
+            <a href=""> <i class="fa-solid fa-user-pen fa-xl"></i></a>
+            <br>
+        </div>
+        <hr>
+
+
+        <br>
+        <p> Staff no.: {{employee_no}} </p>
+
+        <p> Hourly rate: ${{hourly_rate}}/h </p>
+
+        <p>Phone no.: {{phone_no}}</p>
+
+        <p>Address: {{address}}</p>
+
+        <p>Date of brith: {{date_of_brith}}</p>
+
+        <p>Gender: {{gender}}</p>
+        <br>
+
+    </div>
+    {{!-- {{/each}} --}}
+</div>

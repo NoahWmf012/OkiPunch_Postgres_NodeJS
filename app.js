@@ -88,7 +88,7 @@ app.get("/company_calendar", (req, res) => {
 //set up node router
 app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express).router());
 
-app.use("/api/employee", new nodeRouterEmployee(new nodeServiceEmployee(fs, knex), express).router());
+app.use("/api/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), express).router());
 
 app.listen(port, () => {
     console.log(
