@@ -253,7 +253,7 @@ class nodeServiceEmployee {
 
 
     /* PUT /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
-    updateEmployeeInfo(id, fName, phone_number, address, date_of_birth, gender, hourly_rate) {
+    updateEmployeeInfo(id, phone_number, address) {
 
     };
 }
