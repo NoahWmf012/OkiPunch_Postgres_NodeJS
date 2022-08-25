@@ -23,13 +23,13 @@ module.exports = (passport, bcrypt, knex) => {
 
     passport.use(
         "local-login",
-        new LocalStrategy(async (email, password, done) => {
+        new LocalStrategy({ usernameField: "email" }, async (email, password, done) => {
             try {
                 const user = await knex("users").where({ email }).first();
                 if (!user) {
                     return done(null, false, { message: "No user with this email" });
                 }
-                const result = bcrypt.compare(password, user.password);
+                const result = await bcrypt.compare(password, user.password);
                 if (result) {
                     return done(null, user);
                 } else {
