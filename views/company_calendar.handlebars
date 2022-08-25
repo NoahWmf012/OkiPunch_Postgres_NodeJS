@@ -4,24 +4,49 @@
             <div class="--noshadow" id="evoCalendar"></div>
         </div>
         <br>
-        <div class="action-buttons d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center">
+            <button type="button" class="btn" id="editBtn" style="background-color: #b19cd9; color: white"><i
+                    class="fa-regular fa-pen-to-square"></i> Edit</button>
+        </div>
+
+        {{!-- <div class="action-buttons d-flex justify-content-center align-items-center">
             <button type="button" class="editBtn btn btn-action" id="addBtn">ADD EVENT</button>
             <button type="button" class="deleteBtn btn-action" id="removeBtn" disabled>REMOVE EVENT</button>
+        </div> --}}
+
+        <br>
+
+        <div class="card" id="card" style="visibility: hidden; border:black">
+            <div class="mb-3">
+                <label for="inputDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="inputDate" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="editTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="editTitle" rows="3"></input>
+            </div>
+            <div class="mb-3">
+                <label for="editDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="editDescription" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn bg-light" id="submitBtn"> <i class="fa-regular fa-circle-check"></i> Submit
+            </button>
+            <br>
         </div>
     </div>
+    <br>
 </section>
 
-{{!-- <script>
-    $("editBtn").on("click"){
-        <div class="card">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-        </div>
+
+{{!-- for edit calendar --}}
+<script>
+    document.getElementById("editBtn").onclick = function () {
+        var card = document.getElementById("card");
+        card.style.visibility = "visible";
     }
-</script> --}}
+
+    document.getElementById("submitBtn").onclick = function () {
+        var card = document.getElementById("card");
+        card.style.visibility = "hidden";
+    }
+</script>
