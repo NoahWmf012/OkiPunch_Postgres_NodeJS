@@ -1,4 +1,5 @@
-//knex code editing//
+//For testing//
+
 require("dotenv").config();
 const knex = require("knex")({
     // CODE HERE
@@ -7,10 +8,8 @@ const knex = require("knex")({
         database: "template1",
         user: "postgres",
         password: "password",
-
         dateStrings: true
     },
-
 });
 
 let in_time = "";
@@ -23,12 +22,13 @@ in_date_result = "";
 //below return it as correct date, 19->20, 20->21
 for (i = 1; i <= 3; i++) {
     let query = knex.select("employee_id", "in_date").from("attendance")
-        .where("employee_id", i);
+        .where("employee_id", i)
+        .orderBy('employee_id', 'asc');
 
     query.then((rows) => {
         console.log(rows); //!PROBLEM HERE! it return 19 & 20, therefore, I changed it to 20 & 21 below
         for (let j = 0; j < rows.length; j++) {
-            let value = (rows[j].in_date); 
+            let value = (rows[j].in_date);
 
             value = value.toString();
 
@@ -42,7 +42,7 @@ for (i = 1; i <= 3; i++) {
             month = (months.indexOf(month) + 1)
             let alteredDate = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes), Number(seconds)));
 
-            console.log(alteredDate)
+            console.log(alteredDate);
         }
     }).catch((error) => {
         console.log(error);

@@ -3,46 +3,52 @@ class nodeServiceEmployee {
         this.init();
         this.knex = knex;
     }
+
     init() {
         new Promise((resolve, reject) => {
 
         });
     }
-    show(user) {
-        return this.knex("users")
-            .select("notes.content", "notes.id")
-            .join("notes", "users.id", "notes.user_id")
-            .where("username", user);
-    }
 
-    add(content, user) {
-        return this.knex("users")
-            .select("id")
-            .where("username", user)
-            .first()
-            .then((data) => {
-                return this.knex("notes").insert({
-                    user_id: data.id,
-                    content: content,
-                });
-            });
-    }
+    /* GET /salary/:id */
+    //Working Hours, Hourly Rate, Total Salary
+    showEmployeeSummary(id) {
 
-    update(index, content, user) {
-        return this.knex("users")
-            .select("id")
-            .where("username", user)
-            .first()
-            .then(() => {
-                return this.knex("notes").where("id", index).update({
-                    content: content,
-                });
-            });
-    }
+    };
 
-    remove(index) {
-        return this.knex("notes").where("id", index).del();
-    }
+    /* POST /punchin/:id/:date */
+    employeePunchIn(id, date) {
+
+    };
+
+    /* POST /punchout/:id/:date */
+    employeePunchOut(id, date) {
+
+    };
+
+    /* GET /calendar/:id/:date */
+    showEmployeeCalendar(id, date) {
+        let query = this.knex
+            .select("employee_id", "in_date", "in_time", "out_time")
+            .from("attendance")
+            .where("id", id)
+            .orderBy("in_time", "asc");
+
+        return query.then((rows) => {
+            return rows;
+        })
+    };
+
+    /* GET /info/:id */
+    //Name, position, id, hourly rate, phone no, address, date of brith, gender
+    showEmployeeInfo(id) {
+
+    };
+
+    /* PUT /info/:id */
+    updateEmployeeInfo(id) {
+
+    };
 }
 
 module.exports = nodeServiceEmployee;
