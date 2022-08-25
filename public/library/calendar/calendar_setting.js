@@ -74,12 +74,13 @@ $(document).ready(function () {
         titleFormat: "MM",
         calendarEvents: [{
             id: "001",//staff_id
-            name: "Author's Birthday",//"Punctual", "Late", "Absence"
+            name: "A's Birthday",//"Punctual", "Late", "Absence"
             description: "Author's note: Thank you for using EvoCalendar! :)",//additional information e.g.late/absence reason
-            date: "2022/08/24", //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
-            type: "birthday", //"punctual", "late", "absence"
+            date: "2022-08-24", //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
+            type: "birthday", //"punctual", "late", "absence" // color according to the type
             everyYear: !0
-        }, {
+        }, 
+        {
             id: "sKn89hi",
             name: "1-Week Coding Bootcamp",
             description: "Lorem ipsum dolor sit amet.",
@@ -88,11 +89,11 @@ $(document).ready(function () {
             type: "event",
             everyYear: !0
         }, {
-            id: "in8bha4",
-            name: "Holiday #2",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            date: today,
-            type: "holiday"
+            id: "sKn89hi", //okipunch example 
+            name: "Punctual",
+            description: "A",
+            date: "2022/08/22",
+            type: "birthday"
         }, {
             id: "in8bha4",
             name: "Event #2",
