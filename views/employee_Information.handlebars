@@ -1,45 +1,76 @@
 {{!-- nav bar --}}
-<nav class="navbar bg-light d-flex justify-content-center align-items-center fixed-top">
-    <div class="container-fluid">
-        <a href=""><i class="fa-solid fa-chevron-left fa-xl"></i></a>
-        <p class="position-absolute top-50 start-50 translate-middle">Employee Information</p>
-    </div>
-</nav>
-<br>
-
-
-
-<!--Each employee information-->
-<div class='row'>
-    {{!-- {{#each employee}} --}}
-    <div>
-        <div class="text-center">
-            <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
-            <br>
-            <h1> name: {{name}} </h1>
-            <br>
-            <h2 class="text-secondary"> title: {{title}} </h2>
-            <br>
-            <a href=""> <i class="fa-solid fa-user-pen fa-xl"></i></a>
-            <br>
+<section>
+    <nav class="navbar bg-light d-flex justify-content-center align-items-center fixed-top">
+        <div class="container-fluid">
+            <a href=""><i class="fa-solid fa-chevron-left fa-xl"></i></a>
+            <p class="position-absolute top-50 start-50 translate-middle">Employee Information</p>
         </div>
-        <hr>
+    </nav>
+    <br>
 
+    <!--Each employee information-->
+    <div class='row'>
+        {{!-- {{#each employee}} --}}
+        <div>
+            <div class="text-center">
+                <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
+                <br>
+                <h1> name: {{name}} </h1>
+                <br>
+                <h2 class="text-secondary"> title: {{title}} </h2>
+                <br>
+                <button class="btn" id="editInfobtn">
+            <i class="fa-solid fa-user-pen fa-xl"></i>
+                </button>
 
-        <br>
-        <p> Staff no.: {{employee_no}} </p>
+                <br>
+            </div>
+            <hr>
 
-        <p> Hourly rate: ${{hourly_rate}}/h </p>
+            <br>
+            <p> Staff no.: {{employee_no}} </p>
 
-        <p>Phone no.: {{phone_no}}</p>
+            <p> Hourly rate: ${{hourly_rate}}/h </p>
 
-        <p>Address: {{address}}</p>
+            <p id="editPhoneNoEmployee">Phone no.: {{phone_no}}</p>
 
-        <p>Date of brith: {{date_of_brith}}</p>
+            <p id="editAddressEmployee">Address: {{address}}</p>
 
-        <p>Gender: {{gender}}</p>
-        <br>
+            <p>Date of birth: {{date_of_birth}}</p>
+
+            <p>Gender: {{gender}}</p>
+
+        </div>
+        {{!-- {{/each}} --}}
 
     </div>
-    {{!-- {{/each}} --}}
-</div>
+
+    <div class="card" id="editForm" style="visibility: hidden; border:black;">
+        <hr>
+        <div class="mb-3">
+            <label for="editPhoneNo" class="form-label">Phone number</label>
+            <input type="tel" class="form-control" id="editPhoneNo">
+        </div>
+        <div class="mb-3">
+            <label for="editAddress" class="form-label">Address</label>
+            <textarea class="form-control" id="editAddress" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn bg-light" id="submitInfoBtn"> <i class="fa-regular fa-circle-check"></i> Submit
+        </button>
+        <br>
+        <br>
+    </div>
+</section>
+
+
+{{!-- for edit calendar --}}
+<script>
+    document.getElementById("editInfobtn").onclick = function () {
+        document.getElementById("editForm").style.visibility = "visible";
+    }
+
+    document.getElementById("submitInfoBtn").onclick = function () {
+        var editForm = document.getElementById("editForm");
+        editForm.style.visibility = "hidden";
+    }
+</script>
