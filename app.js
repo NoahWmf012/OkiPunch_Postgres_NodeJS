@@ -6,6 +6,8 @@ const passport = require('passport');
 const setupPassport = require("./passport");
 const bcrypt = require("bcrypt");
 const session = require('express-session');
+const AuthRouter = require("./Router/company_AuthRouter")
+const flash = require("express-flash");
 
 const { engine } = require('express-handlebars');
 
@@ -44,6 +46,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 setupPassport(app, bcrypt, passport, knex);
+app.use(flash());
 
 //express server
 app.get("/", (req, res) => {
@@ -59,11 +62,6 @@ app.get("/path", (req, res) => {
 app.get("/employee_login", (req, res) => {
     res.type(".html");
     res.render("employee_login");
-});
-
-app.get("/employee_register", (req, res) => {
-    res.type(".html");
-    res.render("employee_register");
 });
 
 app.get("/employee_punch", (req, res) => {
@@ -86,6 +84,11 @@ app.get("/company_login", (req, res) => {
     res.render("company_login");
 });
 
+app.get("/company_signup", (req, res) => {
+    res.type(".html");
+    res.render("company_signup");
+});
+
 app.get("/company_summary", (req, res) => {
     res.type(".html");
     res.render("company_summary");
@@ -100,6 +103,7 @@ app.get("/company_calendar", (req, res) => {
 
 //set up node router
 app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express).router());
+app.use("/", new AuthRouter(express, passport).router());
 
 app.use("/api/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), express).router());
 

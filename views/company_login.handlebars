@@ -1,34 +1,29 @@
 <div class="container container-fluid col">
-    <br>
-    <h1 class="text-center">Login</h1>
-    <br>
+    <form action="/company_login" method="POST">
+        <br>
+        <h1 class="text-center">Login</h1>
+        <br>
 
-    <!-- Enter Email -->
-    <div class="row">
-        <div class="col">
-            <p class="wrapper">
-                <input type="email" class="form-control" placeholder="&#xf003   Email" aria-label="Email">
-            </p>
+        <!-- Enter Email -->
+        <div class="row">
+            <div class="col">
+                <p class="wrapper">
+                    <input type="email" class="form-control" name="email" placeholder="&#xf003   Email" aria-label="Email">
+                </p>
+            </div>
         </div>
-    </div>
 
-    <!-- Enter Password -->
-    <div class="row">
-        <div class="col">
-            <p class="wrapper">
-                <input type="password" class="form-control" placeholder="&#xf023   ********" aria-label="password">
-            </p>
+        <!-- Enter Password -->
+        <div class="row">
+            <div class="col">
+                <p class="wrapper">
+                    <input type="password" class="form-control" name="password" placeholder="&#xf023   ********" aria-label="password">
+                </p>
+            </div>
         </div>
-    </div>
 
-    {{!-- placeholder font awesome code: https://www.w3schools.com/icons/icons_reference.asp --}}
-
-    <!--Enter Btn-->
-    <a href=""><i class="fa-solid fa-circle-right fa-2xl"></i></a>
-    <br>
-
-    <!--Forgot Btn-->
-    <a href="register.handlebars">Forgot ?</a>
-    <br>
-
+        <!--Submit Btn-->
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-right fa-2xl" type="submit"></i></button>
+        <br>
+    </form>
 </div>

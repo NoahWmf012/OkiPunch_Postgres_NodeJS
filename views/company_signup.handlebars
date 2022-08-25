@@ -1,0 +1,45 @@
+<div class="container container-fluid col">
+    <form action="/company_signup" method="POST">
+        <br>
+        <h1 class="text-center">Register</h1>
+        <br>
+
+        <!-- Enter Username -->
+        <div class="row">
+            <div class="col">
+                <p class="wrapper">
+                    <input type="email" name="username" class="form-control" placeholder="&#xf003   Email" aria-label="Email">
+                </p>
+            </div>
+        </div>
+
+        <!-- Enter Email -->
+        {{!-- <div class="row">
+            <div class="col">
+                <p class="wrapper">
+                    <input type="email" name="email" class="form-control" placeholder="&#xf003   Email" aria-label="Email">
+                </p>
+            </div>
+        </div> --}}
+
+        <!-- Enter Password -->
+        <div class="row">
+            <div class="col">
+                <p class="wrapper">
+                    <input type="password" name="password" class="form-control" placeholder="&#xf023   ********" aria-label="password">
+                </p>
+            </div>
+        </div>
+
+        {{!-- placeholder font awesome code: https://www.w3schools.com/icons/icons_reference.asp --}}
+
+        <!--Submit Btn-->
+        <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-right fa-2xl" type="submit"></i></button>
+        <br>
+        <br>
+
+        <!--Login Btn-->
+        <button type="button" class="btn btn-primary btn-sm">Login</button>
+        <br>
+    </form>
+</div>
