@@ -8,38 +8,42 @@ class nodeServiceCompany {
     }
 
     // /biz/showworkers (GET)
-    showWorkers(company) {
+    showWorkers(role) {
         return this.knex("employee");
     }
 
     //  /biz/worker/addnew (POST)
-    addNewWorker(company, body) {
+    addNewWorker(role, body) {
 
     }
 
     // /biz/worker/:id/calendar (GET)
-    showWorkerCanlendar(company, user) {
+    showWorkerCanlendar(role, user) {
         return this.knex("attendance").where('employee_id', user);
     }
 
     // /biz/worker/:id/calendar (PUT)
-    updateWorkerCanlendar(company, user) {
+    updateWorkerCanlendar(role, user) {
 
     }
 
     // /biz/worker/:id/info (GET)
-    showWorkerDayRecord(company, user) {
+    showWorkerDayRecord(role, user) {
         return this.knex("employee_information").where('employee_id', user);
     }
 
     // /biz/worker/:id/info (PUT)
-    updateWorkerInfo(company, body) {
+    updateWorkerInfo(role, body) {
 
     }
 
     // /biz/worker/:id/info (DELETE)
-    layoffWorker(company, user) {
+    layoffWorker(role, user) {
         return this.knex("employee").update('active_status', 'layoff').where('id', user);
+    }
+
+    addAnnouncement(role, body) {
+
     }
 }
 
