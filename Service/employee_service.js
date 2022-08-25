@@ -67,16 +67,55 @@ class nodeServiceEmployee {
 
 
 
-    /* POST /punchin/:id/:date */
-    employeePunchIn(id, date) {
+    /* POST /punchin/:id/:date */ //insert data in attendance
+    employeePunchIn(id) {
+        let command = async function () {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
 
+            let d = new Date();
+            let n = d.toLocaleTimeString();
+
+            await this.knex
+                .insert({ employee_id: id, in_date: today, in_time: n })
+                .into("attendance");
+
+            console.log("Punch In and insert data successfully")
+        }
+        command();
     };
 
 
 
     /* POST /punchout/:id/:date */
-    employeePunchOut(id, date) {
+    employeePunchOut(id) {
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
 
+        let d = new Date();
+        let n = d.toLocaleTimeString();
+
+        let queryPunchOutId = this.knex.select("id").from("attendance")
+            .where("attendance.employee_id", id)
+            .orderBy("id", "asyn")
+
+        return queryPunchOutId.then((data) => {
+            let punchOutId = (data[data.length - 1].id);
+            console.log(punchOutId);
+            if (punchOutId) {
+                console.log("Punch Out and insert data successfully")
+                return this.knex("attendance").where("id", punchOutId)
+                    .update({ out_date: d, out_time: n });
+            } else {
+                console.log("Employee Service Error - queryPunchInId");
+            }
+        })
     };
 
 

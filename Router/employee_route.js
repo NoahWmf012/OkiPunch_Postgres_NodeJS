@@ -16,7 +16,7 @@ class nodeRouterEmployee {
     }
 
     async EmployeeSummary(req, res) {
-        var data = await this.nodeServiceEmployee.showEmployeeSummary("1");
+        var data = await this.nodeServiceEmployee.showEmployeeSummary(id);
         let id = req.params.id;
         console.log(id);
         res.json(data);
