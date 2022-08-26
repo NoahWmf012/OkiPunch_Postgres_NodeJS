@@ -9,6 +9,7 @@ module.exports = (passport, bcrypt, knex) => {
                 if (user) {
                     return done(null, false, { message: "email already taken" });
                 }
+                console.log(user)
                 const hash = await bcrypt.hash(password, 10);
                 let newUser = { email, password: hash, role: 'company' };
 

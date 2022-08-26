@@ -84,6 +84,11 @@ app.get("/company_login", (req, res) => {
     res.render("company_login");
 });
 
+app.get("/company_signup", (req, res) => {
+    res.type(".html");
+    res.render("company_signup");
+});
+
 
 
 //set up node router

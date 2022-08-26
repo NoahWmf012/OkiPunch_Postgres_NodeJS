@@ -9,10 +9,12 @@ class nodeRouterCompany {
     }
     router() {
         let router = this.express.Router();
-        router.use(this.auth.isLogged);
         //the route starts from "/biz"
-        router.get("/login", this.loadLoginPage.bind(this));
-        router.get("/signup", this.loadSignupPage.bind(this));
+        // router.get("/login", this.loadLoginPage.bind(this));
+        // router.get("/signup", this.loadSignupPage.bind(this));
+
+        router.use(this.auth.isLogged);
+
 
         //connecting DB
         router.get("/showworkers", this.showAll.bind(this)); //employ
