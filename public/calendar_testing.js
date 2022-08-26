@@ -1,11 +1,12 @@
 //For testing//
 
+
 require("dotenv").config();
 const knex = require("knex")({
     // CODE HERE
     client: 'postgresql',
     connection: {
-        database: "postgres",
+        database: "chingyiyeung",
         user: "postgres",
         password: "password",
         dateStrings: true
@@ -70,11 +71,11 @@ in_date_result = "";
 //         .then((rows) => {
 //             try {
 //                 for (i = 0; i < rows.length; i++) {
-//                     if (rows[i].in_time == null) {
+//                     if (n == null) {
 //                         name.push("Absence");
-//                     } else if (((rows[i].in_time).split(':')[0]) < 9 || ((rows[i].in_time).split(':')[0]) == 9 && ((rows[i].in_time).split(':')[1]) == 0 && ((rows[i].in_time).split(':')[2]) == 0) {
+//                     } else if (((n).split(':')[0]) < 9 || ((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0 && ((n).split(':')[2]) == 0) {
 //                         name.push("Punctual");
-//                     } else if ((((rows[i].in_time).split(':')[0]) >= 9) && (((rows[i].in_time).split(':')[1]) > 0) && (((rows[i].in_time).split(':')[2]) == 0)) {
+//                     } else if ((((n).split(':')[0]) >= 9) && (((n).split(':')[1]) > 0) && (((n).split(':')[2]) == 0)) {
 //                         name.push("Late");
 //                     } else {
 //                         name.push("Absence");
@@ -147,27 +148,174 @@ in_date_result = "";
 
 // command();
 
-let command = async function () {
-    // acquire hourly rate
-    let summaryObject = {};
-    let querysummary = await knex
-        .select("hourly_rate", "total_working_hour", "total_salary")
+
+let id = 1;
+
+//punch in
+
+let command1 = async function () {
+    //in_date
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = yyyy + '/' + mm + '/' + dd;
+
+    //in_time
+    let d = new Date();
+    let n = d.toLocaleTimeString();
+
+    //status
+    let status = "";
+    if (in_time == null) {
+        status = "ABSENT";
+    } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+        status = "ON_TIME"; //09:00:00 - 09:00:59
+    } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+        status = "LATE"; //09:01:00 - 15:59:59
+    } else if ((((n).split(':')[0]) < 9)) {
+        status = "EARLY GOING"; // ... - 08:59:59
+    } else if ((((n).split(':')[0]) >= 16)) {
+        status = "HALF DAY"; // 16:00:00 - ...
+    }
+
+    await knex
+        .insert({ employee_id: 1, in_date: today, in_time: n, status: status })
+        .into("attendance");
+
+    console.log("Punch In and insert data successfully")
+}
+
+// command1();
+
+
+
+
+//date
+let command2 = async function () {
+
+    function toMonthName(monthNumber) {
+        let date = new Date();
+        date.setMonth(monthNumber - 1);
+        return date.toLocaleString('en-US', {
+            month: 'long',
+        });
+    }
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+    let punchOutId;
+    let workinghhmmss;
+
+    let d = new Date();
+    let n = d.toLocaleTimeString();
+
+
+    //insert attendance table
+    let queryPunchOutId = await knex.select("id").from("attendance")
+        .where("attendance.employee_id", 1)
+        .orderBy("id", "asyn")
+        .then((data) => {
+            punchOutId = (data[data.length - 1].id);
+
+            if (punchOutId) {
+                console.log("Punch Out and insert data successfully")
+                let queryIn_time = knex.select("in_time").from("attendance").where("id", punchOutId)
+                return queryIn_time.then((time) => {
+
+                    // in_time -> change 21:39:26 to 77966s
+                    let hmsInTime = time[0].in_time;
+                    var aInTime = hmsInTime.split(':');
+                    var inTimeSeconds = (+aInTime[0]) * 60 * 60 + (+aInTime[1]) * 60 + (+aInTime[2]);
+
+                    //out_time -> change 21:39:26 to 77966s
+                    let hmsOutTime = n;
+                    var aOutTime = hmsOutTime.split(':');
+                    var outTimeSeconds = (+aOutTime[0]) * 60 * 60 + (+aOutTime[1]) * 60 + (+aOutTime[2]);
+
+                    //cal working hours for one day
+                    let workingSecond = outTimeSeconds - inTimeSeconds;
+                    workinghhmmss = new Date(workingSecond * 1000).toISOString().slice(11, 19);
+
+                    // return knex("attendance").where("id", punchOutId)
+                    //     .update({ out_date: d, out_time: n, day_working_hour: workinghhmmss });
+                })
+            } else {
+                console.log("Employee Service Error - queryPunchInId");
+            }
+
+        })
+
+
+    //insert payroll table
+    let payrollquery = await knex
+        .select("hourly_rate")
         .from("salary")
-        .where("employee_id", 3)
+        .where("employee_id", 1)
+        .then((rows) => {
+            console.log(rows[0].hourly_rate);
+
+            let daily_salary = (workinghhmmss.split(":")[1]) * (rows[0].hourly_rate) / 60;
+            console.log(daily_salary);
+
+
+            // return knex
+            //     .insert({ employee_id: id, attendance_id: punchOutId, salary_id: id, daily_salary: daily_salary })
+            //     .into(`payroll_${toMonthName(mm).toLowerCase()}`);
+        });
+
+    //update salary table
+
+    let querySalary = await knex
+        .select("daily_salary")
+        .from(`payroll_${toMonthName(mm).toLowerCase()}`)
+        .where("employee_id", id)
+        .orderBy("id", "asc")
         .then((rows) => {
             try {
-                // console.log("Employee Service - hourly rate: " + rows[0].hourly_rate);
-                summaryObject.working_hours = rows[0].hourly_rate;
-                summaryObject.hourly_rate = rows[0].hourly_rate;
-                summaryObject.hourly_rate = rows[0].hourly_rate;
+                let workHoursArray = [];
+                for (i = 0; i < rows.length; i++) {
+                    const [hours, minutes, seconds] = (n).split(':');
+                    function convertToSeconds(hours, minutes, seconds) {
+                        return Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds);
+                    }
+                    workHoursArray.push(parseInt((convertToSeconds(hours, minutes, seconds)) / 60 / 60));
+                }
+                const initialValue = 0;
+                const totalWorkHours = workHoursArray.reduce(
+                    (previousValue, currentValue) => previousValue + currentValue,
+                    initialValue
+                );
+                console.log(`Employee Service - total working hours: ${totalWorkHours}`);
+                summaryObject.total_work_hours = totalWorkHours;
             }
             catch {
-                console.log("Employee Service: queryHourlyRate Error");
+                console.log("Employee Service queryWorkHours Error");
             }
-        });
-console.log(summaryObject);
-}
-command();
+        })
+
+    // let querySalary1 = await knex
+    //     .select()
+
+    // return knex
+    //     .insert({ employee_id: id, month_working_hour: 1, month_salary: 1, accumulate_salary: 1, accumulate_working_hour: 1 })
+    //     .into(`payroll_${toMonthName(mm).toLowerCase()}`);
+
+};
+
+command2();
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -185,7 +333,7 @@ command();
 //     try {
 //         let workHoursArray = [];
 //         for (i = 0; i < rows.length; i++) {
-//             const [hours, minutes, seconds] = (rows[i].in_time).split(':');
+//             const [hours, minutes, seconds] = (n).split(':');
 //             function convertToSeconds(hours, minutes, seconds) {
 //                 return Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds);
 //             }

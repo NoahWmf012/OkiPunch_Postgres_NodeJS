@@ -2,33 +2,33 @@
 class nodeServiceEmployee {
     constructor(knex) {
         this.knex = knex;
-        
+
     }
 
 
     /* GET /salary/:id */ //Working Hours, Hourly Rate, Total Salary
     async showEmployeeSummary(id) {
-       
-            // acquire hourly rate
-            let summaryObject = {};
-            await this.knex
-                .select("hourly_rate", "month_working_hour", "month_salary")
-                .from("salary")
-                .where("employee_id", id)
-                .then((rows) => {
-                    try {
-                        // console.log("Employee Service - hourly rate: " + rows[0].hourly_rate);
-                        summaryObject.hourly_rate = rows[0].hourly_rate;
-                        summaryObject.month_working_hour = rows[0].month_working_hour;
-                        summaryObject.month_salary = rows[0].month_salary;
-                    }
-                    catch {
-                        console.log("Employee Service: queryHourlyRate Error");
-                    }
-                });
-            
-           return (summaryObject);
-       
+
+        // acquire hourly rate
+        let summaryObject = {};
+        await this.knex
+            .select("hourly_rate", "month_working_hour", "month_salary")
+            .from("salary")
+            .where("employee_id", id)
+            .then((rows) => {
+                try {
+                    // console.log("Employee Service - hourly rate: " + rows[0].hourly_rate);
+                    summaryObject.hourly_rate = rows[0].hourly_rate;
+                    summaryObject.month_working_hour = rows[0].month_working_hour;
+                    summaryObject.month_salary = rows[0].month_salary;
+                }
+                catch {
+                    console.log("Employee Service: queryHourlyRate Error");
+                }
+            });
+
+        return (summaryObject);
+
     };
 
 
@@ -36,17 +36,33 @@ class nodeServiceEmployee {
     /* POST /punchin/:id/:date */ //insert data in attendance
     employeePunchIn(id) {
         let command = async function () {
+            //in_date
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
             let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
             let yyyy = today.getFullYear();
-            today = mm + '/' + dd + '/' + yyyy;
+            today = yyyy + '/' + mm + '/' + dd;
 
+            //in_time
             let d = new Date();
             let n = d.toLocaleTimeString();
 
+            //status
+            let status = "";
+            if (in_time == null) {
+                status = "ABSENT";
+            } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+                status = "ON_TIME"; //09:00:00 - 09:00:59
+            } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+                status = "LATE"; //09:01:00 - 15:59:59
+            } else if ((((n).split(':')[0]) < 9)) {
+                status = "EARLY GOING"; // ... - 08:59:59
+            } else if ((((n).split(':')[0]) >= 16)) {
+                status = "HALF DAY"; // 16:00:00 - ...
+            }
+
             await this.knex
-                .insert({ employee_id: id, in_date: today, in_time: n })
+                .insert({ employee_id: id, in_date: today, in_time: n, status: status })
                 .into("attendance");
 
             console.log("Punch In and insert data successfully")
