@@ -94,6 +94,11 @@ app.get("/company_summary", (req, res) => {
     res.render("company_summary");
 });
 
+app.get("/company_information", (req, res) => {
+    res.type(".html");
+    res.render("company_information");
+});
+
 app.get("/company_calendar", (req, res) => {
     res.type(".html");
     res.render("company_calendar");

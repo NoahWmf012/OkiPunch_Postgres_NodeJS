@@ -17,10 +17,10 @@
                 <br>
                 <h1> name: {{name}} </h1>
                 <br>
-                <h2 class="text-secondary"> title: {{title}} </h2>
+                <h2 id="editTitleCompany" class="text-secondary"> title: {{title}} </h2>
                 <br>
                 <button class="btn" id="editInfoBtn">
-            <i class="fa-solid fa-user-pen fa-xl"></i>
+                    <i class="fa-solid fa-user-pen fa-xl"></i>
                 </button>
 
                 <br>
@@ -30,11 +30,11 @@
             <br>
             <p> Staff no.: {{employee_no}} </p>
 
-            <p> Hourly rate: ${{hourly_rate}}/h </p>
+            <p id="editHourlyRate"> Hourly rate: ${{hourly_rate}}/h </p>
 
-            <p id="editPhoneNoEmployee">Phone no.: {{phone_no}}</p>
+            <p id="editPhoneNoCompany">Phone no.: {{phone_no}}</p>
 
-            <p id="editAddressEmployee">Address: {{address}}</p>
+            <p id="editAddressCompany">Address: {{address}}</p>
 
             <p>Date of birth: {{date_of_birth}}</p>
 
@@ -47,6 +47,14 @@
 
     <div class="card" id="editForm" style="visibility: hidden; border:black;">
         <hr>
+        <div class="mb-3">
+            <label for="editTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="editTitle">
+        </div>
+        <div class="mb-3">
+            <label for="editHourlyRate" class="form-label">Hourly rate</label>
+            <input type="number" class="form-control" id="editHourlyRate">
+        </div>
         <div class="mb-3">
             <label for="editPhoneNo" class="form-label">Phone number</label>
             <input type="tel" class="form-control" id="editPhoneNo">
