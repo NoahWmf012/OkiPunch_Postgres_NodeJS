@@ -10,6 +10,7 @@ class nodeRouterCompany {
     router() {
         let router = this.express.Router();
         router.use(this.auth.isLogged);
+        //the route starts from "/biz"
         router.get("/showworkers", this.showAll.bind(this)); //employ
         router.post("/worker/addnew", this.addNew.bind(this)); //employ , employ_information
         router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
