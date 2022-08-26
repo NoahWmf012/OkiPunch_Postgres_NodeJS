@@ -8,7 +8,7 @@ class AuthRouter {
         if (req.isAuthenticated()) {
             return next();
         }
-        res.redirect("/company_login");
+        res.redirect("/biz/login");
     }
 
     isNotLogged(req, res, next) {
@@ -53,21 +53,21 @@ class AuthRouter {
         ); */
 
         router.post(
-            "/company_signup",
+            "/biz/signup",
             this.isNotLogged,
             this.passport.authenticate("local-signup", {
-                successRedirect: "/company_login",
-                failureRedirect: "/company_signup",
+                successRedirect: "/biz/login",
+                failureRedirect: "/biz/signup",
                 failureFlash: true,
             })
         );
 
         router.post(
-            "/company_login",
+            "/biz/login",
             this.isNotLogged,
             this.passport.authenticate("local-login", {
                 successRedirect: "/biz/showworkers",
-                failureRedirect: "/company_login",
+                failureRedirect: "/biz/login",
                 failureFlash: true,
             })
         );
@@ -77,7 +77,7 @@ class AuthRouter {
                 if (err) {
                     return err;
                 }
-                res.redirect("/company_login");
+                res.redirect("/biz/login");
             });
         });
 

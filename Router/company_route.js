@@ -11,6 +11,10 @@ class nodeRouterCompany {
         let router = this.express.Router();
         router.use(this.auth.isLogged);
         //the route starts from "/biz"
+        router.get("/login", this.loadLoginPage.bind(this));
+        router.get("/signup", this.loadSignupPage.bind(this));
+
+        //connecting DB
         router.get("/showworkers", this.showAll.bind(this)); //employ
         router.post("/worker/addnew", this.addNew.bind(this)); //employ , employ_information
         router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
@@ -19,6 +23,16 @@ class nodeRouterCompany {
         router.put("/worker/:id/info", this.updateInfo.bind(this)); //employ_information
         router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information
         return router;
+    }
+
+    loadLoginPage(req, res) {
+        res.type(".html");
+        res.render("company_login");
+    }
+
+    loadSignupPage(req, res) {
+        res.type(".html");
+        res.render("company_signup");
     }
 
     async showAll(req, res) {
