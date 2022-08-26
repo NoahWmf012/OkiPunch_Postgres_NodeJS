@@ -105,12 +105,12 @@ app.get("/company_calendar", (req, res) => {
 app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express).router());
 app.use("/", new AuthRouter(express, passport).router());
 
-app.use("/api/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), express).router());
+app.use("/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), express).router());
 
 app.listen(port, () => {
     console.log(
         `
     company site: http://localhost:${port}/biz
-    employee site: http://localhost:${port}/api/employee
+    employee site: http://localhost:${port}/employee
     root site: http://localhost:${port} `)
 });
