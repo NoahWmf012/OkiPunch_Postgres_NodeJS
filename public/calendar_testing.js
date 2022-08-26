@@ -5,7 +5,7 @@ const knex = require("knex")({
     // CODE HERE
     client: 'postgresql',
     connection: {
-        database: "template1",
+        database: "postgres",
         user: "postgres",
         password: "password",
         dateStrings: true
@@ -147,47 +147,59 @@ in_date_result = "";
 
 // command();
 
-
-//Name, position, id, hourly rate, phone no, address, date of brith, gender
 let command = async function () {
-    let object = {};
-    let infoQuery = await knex
-        .select("fName", "lName", "employee_id", "phone_number", "address", "date_of_birth", "gender")
-        .from("employee_information")
-        .where("employee_id", "4")
-        .then((rows) => {
-            try {
-                let date = rows[0].date_of_birth;
-                date.setDate(date.getDate() + 1);
-
-                object.fName = rows[0].fName;
-                object.lName = rows[0].lName;
-                object.employee_id = rows[0].employee_id;
-                object.phone_number = rows[0].phone_number;
-                object.address = rows[0].address;
-                object.date_of_birth = date;
-                object.gender = rows[0].gender;
-            } catch {
-                console.log("Employee Service Error - infoQuery")
-            }
-        })
-
-    let salaryQuery = await knex
-        .select("hourly_rate")
+    // acquire hourly rate
+    let summaryObject = {};
+    let querysummary = await knex
+        .select("hourly_rate", "total_working_hour", "total_salary")
         .from("salary")
-        .where("employee_id", "1")
+        .where("employee_id", 3)
         .then((rows) => {
             try {
-                object.hourly_rate = rows[0].hourly_rate;
-            } catch {
-                console.log("Employee Service Error - salaryQuery")
+                // console.log("Employee Service - hourly rate: " + rows[0].hourly_rate);
+                summaryObject.working_hours = rows[0].hourly_rate;
+                summaryObject.hourly_rate = rows[0].hourly_rate;
+                summaryObject.hourly_rate = rows[0].hourly_rate;
             }
-        })
-        
-    // console.log(object);
+            catch {
+                console.log("Employee Service: queryHourlyRate Error");
+            }
+        });
+console.log(summaryObject);
 }
-
 command();
 
 
 
+
+
+
+
+//for cal 
+// let queryWorkHours = await knex
+// .select("in_time", "out_time")
+// .from("attendance")
+// .where("employee_id", 1)
+// .orderBy("id", "asc")
+// .then((rows) => {
+//     try {
+//         let workHoursArray = [];
+//         for (i = 0; i < rows.length; i++) {
+//             const [hours, minutes, seconds] = (rows[i].in_time).split(':');
+//             function convertToSeconds(hours, minutes, seconds) {
+//                 return Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds);
+//             }
+//             workHoursArray.push(parseInt((convertToSeconds(hours, minutes, seconds)) / 60 / 60));
+//         }
+//         const initialValue = 0;
+//         const totalWorkHours = workHoursArray.reduce(
+//             (previousValue, currentValue) => previousValue + currentValue,
+//             initialValue
+//         );
+//         // console.log(`Employee Service - total working hours: ${totalWorkHours}`);
+//         summaryObject.total_work_hours = totalWorkHours;
+//     }
+//     catch {
+//         console.log("Employee Service queryWorkHours Error");
+//     }
+// })

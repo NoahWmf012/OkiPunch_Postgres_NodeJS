@@ -7,8 +7,10 @@ exports.up = function (knex) {
         table.increments();
         table.integer("employee_id").unsigned().references("employee.id");
         table.decimal("hourly_rate");
-        table.decimal("total_working_hour");
-        table.decimal("total_salary")
+        table.decimal("month_working_hour");//current month
+        table.decimal("month_salary"); //current month
+        table.decimal("accumulate_salary"); //accumulate
+        table.decimal("accumulate_working_hour"); //accumulate
     })
 };
 
