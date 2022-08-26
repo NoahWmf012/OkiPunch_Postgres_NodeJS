@@ -1,0 +1,44 @@
+class PageRouter {
+    constructor(express) {
+        this.express = express;
+    }
+
+    isLoggedIn(req, res, next) {
+        if (req.isAuthenticated()) { return next(); }
+        res.redirect("/login");
+    }
+
+    isNotLogged(req, res, next) {
+        if (!req.isAuthenticated()) {
+            return next();
+        }
+        res.redirect("/");
+    }
+
+    router() {
+        let router = this.express.Router();
+        router.get("/", this.isLoggedIn, this.showAll.bind(this));
+        router.get("/company_signup", this.isNotLogged, this.companySignup.bind(this));
+        router.get("/company_login", this.isNotLogged, this.companyLogin.bind(this));
+        router.get("/employee_login", this.isNotLogged, this.employeeLogin.bind(this));
+        return router;
+    }
+
+    showAll(req, res) {
+        res.redirect("/biz/showworkers");
+    }
+
+    companySignup(req, res) {
+        res.render("company_signup");
+    }
+
+    companyLogin(req, res) {
+        res.render("company_login");
+    }
+
+    employeeLogin(req, res) {
+        res.render("employee_login");
+    }
+}
+
+module.exports = PageRouter;

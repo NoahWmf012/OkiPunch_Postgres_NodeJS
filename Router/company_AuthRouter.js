@@ -1,3 +1,4 @@
+const role = require("../roles.js")
 class AuthRouter {
     constructor(express, passport) {
         this.express = express;
@@ -55,7 +56,7 @@ class AuthRouter {
         router.post(
             "/company_signup",
             this.isNotLogged,
-            this.passport.authenticate("local-signup", {
+            this.passport.authenticate("company-signup", {
                 successRedirect: "/company_login",
                 failureRedirect: "/company_signup",
                 failureFlash: true,
@@ -65,7 +66,7 @@ class AuthRouter {
         router.post(
             "/company_login",
             this.isNotLogged,
-            this.passport.authenticate("local-login", {
+            this.passport.authenticate("company-login", {
                 successRedirect: "/biz/showworkers",
                 failureRedirect: "/company_login",
                 failureFlash: true,

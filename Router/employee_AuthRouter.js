@@ -24,7 +24,7 @@ class AuthRouter {
         router.post(
             "/employee_login",
             this.isNotLogged,
-            this.passport.authenticate("local-login", {
+            this.passport.authenticate("employee-login", {
                 successRedirect: "/salary/:id", //not yet assign /:id
                 failureRedirect: "/employee_login",
                 failureFlash: true,
