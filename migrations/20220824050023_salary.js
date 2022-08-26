@@ -6,7 +6,9 @@ exports.up = function (knex) {
     return knex.schema.createTable('salary', (table) => {
         table.increments();
         table.integer("employee_id").unsigned().references("employee.id");
-        table.integer("hourly_rate");
+        table.decimal("hourly_rate");
+        table.decimal("total_working_hour");
+        table.decimal("total_salary")
     })
 };
 

@@ -10,6 +10,8 @@ exports.up = function (knex) {
         table.date("out_date");
         table.time("in_time");
         table.time("out_time");
+        table.time("day_working_hour")
+        table.enu('status', ['ON_TIME', 'LATE', 'ABSENT', 'EARLY GOING', 'HALF DAY'])
     })
 };
 
