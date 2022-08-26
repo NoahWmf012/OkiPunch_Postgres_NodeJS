@@ -109,7 +109,7 @@ app.use("/api/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), e
 
 app.listen(port, () => {
     console.log(
-        `app listening to port ${port}
+        `
     company site: http://localhost:${port}/biz
     employee site: http://localhost:${port}/api/employee
     root site: http://localhost:${port} `)

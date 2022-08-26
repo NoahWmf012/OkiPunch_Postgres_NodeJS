@@ -1,12 +1,15 @@
 const { json } = require("body-parser");
+const Auth = require("./company_AuthRouter");
 
 class nodeRouterCompany {
     constructor(noteServiceCompany, express) {
         this.noteServiceCompany = noteServiceCompany;
         this.express = express;
+        this.auth = new Auth();
     }
     router() {
         let router = this.express.Router();
+        router.use(this.auth.isLogged);
         router.get("/showworkers", this.showAll.bind(this)); //employ
         router.post("/worker/addnew", this.addNew.bind(this)); //employ , employ_information
         router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
