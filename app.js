@@ -56,27 +56,10 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-
-// app.get("/employee_login", (req, res) => {
-//     res.type(".html");
-//     res.render("employee_login");
-// });
-
-app.get("/employee_punch", (req, res) => {
-    res.type(".html");
-    res.render("employee_punch");
-});
-
-app.get("/employee_calendar", (req, res) => {
+app.get("/employee_calendar", (req, res) => { //not working when moved to employee_route.jd
     res.type(".html");
     res.render("employee_calendar");
 });
-
-app.get("/employee_information", (req, res) => {
-    res.type(".html");
-    res.render("employee_information");
-});
-
 
 //set up node router
 app.use("/", new PageRouter(express).router());
