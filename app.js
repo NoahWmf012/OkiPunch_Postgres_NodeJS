@@ -56,11 +56,6 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-app.get("/employee_calendar", (req, res) => { //not working when moved to employee_route.jd
-    res.type(".html");
-    res.render("employee_calendar");
-});
-
 //set up node router
 app.use("/", new PageRouter(express).router());
 app.use("/", new comAuthRouter(express, passport).router());
