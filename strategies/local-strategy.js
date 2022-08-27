@@ -30,12 +30,12 @@ module.exports = (passport, bcrypt, knex) => {
                 if (!user) {
                     return done(null, false, { message: "No user with this email" });
                 }
-                console.log("company-login user:", user.role)
                 const result = await bcrypt.compare(password, user.password);
                 if (result) {
-                    console.log("result:", result)
-
-                    return done(null, user);
+                    if (user.role == "company") {
+                        return done(null, user);
+                    }
+                    else done(null, false, { message: "Invalid role" })
                 } else {
                     return done(null, false, { message: "Incorrect password" });
                 }
@@ -53,11 +53,12 @@ module.exports = (passport, bcrypt, knex) => {
                 if (!user) {
                     return done(null, false, { message: "No user with this email" });
                 }
-                console.log("user:", user.role)
                 const result = await bcrypt.compare(password, user.password);
                 if (result) {
-                    console.log("result:", result)
-
+                    if (user.role == "employee") {
+                        return done(null, user);
+                    }
+                    else done(null, false, { message: "Invalid role" })
                     return done(null, user);
                 } else {
                     return done(null, false, { message: "Incorrect password" });
@@ -67,7 +68,26 @@ module.exports = (passport, bcrypt, knex) => {
             }
         })
     );
+    passport.use(
+        "add-new-employee",
+        new LocalStrategy(async (email, password, done) => {
+            try {
+                const user = await knex("users").where({ email }).first();
+                if (user) {
+                    return done(null, false, { message: "email already taken" });
+                }
+                console.log(user)
+                const hash = await bcrypt.hash(password, 10);
+                let newUser = { email, password: hash, role: 'employee' };
 
+                let userId = await knex("users").insert(newUser).returning("id");
+                newUser.id = userId[0].id;
+                done(null, newUser);
+            } catch (err) {
+                done(err);
+            }
+        })
+    );
 
 
 };

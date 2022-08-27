@@ -15,21 +15,6 @@ class nodeServiceCompany {
 
     //  /biz/worker/addnew (POST)
     async addNewWorker(email, password) {
-        try {
-            const user = await knex("users").where({ email }).first();
-            if (user) {
-                return done(null, false, { message: "email already taken" });
-            }
-            const hash = await bcrypt.hash(password, 10);
-            let newUser = { email, password: hash, role: 'employee' };
-
-            let userId = await knex("users").insert(newUser).returning("id");
-            newUser.id = userId[0].id;
-
-            return done(null, newUser);
-        } catch (err) {
-            done(err);
-        }
     }
 
     // /biz/worker/:id/calendar (GET)

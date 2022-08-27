@@ -46,11 +46,16 @@ class nodeRouterCompany {
     }
 
     async addNew(req, res) {
-        this.passport.authenticate("local-signup", {
-            successRedirect: "/company_login",
-            failureRedirect: "/company_signup",
-            failureFlash: true,
-        })
+        console.log("addNew")
+        // router.post(
+        //     "/company_signup",
+        //     this.isNotLogged,
+        //     this.passport.authenticate("company-signup", {
+        //         successRedirect: "/company_login",
+        //         failureRedirect: "/company_signup",
+        //         failureFlash: true,
+        //     })
+        // );
     }
 
     async showCalendar(req, res) {
