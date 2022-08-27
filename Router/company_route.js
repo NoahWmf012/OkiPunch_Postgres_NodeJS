@@ -10,7 +10,7 @@ class nodeRouterCompany {
     router() {
         let router = this.express.Router();
 
-        router.use(this.auth.isLogged);
+        router.use(this.auth.isAdminLogged);
 
 
         //connecting DB
