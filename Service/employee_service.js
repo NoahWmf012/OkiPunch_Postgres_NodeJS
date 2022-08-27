@@ -33,9 +33,9 @@ class nodeServiceEmployee {
 
 
 
-    /* POST /punchin/:id/:date */ //insert data in attendance
+    /* POST /punchin/:id/:date */ //insert data in attendance // checked
     employeePunchIn(id) {
-        let command = async function () {
+        let command1 = async function () {
             //in_date
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
@@ -67,37 +67,126 @@ class nodeServiceEmployee {
 
             console.log("Punch In and insert data successfully")
         }
-        command();
+        command1();
     };
 
 
 
-    /* POST /punchout/:id/:date */
+    /* POST /punchout/:id/:date */ //checked
     employeePunchOut(id) {
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-
-        let d = new Date();
-        let n = d.toLocaleTimeString();
-
-        let queryPunchOutId = this.knex.select("id").from("attendance")
-            .where("attendance.employee_id", id)
-            .orderBy("id", "asyn")
-
-        return queryPunchOutId.then((data) => {
-            let punchOutId = (data[data.length - 1].id);
-            console.log(punchOutId);
-            if (punchOutId) {
-                console.log("Punch Out and insert data successfully")
-                return this.knex("attendance").where("id", punchOutId)
-                    .update({ out_date: d, out_time: n });
-            } else {
-                console.log("Employee Service Error - queryPunchInId");
+        //date
+        let command2 = async function () {
+            function toMonthName(monthNumber) {
+                let date = new Date();
+                date.setMonth(monthNumber - 1);
+                return date.toLocaleString('en-US', {
+                    month: 'long',
+                });
             }
-        })
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0');
+            let yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+            let punchOutId;
+            let workinghhmmss;
+
+            let d = new Date();
+            let n = d.toLocaleTimeString();
+
+
+            //insert attendance table
+            let queryPunchOutId = await this.knex.select("id").from("attendance")
+                .where("attendance.employee_id", id)
+                .orderBy("id", "asyn")
+                .then((data) => {
+                    punchOutId = (data[data.length - 1].id);
+
+                    if (punchOutId) {
+                        console.log("Punch Out and insert data successfully")
+                        let queryIn_time = this.knex.select("in_time").from("attendance").where("id", punchOutId)
+                        return queryIn_time.then((time) => {
+
+                            // in_time -> change 21:39:26 to 77966s
+                            let hmsInTime = time[0].in_time;
+                            var aInTime = hmsInTime.split(':');
+                            var inTimeSeconds = (+aInTime[0]) * 60 * 60 + (+aInTime[1]) * 60 + (+aInTime[2]);
+
+                            //out_time -> change 21:39:26 to 77966s
+                            let hmsOutTime = n;
+                            var aOutTime = hmsOutTime.split(':');
+                            var outTimeSeconds = (+aOutTime[0]) * 60 * 60 + (+aOutTime[1]) * 60 + (+aOutTime[2]);
+
+                            //cal working hours for one day
+                            let workingSecond = outTimeSeconds - inTimeSeconds;
+                            workinghhmmss = new Date(workingSecond * 1000).toISOString().slice(11, 19);
+
+                            return this.knex("attendance").where("id", punchOutId)
+                                .update({ out_date: d, out_time: n, day_working_hour: workinghhmmss });
+                        })
+                    } else {
+                        console.log("Employee Service Error - queryPunchInId");
+                    }
+
+                })
+
+
+            //insert payroll table
+            let hourly_rate;
+            let payrollquery = await this.knex
+                .select("hourly_rate")
+                .from("salary")
+                .where("employee_id", id)
+                .then((rows) => {
+                    let daily_salary = (workinghhmmss.split(":")[1]) * (rows[0].hourly_rate) / 60;
+                    hourly_rate = rows[0].hourly_rate;
+                    return this.knex
+                        .insert({ employee_id: id, attendance_id: punchOutId, salary_id: id, daily_salary: daily_salary })
+                        .into(`payroll_${toMonthName(mm).toLowerCase()}`);
+                });
+
+
+
+            //update salary table
+            //find month_working_hour in salary
+            let querySalary = await this.knex
+                .select("day_working_hour")
+                .from("attendance")
+                .where("employee_id", id)
+                .orderBy("id", "asc")
+                .then((rows) => {
+
+                    let workHoursArray = [];
+                    for (i = 0; i < rows.length; i++) {
+                        let hmsInTime = rows[i].day_working_hour;
+                        if (hmsInTime === null) {
+                            console.log("Employee Service - querySalary no working hours, no need push in array");
+                        } else {
+                            let bInTime = hmsInTime.split(':');
+                            let inTimeSeconds = (+bInTime[0]) * 60 * 60 + (+bInTime[1]) * 60 + (+bInTime[2]);
+                            workHoursArray.push(inTimeSeconds);
+                        }
+                    }
+                    const initialValue = 0;
+                    const totalWorkHours = workHoursArray.reduce(
+                        (previousValue, currentValue) => previousValue + currentValue,
+                        initialValue
+                    );
+
+                    workinghhmmss = new Date(totalWorkHours * 1000).toISOString().slice(11, 19);
+                    let working_hour = Number((workinghhmmss.split(":")[0]) * 60);
+                    let working_min = Number((workinghhmmss.split(":")[1]));
+                    let calHour = ((working_hour + working_min) / 60).toFixed(2);
+                    // console.log(`Employee Service - total working hours: ${calHour}`);
+
+                    console.log("month_working_hour: " + calHour);
+                    console.log("calHour * hourly_rate: " + calHour * hourly_rate);
+
+                    return this.knex("salary").where("id", id)
+                        .update({ month_working_hour: calHour, month_salary: calHour * hourly_rate });
+                })
+        };
+        command2();
     };
 
 
