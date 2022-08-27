@@ -1,4 +1,4 @@
-class AuthRouter {
+class emAuthRouter {
     constructor(express, passport) {
         this.express = express;
         this.passport = passport;
@@ -25,7 +25,7 @@ class AuthRouter {
             "/employee_login",
             this.isNotLogged,
             this.passport.authenticate("employee-login", {
-                successRedirect: "/salary/:id", //not yet assign /:id
+                successRedirect: "/employee/salary/1", //not yet assign /:id
                 failureRedirect: "/employee_login",
                 failureFlash: true,
             })
@@ -44,4 +44,4 @@ class AuthRouter {
     }
 }
 
-module.exports = AuthRouter;
+module.exports = emAuthRouter;

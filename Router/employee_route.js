@@ -8,9 +8,9 @@ class nodeRouterEmployee {
     }
 
     router() {
-      
+
         let router = this.express.Router();
-        // router.use(this.auth.isLogged);
+        router.use(this.auth.isLogged);
         router.get("/salary/:id", this.EmployeeSummary.bind(this));
         router.get("/calendar/:id/:date", this.EmployeeCalendar.bind(this));
         router.post("/punchin/:id/:date", this.punchIn.bind(this));
@@ -21,11 +21,11 @@ class nodeRouterEmployee {
     }
 
     async EmployeeSummary(req, res) {
-        
+
         let id = req.params.id;
         var data = await this.nodeServiceEmployee.showEmployeeSummary(id);
         res.json(data);
-       
+
     }
 
     async EmployeeCalendar(req, res) {

@@ -1,4 +1,4 @@
-class AuthRouter {
+class comAuthRouter {
     constructor(express, passport) {
         this.express = express;
         this.passport = passport;
@@ -92,4 +92,4 @@ class AuthRouter {
     }
 }
 
-module.exports = AuthRouter;
+module.exports = comAuthRouter;
