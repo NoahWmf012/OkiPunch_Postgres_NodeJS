@@ -29,7 +29,7 @@ class nodeRouterEmployee {
 
     renderEmployeeCalendar(req, res) {
         res.type(".html");
-        res.render("employee_calendar"); //does not render
+        res.render("employee_calendar");
     }
 
     async inputEmployeeCalendar(req, res){
@@ -39,6 +39,7 @@ class nodeRouterEmployee {
     }
 
     renderPunchPage(req, res) {
+        res.type(".html");
         res.render("employee_punch");
     }
 
@@ -58,6 +59,7 @@ class nodeRouterEmployee {
         // var data = await this.nodeServiceEmployee.showEmployeeInfo(id);
         // let id = req.params.id;
         // res.json(data);
+        res.type(".html");
         res.render("employee_information")
     }
 

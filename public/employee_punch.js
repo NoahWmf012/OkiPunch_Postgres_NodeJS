@@ -11,7 +11,16 @@ $.ajax({
     }
 });
 
+$.ajax({
+    type: "GET",
+    url: `http://localhost:8000/employee/punchin/${id}`,
+    success: function (result) {
+        console.log(result);
+        // $("#emplouee_punch_inBtn").append(result.month_working_hour);
+    }
+});
 
+// 
 
 
 

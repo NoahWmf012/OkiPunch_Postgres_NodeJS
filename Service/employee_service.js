@@ -47,7 +47,7 @@ class nodeServiceEmployee {
 
             //status
             let status = "";
-            if (in_time == null) {
+            if (n == null) {
                 status = "ABSENT";
             } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
                 status = "ON_TIME"; //09:00:00 - 09:00:59

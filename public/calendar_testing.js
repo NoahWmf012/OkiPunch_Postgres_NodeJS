@@ -149,100 +149,125 @@ in_date_result = "";
 // command();
 
 
-let id = 3;
+// let id = 3;
 
-//e.g. id:employee_id, name:"punctual", description:"08:50:50", date:"2022/08/24", type""punctual"
-let command = async function () {
-    //acquire type
-    let summaryObject = {};
-    let status = [];
-    let query_time = await knex
-        .select("status")
-        .from("attendance")
-        .where("employee_id", id)
-        .orderBy("id", "asc")
-        .then((rows) => {
-            try {
-                for (i = 0; i < rows.length; i++) {
-                    status.push(rows[i].status);
-                }
-                summaryObject.status = status;
-            } catch {
-                console.log("Employee Service Error - query_time");
-            }
-        });
+// //e.g. id:employee_id, name:"punctual", description:"08:50:50", date:"2022/08/24", type""punctual"
+// let command = async function () {
+//     //acquire type
+//     let summaryObject = {};
+//     let status = [];
+//     let query_time = await knex
+//         .select("status")
+//         .from("attendance")
+//         .where("employee_id", id)
+//         .orderBy("id", "asc")
+//         .then((rows) => {
+//             try {
+//                 for (i = 0; i < rows.length; i++) {
+//                     status.push(rows[i].status);
+//                 }
+//                 summaryObject.status = status;
+//             } catch {
+//                 console.log("Employee Service Error - query_time");
+//             }
+//         });
 
 
 
-    //acquire in_time & out_time description
-    let description = [];
-    let query_in_time = await knex
-        .select("in_time", "out_time")
-        .from("attendance")
-        .where("employee_id", id)
-        .orderBy("id", "asc")
-        .then((rows) => {
-            try {
-                for (j = 0; j < rows.length; j++) {
+//     //acquire in_time & out_time description
+//     let description = [];
+//     let query_in_time = await knex
+//         .select("in_time", "out_time")
+//         .from("attendance")
+//         .where("employee_id", id)
+//         .orderBy("id", "asc")
+//         .then((rows) => {
+//             try {
+//                 for (j = 0; j < rows.length; j++) {
 
-                        description.push(`IN:${rows[j].in_time}  OUT:${rows[j].out_time}`);
+//                         description.push(`IN:${rows[j].in_time}  OUT:${rows[j].out_time}`);
                     
-                }
-            } catch {
-                console.log("Employee Service Error - query_in_time");
-            }
-        });
-    summaryObject.description = description;
+//                 }
+//             } catch {
+//                 console.log("Employee Service Error - query_in_time");
+//             }
+//         });
+//     summaryObject.description = description;
 
 
-    //acquire date
-    let queryDate = await knex.select("in_date").from("attendance")
-        .where("employee_id", id)
-        .orderBy('id', 'asc')
-        .then((rows) => {
-            // let value = [];
-            // let date = [];
-            // let time = [];
-            // let alteredDate = [];
-            // let resultDate = [];
-            let dateArray = [];
-            // console.log(rows); //!PROBLEM HERE! it return 19 & 20, therefore, I changed it to 20 & 21 below
-            for (let j = 0; j < rows.length; j++) {
-                // value.push(rows[j].in_date.toString());
-                // date.push((value[j]).split(' ', 4).join(' '));
-                // time.push(value[j].split(' ').slice(4).join(' ').split(' ')[0]);
-                // let [month, day, year] = date[j].split(' ').slice(1).join(' ').split(' ');
-                // const [hours, minutes, seconds] = time[j].split(':');
-                // let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                // month = (months.indexOf(month) + 1)
-                // alteredDate.push(new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes), Number(seconds))));
-                // console.log(alteredDate);
-                // resultDate.push(alteredDate[j].toISOString().split('T')[0]);
-                // console.log(resultDate);
+//     //acquire date
+//     let queryDate = await knex.select("in_date").from("attendance")
+//         .where("employee_id", id)
+//         .orderBy('id', 'asc')
+//         .then((rows) => {
+//             // let value = [];
+//             // let date = [];
+//             // let time = [];
+//             // let alteredDate = [];
+//             // let resultDate = [];
+//             let dateArray = [];
+//             // console.log(rows); //!PROBLEM HERE! it return 19 & 20, therefore, I changed it to 20 & 21 below
+//             for (let j = 0; j < rows.length; j++) {
+//                 // value.push(rows[j].in_date.toString());
+//                 // date.push((value[j]).split(' ', 4).join(' '));
+//                 // time.push(value[j].split(' ').slice(4).join(' ').split(' ')[0]);
+//                 // let [month, day, year] = date[j].split(' ').slice(1).join(' ').split(' ');
+//                 // const [hours, minutes, seconds] = time[j].split(':');
+//                 // let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+//                 // month = (months.indexOf(month) + 1)
+//                 // alteredDate.push(new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hours), Number(minutes), Number(seconds))));
+//                 // console.log(alteredDate);
+//                 // resultDate.push(alteredDate[j].toISOString().split('T')[0]);
+//                 // console.log(resultDate);
 
-                const date = rows[j].in_date;
-                date.setDate(date.getDate() + 1);
-                dateArray.push(date.toISOString().split('T')[0]);
-            }
-            summaryObject.date = dateArray;
-        });
-    console.log(summaryObject);
-    return summaryObject; // include status, description, time
-}
-command();
+//                 const date = rows[j].in_date;
+//                 date.setDate(date.getDate() + 1);
+//                 dateArray.push(date.toISOString().split('T')[0]);
+//             }
+//             summaryObject.date = dateArray;
+//         });
+//     console.log(summaryObject);
+//     return summaryObject; // include status, description, time
+// }
+// command();
 
+id =1;
 
+    let command1 = async function () {
+        //in_date
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = yyyy + '/' + mm + '/' + dd;
 
+        //in_time
+        let d = new Date();
+        let n = d.toLocaleTimeString();
+        console.log(n)
 
+        
+        //status
+        let status = "";
+        if (n == null) {
+            status = "ABSENT";
+        } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+            status = "ON_TIME"; //09:00:00 - 09:00:59
+        } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+            status = "LATE"; //09:01:00 - 15:59:59
+        } else if ((((n).split(':')[0]) < 9)) {
+            status = "EARLY GOING"; // ... - 08:59:59
+        } else if ((((n).split(':')[0]) >= 16)) {
+            status = "HALF DAY"; // 16:00:00 - ...
+        }
 
+        await knex
+            .insert({ employee_id: id, in_date: today, in_time: n, status: status })
+            .into("attendance");
 
-
-
-
-
-
-
-
-
+        console.log("Punch In and insert data successfully")
+        
+    }
+    // command1();
 
 
