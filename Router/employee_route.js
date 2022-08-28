@@ -8,14 +8,14 @@ class nodeRouterEmployee {
     }
 
     router() {
-
         let router = this.express.Router();
         router.use(this.auth.isLogged);
         router.get("/salary/:id", this.EmployeeSummary.bind(this));
         router.get("/calendar", this.renderEmployeeCalendar.bind(this)); // should be "/calendar/:id/:date"
+        router.get("/calendar/:id", this.inputEmployeeCalendar.bind(this)); // should be "/calendar/:id/:date"
         router.get("/punch", this.renderPunchPage.bind(this));
-        router.post("/punchin/:id/:date", this.punchIn.bind(this));
-        router.post("/punchout/:id/:date", this.punchOut.bind(this));
+        router.get("/punchin/:id", this.punchIn.bind(this));
+        router.get("/punchout/:id", this.punchOut.bind(this));
         router.get("/info/:id", this.renderInfo.bind(this));
         router.put("/info/:id", this.editInfo.bind(this));
         return router;
@@ -25,39 +25,41 @@ class nodeRouterEmployee {
         let id = req.params.id;
         var data = await this.nodeServiceEmployee.showEmployeeSummary(id);
         res.json(data);
-
     }
 
     renderEmployeeCalendar(req, res) {
-        // let id = req.params.id;
-        // let date = req.params.date;
-        // var data = await this.nodeServiceEmployee.showEmployeeCalendar(id, date);
-        // console.log(data);
-        console.log("renderEmployeeCalendar")
-        res.render("employee_calendar"); //does not render
+        res.type(".html");
+        res.render("employee_calendar");
+    }
+
+    async inputEmployeeCalendar(req, res) {
+        let id = req.params.id;
+        var data = await this.nodeServiceEmployee.showEmployeeCalendar(id);
+        res.json(data);
     }
 
     renderPunchPage(req, res) {
+        res.type(".html");
         res.render("employee_punch");
     }
 
     async punchIn(req, res) {
         let id = req.params.id;
-        let date = req.params.id;
-        var data = await this.nodeServiceEmployee.employeePunchIn(id, date);
+        var data = await this.nodeServiceEmployee.employeePunchIn(id);
         res.json(data);
     }
 
     async punchOut(req, res) {
-        var data = await this.nodeServiceEmployee.employeePunchOut(id, date);
         let id = req.params.id;
+        var data = await this.nodeServiceEmployee.employeePunchOut(id);
         res.json(data);
     }
 
-    async renderInfo(req, res) {
-        // let id = req.params.id;
+    renderInfo(req, res) {
         // var data = await this.nodeServiceEmployee.showEmployeeInfo(id);
+        // let id = req.params.id;
         // res.json(data);
+        res.type(".html");
         res.render("employee_information")
     }
 

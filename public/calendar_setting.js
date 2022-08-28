@@ -1,10 +1,14 @@
+// //AJAX
+let id = 1;
+
+//Setting
 var today = new Date();
 
 var events = [{
     id: "imwyx6S",
     name: "Event #3",
     description: "Lorem ipsum dolor sit amet.",
-    date: today.getMonth() + 1 + "/18/" + today.getFullYear(),
+    date: "2022/08/27",
     type: "event"
 }, {
     id: "9jU6g6f",
@@ -67,40 +71,57 @@ function getWeeksInMonth(a, b) {
 
 week_date = getWeeksInMonth(today.getMonth(), today.getFullYear())[2];
 
-//add knex here
+//!!!!!add event here!!!!!
 $(document).ready(function () {
-    $("#evoCalendar").evoCalendar({
-        format: "yyyy/mm/dd", // default format: MM dd, yyyy
-        titleFormat: "MM",
-        calendarEvents: [{
-            id: "001",//staff_id
-            name: "A's Birthday",//"Punctual", "Late", "Absence"
-            description: "Author's note: Thank you for using EvoCalendar! :)",//additional information e.g.late/absence reason
-            date: "2022-08-24", //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
-            type: "birthday", //"punctual", "late", "absence" // color according to the type
-            everyYear: !0
-        }, 
-        {
-            id: "sKn89hi",
-            name: "1-Week Coding Bootcamp",
-            description: "Lorem ipsum dolor sit amet.",
-            badge: "5-day event",
-            date: [today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear()],
-            type: "event",
-            everyYear: !0
-        }, {
-            id: "sKn89hi", //okipunch example 
-            name: "Punctual",
-            description: "A",
-            date: "2022/08/22",
-            type: "birthday"
-        }, {
-            id: "in8bha4",
-            name: "Event #2",
-            date: today,
-            type: "event"
-        }]
+
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8000/employee/calendar/${id}`,
+        async:true,
+        success: function (result) {
+            // console.log(result);
+            // console.log(result.date.length);
+
+            let status_id;
+            let cal_array = []
+            for (let c = 0; c < result.date.length; c++) {
+                if (result.status[c] == "ON_TIME") {
+                    status_id = "1";
+                } else if (result.status[c] == "LATE") {
+                    status_id = "2";
+                } else if (result.status[c] == "ABSENT") {
+                    status_id = "3";
+                } else if (result.status[c] == "EARLY GOING") {
+                    status_id = "4";
+                } else if (result.status[c] == "HALF DAY") {
+                    status_id = "5";
+                }
+                
+                cal_array.push({
+                    id: status_id,//staff_id
+                    name: result.status[c],//"Punctual", "Late", "Absence"
+                    description: result.description[c],//additional information e.g.late/absence reason
+                    date: result.date[c], //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
+                    type: "event", //"punctual", "late", "absence" // color according to the type
+                })
+
+                c = c++
+            }
+
+            $("#evoCalendar").evoCalendar({
+                format: "yyyy/mm/dd", // default format: MM dd, yyyy
+                titleFormat: "MM",
+                calendarEvents:
+                    cal_array 
+            });
+        }
     });
+
+
+
+
+
+
     $("[data-set-theme]").click(function (b) {
         a(b.target);
     });
