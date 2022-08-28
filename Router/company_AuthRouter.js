@@ -6,7 +6,6 @@ class comAuthRouter {
 
     isLogged(req, res, next) {
         if (req.isAuthenticated()) {
-            console.log("role", req.user)
             return next();
         }
         res.redirect("/company_login");
@@ -20,10 +19,13 @@ class comAuthRouter {
     }
 
     isAdminLogged(req, res, next) {
-        if (req.isAuthenticated() && req.user === "company") {
-            return next();
+        if (req.isAuthenticated()) {
+            if (req.user.role === "company") {
+                return next();
+            }
+            res.send("Only company admin is allowed to enter this page");
         }
-        res.send("Only company admin is allowed to enter this page");
+        res.redirect("/company_login");
     }
 
     router() {

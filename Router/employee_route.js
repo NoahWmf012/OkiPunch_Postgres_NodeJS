@@ -33,6 +33,7 @@ class nodeRouterEmployee {
         // let date = req.params.date;
         // var data = await this.nodeServiceEmployee.showEmployeeCalendar(id, date);
         // console.log(data);
+        console.log("renderEmployeeCalendar")
         res.render("employee_calendar"); //does not render
     }
 

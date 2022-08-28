@@ -18,6 +18,12 @@ class emAuthRouter {
         res.redirect("/");
     }
 
+    isEmployeeLogged(req, res, next) {
+        if (req.isAuthenticated() && req.user.role == "employee") {
+            return next();
+        }
+    }
+
     router() {
         let router = this.express.Router();
 

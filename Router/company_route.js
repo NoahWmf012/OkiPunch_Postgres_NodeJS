@@ -42,7 +42,7 @@ class nodeRouterCompany {
     }
 
     showAddNew(req, res) {
-        res.render("company_new_worker")
+        res.render("company_new_worker");
     }
 
     async addNew(req, res) {
