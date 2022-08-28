@@ -9,8 +9,6 @@ exports.up = function (knex) {
         table.decimal("hourly_rate");
         table.decimal("month_working_hour");//current month
         table.decimal("month_salary"); //current month
-        table.decimal("accumulate_salary"); //accumulate
-        table.decimal("accumulate_working_hour"); //accumulate
     })
 };
 

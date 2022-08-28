@@ -8,7 +8,7 @@ exports.up = function (knex) {
         table.integer("department_id");
         table.string("title");
         table.decimal("salary");
-        table.string("active_status")
+        table.string("active_status"); 
         table.date("start_date");
         table.date("end_date");
         table.timestamps(true, true);
