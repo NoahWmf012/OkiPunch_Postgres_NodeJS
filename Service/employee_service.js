@@ -32,8 +32,7 @@ class nodeServiceEmployee {
 
 
     /* POST /punchin/:id/:date */ //insert data in attendance // checked
-    employeePunchIn(id) {
-        let command1 = async function () {
+    async employeePunchIn(id) {
             //in_date
             let today = new Date();
             let dd = String(today.getDate()).padStart(2, '0');
@@ -64,8 +63,6 @@ class nodeServiceEmployee {
                 .into("attendance");
 
             console.log("Punch In and insert data successfully")
-        }
-        command1();
     };
 
 
@@ -154,7 +151,7 @@ class nodeServiceEmployee {
             .then((rows) => {
 
                 let workHoursArray = [];
-                for (i = 0; i < rows.length; i++) {
+                for (let i = 0; i < rows.length; i++) {
                     let hmsInTime = rows[i].day_working_hour;
                     if (hmsInTime === null) {
                         console.log("Employee Service - querySalary no working hours, no need push in array");

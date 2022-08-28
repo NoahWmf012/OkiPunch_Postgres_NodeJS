@@ -27,11 +27,75 @@
 
             <hr>
 
-            <button id="emplouee_punch_inBtn" type="submit" class="btn btn-primary btn-ml">Punch In</button>
-            <button id="emplouee_punch_outBtn" type="submit" class="btn btn-secondary btn-ml">Punch Out</button>
+            <button id="employee_punch_inBtn" type="submit" class="btn btn-primary btn-ml">Punch In</button>
+            <button id="employee_punch_outBtn" type="submit" class="btn btn-secondary btn-ml">Punch Out</button>
         </div>
     </div>
 </div>
+
+<br>
+
+
+<div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
+      {{!-- alert for successful punchin --}}
+  <div id="punchIn_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+    
+        <strong class="me-auto">Punch In successfully</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div id="punchInMessage" class="toast-body">
+       Punch In Time: 
+      </div>
+    </div>
+</div>
+
+<div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
+      {{!-- alert for successful punchin --}}
+  <div id="punchOut_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
+    
+        <strong class="me-auto">Punch out successfully</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div id="punchOutMessage" class="toast-body">
+       Punch Out Time: 
+      </div>
+    </div>
+</div>
+
+<script>
+const time = new Date();
+console.log( 
+  time.toLocaleString('en-us', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true 
+  })
+); 
+
+$("#punchInMessage").append(time.toLocaleString('en-us', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true 
+  }))
+
+  $("#punchOutMessage").append(time.toLocaleString('en-us', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true 
+  }))
+</script>
+
+
+
+
+
 
 
 <!-- below announcement box can add later-->

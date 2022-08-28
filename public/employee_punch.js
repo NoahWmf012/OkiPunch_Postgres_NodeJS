@@ -1,5 +1,6 @@
 let id = 1;
 
+//Show salary summary//
 $.ajax({
     type: "GET",
     url: `http://localhost:8000/employee/salary/${id}`,
@@ -11,31 +12,44 @@ $.ajax({
     }
 });
 
-$.ajax({
-    type: "GET",
-    url: `http://localhost:8000/employee/punchin/${id}`,
-    success: function (result) {
-        console.log(result);
-        // $("#emplouee_punch_inBtn").append(result.month_working_hour);
-    }
-});
+//punch in insert data
+let employeePunchIn = function(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8000/employee/punchin/${id}`,
+        success: function (result) {
+            return true;
+        }
+    });
+}
 
-// 
-
-
-
-
-
-
-
-
-
-
+$(document).ready(function(){
+    $("#employee_punch_inBtn").click(function() {
+        employeePunchIn();
+       $("#punchIn_alert").css("visibility", "visible");
+        $(employee_punch_inBtn).attr('disabled', true);
+      });
+})
 
 
+//punch out insert data
+let employeePunchOut = function(){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8000/employee/punchout/${id}`,
+        success: function (result) {
+            return true;
+        }
+    });
+}
 
-
-
+$(document).ready(function(){
+    $("#employee_punch_outBtn").click(function() {
+        employeePunchOut();
+       $("#punchOut_alert").css("visibility", "visible");
+        $(employee_punch_outBtn).attr('disabled', true);
+      });
+})
 
 
 
