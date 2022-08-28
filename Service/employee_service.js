@@ -258,27 +258,25 @@ class nodeServiceEmployee {
     /* GET /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
     async showEmployeeInfo(id) {
         let object = {};
-        let infoQuery = await this.knex
+        await this.knex
             .select("fName", "employee_id", "phone_number", "address", "date_of_birth", "gender")
             .from("employee_information")
             .where("employee_id", "4")
             .then((rows) => {
-                try {
-                    let date = rows[0].date_of_birth;
-                    date.setDate(date.getDate() + 1);
+                console.log(rows[0])
+                    // let date = rows[0].date_of_birth;
+                    // date.setDate(date.getDate() + 1);
 
-                    object.fName = rows[0].fName;
-                    object.employee_id = rows[0].employee_id;
-                    object.phone_number = rows[0].phone_number;
-                    object.address = rows[0].address;
-                    object.date_of_birth = date;
-                    object.gender = rows[0].gender;
-                } catch {
-                    console.log("Employee Service Error - infoQuery")
-                }
+                    // object.fName = rows[0].fName;
+                    // object.employee_id = rows[0].employee_id;
+                    // object.phone_number = rows[0].phone_number;
+                    // object.address = rows[0].address;
+                    // object.date_of_birth = date;
+                    // object.gender = rows[0].gender;
+                    // console.log(object) ;
             })
-
-        let salaryQuery = await this.knex
+          
+        await this.knex
             .select("hourly_rate")
             .from("salary")
             .where("employee_id", id)
@@ -289,6 +287,7 @@ class nodeServiceEmployee {
                     console.log("Employee Service Error - salaryQuery")
                 }
             })
+           
         // console.log(object);
     };
 

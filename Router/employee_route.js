@@ -17,12 +17,13 @@ class nodeRouterEmployee {
         router.get("/punchin", this.punchIn.bind(this));
         router.get("/punchout", this.punchOut.bind(this));
         router.get("/info", this.renderInfo.bind(this));
+        router.get("/info/api", this.inputInfo.bind(this));
         router.put("/info/:id", this.editInfo.bind(this));
         return router;
     }
 
     async EmployeeSummary(req, res) {
-        let id =(req.user.id).toString();
+        let id = (req.user.id).toString();
         var data = await this.nodeServiceEmployee.showEmployeeSummary(id);
         res.json(data);
     }
@@ -33,12 +34,9 @@ class nodeRouterEmployee {
     }
 
     async inputEmployeeCalendar(req, res) {
-    
         let id = req.user.id;
-     
         var data = await this.nodeServiceEmployee.showEmployeeCalendar(id);
         res.json(data);
-      
     }
 
     renderPunchPage(req, res) {
@@ -47,28 +45,30 @@ class nodeRouterEmployee {
     }
 
     async punchIn(req, res) {
-        let id =4;
+        let id = req.user.id;
         var data = await this.nodeServiceEmployee.employeePunchIn(id);
         res.json(data);
     }
 
     async punchOut(req, res) {
-        let id =4;
+        let id = req.user.id;
         var data = await this.nodeServiceEmployee.employeePunchOut(id);
         res.json(data);
     }
 
     renderInfo(req, res) {
-        // var data = await this.nodeServiceEmployee.showEmployeeInfo(id);
-        // let id = req.params.id;
-        // res.json(data);
         res.type(".html");
         res.render("employee_information")
     }
 
+    async inputInfo(req, res) {
+        let id = req.user.id;
+        var data = await this.nodeServiceEmployee.showEmployeeInfo(id);
+        res.json(data);
+    }
+
     async editInfo(req, res) {
-       let id = req.users.id;
-      
+        let id = req.user.id;
         var data = await this.nodeServiceEmployee.updateEmployeeInfo(id);
         res.json(data);
     }
