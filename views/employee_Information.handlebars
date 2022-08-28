@@ -15,9 +15,9 @@
             <div class="text-center">
                 <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
                 <br>
-                <h1> name: {{name}} </h1>
+                <h1 id="nameEmployee"> name: {{name}} </h1>
                 <br>
-                <h2 class="text-secondary"> title: {{title}} </h2>
+                <h2 id="titleEmployee" class="text-secondary"> title: {{title}} </h2>
                 <br>
                 <button class="btn" id="editInfoBtn">
             <i class="fa-solid fa-user-pen fa-xl"></i>
@@ -28,17 +28,17 @@
             <hr>
 
             <br>
-            <p> Staff no.: {{employee_no}} </p>
+            <p id="staffNoEmployee"> Staff no.: {{employee_no}} </p>
 
-            <p> Hourly rate: ${{hourly_rate}}/h </p>
+            <p id="hourlyrateEmployee"> Hourly rate: ${{hourly_rate}}/h </p>
 
-            <p id="editPhoneNoEmployee">Phone no.: {{phone_no}}</p>
+            <p id="phoneNoEmployee">Phone no.: {{phone_no}}</p>
 
-            <p id="editAddressEmployee">Address: {{address}}</p>
+            <p id="addressEmployee">Address: {{address}}</p>
 
-            <p>Date of birth: {{date_of_birth}}</p>
+            <p id="dateOfBirthEmployee">Date of birth: {{date_of_birth}}</p>
 
-            <p>Gender: {{gender}}</p>
+            <p id="genderEmployee">Gender: {{gender}}</p>
 
         </div>
         {{!-- {{/each}} --}}
@@ -48,11 +48,11 @@
     <div class="card" id="editForm" style="visibility: hidden; border:black;">
         <hr>
         <div class="mb-3">
-            <label for="editPhoneNo" class="form-label">Phone number</label>
+            <label for="editPhoneNoEmployee" class="form-label">Phone number</label>
             <input type="tel" class="form-control" id="editPhoneNo">
         </div>
         <div class="mb-3">
-            <label for="editAddress" class="form-label">Address</label>
+            <label for="editAddressEmployee" class="form-label">Address</label>
             <textarea class="form-control" id="editAddress" rows="3"></textarea>
         </div>
         <button type="submit" class="btn bg-light" id="submitInfoBtn"> <i class="fa-regular fa-circle-check"></i> Submit

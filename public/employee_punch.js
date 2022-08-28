@@ -1,9 +1,9 @@
-let id = 1;
+
 
 //Show salary summary//
 $.ajax({
     type: "GET",
-    url: `http://localhost:8000/employee/salary/${id}`,
+    url: `http://localhost:8000/employee/salary`,
     success: function (result) {
         console.log(result);
         $("#employee_punch_workingHours").append(result.month_working_hour);
@@ -16,7 +16,7 @@ $.ajax({
 let employeePunchIn = function(){
     $.ajax({
         type: "GET",
-        url: `http://localhost:8000/employee/punchin/${id}`,
+        url: `http://localhost:8000/employee/punchin`,
         success: function (result) {
             return true;
         }
@@ -36,7 +36,7 @@ $(document).ready(function(){
 let employeePunchOut = function(){
     $.ajax({
         type: "GET",
-        url: `http://localhost:8000/employee/punchout/${id}`,
+        url: `http://localhost:8000/employee/punchout`,
         success: function (result) {
             return true;
         }
@@ -50,6 +50,7 @@ $(document).ready(function(){
         $(employee_punch_outBtn).attr('disabled', true);
       });
 })
+
 
 
 

@@ -33,36 +33,36 @@ class nodeServiceEmployee {
 
     /* POST /punchin/:id/:date */ //insert data in attendance // checked
     async employeePunchIn(id) {
-            //in_date
-            let today = new Date();
-            let dd = String(today.getDate()).padStart(2, '0');
-            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            let yyyy = today.getFullYear();
-            today = yyyy + '/' + mm + '/' + dd;
+        //in_date
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = yyyy + '/' + mm + '/' + dd;
 
-            //in_time
-            let d = new Date();
-            let n = d.toLocaleTimeString();
+        //in_time
+        let d = new Date();
+        let n = d.toLocaleTimeString();
 
-            //status
-            let status = "";
-            if (n == null) {
-                status = "ABSENT";
-            } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
-                status = "ON_TIME"; //09:00:00 - 09:00:59
-            } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
-                status = "LATE"; //09:01:00 - 15:59:59
-            } else if ((((n).split(':')[0]) < 9)) {
-                status = "EARLY GOING"; // ... - 08:59:59
-            } else if ((((n).split(':')[0]) >= 16)) {
-                status = "HALF DAY"; // 16:00:00 - ...
-            }
+        //status
+        let status = "";
+        if (n == null) {
+            status = "ABSENT";
+        } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+            status = "ON_TIME"; //09:00:00 - 09:00:59
+        } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+            status = "LATE"; //09:01:00 - 15:59:59
+        } else if ((((n).split(':')[0]) < 9)) {
+            status = "EARLY GOING"; // ... - 08:59:59
+        } else if ((((n).split(':')[0]) >= 16)) {
+            status = "HALF DAY"; // 16:00:00 - ...
+        }
 
-            await this.knex
-                .insert({ employee_id: id, in_date: today, in_time: n, status: status })
-                .into("attendance");
+        await this.knex
+            .insert({ employee_id: id, in_date: today, in_time: n, status: status })
+            .into("attendance");
 
-            console.log("Punch In and insert data successfully")
+        console.log("Punch In and insert data successfully")
     };
 
 
@@ -169,8 +169,10 @@ class nodeServiceEmployee {
 
                 workinghhmmss = new Date(totalWorkHours * 1000).toISOString().slice(11, 19);
                 let working_hour = Number((workinghhmmss.split(":")[0]) * 60);
+                console.log("working_hour: " + working_hour);
                 let working_min = Number((workinghhmmss.split(":")[1]));
-                let calHour = ((working_hour + working_min) / 60).toFixed(2);
+                console.log("working_min: " + working_min);
+                let calHour = (((working_hour) + working_min) / 60).toFixed(2);
                 // console.log(`Employee Service - total working hours: ${calHour}`);
 
                 console.log("month_working_hour: " + calHour);
@@ -254,45 +256,40 @@ class nodeServiceEmployee {
 
 
     /* GET /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
-    showEmployeeInfo(id) {
-        let command = async function () {
-            let object = {};
-            let infoQuery = await this.knex
-                .select("fName", "employee_id", "phone_number", "address", "date_of_birth", "gender")
-                .from("employee_information")
-                .where("employee_id", "4")
-                .then((rows) => {
-                    try {
-                        let date = rows[0].date_of_birth;
-                        date.setDate(date.getDate() + 1);
+    async showEmployeeInfo(id) {
+        let object = {};
+        let infoQuery = await this.knex
+            .select("fName", "employee_id", "phone_number", "address", "date_of_birth", "gender")
+            .from("employee_information")
+            .where("employee_id", "4")
+            .then((rows) => {
+                try {
+                    let date = rows[0].date_of_birth;
+                    date.setDate(date.getDate() + 1);
 
-                        object.fName = rows[0].fName;
-                        object.employee_id = rows[0].employee_id;
-                        object.phone_number = rows[0].phone_number;
-                        object.address = rows[0].address;
-                        object.date_of_birth = date;
-                        object.gender = rows[0].gender;
-                    } catch {
-                        console.log("Employee Service Error - infoQuery")
-                    }
-                })
+                    object.fName = rows[0].fName;
+                    object.employee_id = rows[0].employee_id;
+                    object.phone_number = rows[0].phone_number;
+                    object.address = rows[0].address;
+                    object.date_of_birth = date;
+                    object.gender = rows[0].gender;
+                } catch {
+                    console.log("Employee Service Error - infoQuery")
+                }
+            })
 
-            let salaryQuery = await this.knex
-                .select("hourly_rate")
-                .from("salary")
-                .where("employee_id", id)
-                .then((rows) => {
-                    try {
-                        object.hourly_rate = rows[0].hourly_rate;
-                    } catch {
-                        console.log("Employee Service Error - salaryQuery")
-                    }
-                })
-
-            // console.log(object);
-        }
-
-        command();
+        let salaryQuery = await this.knex
+            .select("hourly_rate")
+            .from("salary")
+            .where("employee_id", id)
+            .then((rows) => {
+                try {
+                    object.hourly_rate = rows[0].hourly_rate;
+                } catch {
+                    console.log("Employee Service Error - salaryQuery")
+                }
+            })
+        // console.log(object);
     };
 
 
