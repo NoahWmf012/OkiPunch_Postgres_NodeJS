@@ -24,7 +24,7 @@ class nodeRouterEmployee {
 
     async EmployeeSummary(req, res) {
         let id = (req.user.id).toString();
-        var data = await this.nodeServiceEmployee.showEmployeeSummary(id);
+        let data = await this.nodeServiceEmployee.showEmployeeSummary(id);
         res.json(data);
     }
 
@@ -35,7 +35,7 @@ class nodeRouterEmployee {
 
     async inputEmployeeCalendar(req, res) {
         let id = req.user.id;
-        var data = await this.nodeServiceEmployee.showEmployeeCalendar(id);
+        let data = await this.nodeServiceEmployee.showEmployeeCalendar(id);
         res.json(data);
     }
 
@@ -46,13 +46,13 @@ class nodeRouterEmployee {
 
     async punchIn(req, res) {
         let id = req.user.id;
-        var data = await this.nodeServiceEmployee.employeePunchIn(id);
+        let data = await this.nodeServiceEmployee.employeePunchIn(id);
         res.json(data);
     }
 
     async punchOut(req, res) {
         let id = req.user.id;
-        var data = await this.nodeServiceEmployee.employeePunchOut(id);
+        let data = await this.nodeServiceEmployee.employeePunchOut(id);
         res.json(data);
     }
 
@@ -63,13 +63,13 @@ class nodeRouterEmployee {
 
     async inputInfo(req, res) {
         let id = req.user.id;
-        var data = await this.nodeServiceEmployee.showEmployeeInfo(id);
+        let data = await this.nodeServiceEmployee.showEmployeeInfo(id);
         res.json(data);
     }
 
     async editInfo(req, res) {
         let id = req.user.id;
-        var data = await this.nodeServiceEmployee.updateEmployeeInfo(id);
+        let data = await this.nodeServiceEmployee.updateEmployeeInfo(id);
         res.json(data);
     }
 }
