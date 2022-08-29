@@ -13,7 +13,7 @@ $.ajax({
 });
 
 //punch in insert data
-let employeePunchIn = function(){
+let employeePunchIn = function () {
     $.ajax({
         type: "GET",
         url: `http://localhost:8000/employee/punchin`,
@@ -23,17 +23,17 @@ let employeePunchIn = function(){
     });
 }
 
-$(document).ready(function(){
-    $("#employee_punch_inBtn").click(function() {
+$(document).ready(function () {
+    $("#employee_punch_inBtn").click(function () {
         employeePunchIn();
-       $("#punchIn_alert").css("visibility", "visible");
+        $("#punchIn_alert").css("visibility", "visible");
         $(employee_punch_inBtn).attr('disabled', true);
-      });
+    });
 })
 
 
 //punch out insert data
-let employeePunchOut = function(){
+let employeePunchOut = function () {
     $.ajax({
         type: "GET",
         url: `http://localhost:8000/employee/punchout`,
@@ -43,12 +43,12 @@ let employeePunchOut = function(){
     });
 }
 
-$(document).ready(function(){
-    $("#employee_punch_outBtn").click(function() {
+$(document).ready(function () {
+    $("#employee_punch_outBtn").click(function () {
         employeePunchOut();
-       $("#punchOut_alert").css("visibility", "visible");
+        $("#punchOut_alert").css("visibility", "visible");
         $(employee_punch_outBtn).attr('disabled', true);
-      });
+    });
 })
 
 

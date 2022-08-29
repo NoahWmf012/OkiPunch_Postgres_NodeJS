@@ -24,8 +24,9 @@ class nodeRouterCompany {
         router.get("/worker/otp", this.renderOtp.bind(this));
         router.post("/worker/otp/:id", this.submitOtp.bind(this))
 
-        router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
-        router.put("/worker/:id/calendar", this.updateCalendar.bind(this)); //attendance
+        router.get("/worker/calendar", this.renderCalendar.bind(this)); //attendance
+        router.get("/worker/:id/calendar/api", this.showCalendarData.bind(this)); //attendance
+        router.put("/worker/:id/calendar/update", this.updateCalendar.bind(this)); //attendance
         router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
         router.put("/worker/:id/info", this.updateInfo.bind(this)); //employ_information
         router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information
@@ -82,8 +83,14 @@ class nodeRouterCompany {
         // );
     }
 
-    async renderCalendar(req, res) {
-        var data = await this.companyService.showWorkerCanlendar(null, req.params.id);
+    renderCalendar(req, res) {
+        res.type(".html");
+        res.render("company_calendar");
+    }
+
+    async showCalendarData(req, res) {
+        var data = await this.companyService.showWorkerCanlendar(req.params.id);
+        console.log(req.params.id);
         res.json(data);
     }
 

@@ -69,8 +69,8 @@ function getWeeksInMonth(a, b) {
 week_date = getWeeksInMonth(today.getMonth(), today.getFullYear())[2];
 
 //!!!!!add event here!!!!!
+//employee_calendar
 $(document).ready(function () {
-
     $.ajax({
         type: "GET",
         url: `http://localhost:8000/employee/calendar/api`,
@@ -115,8 +115,7 @@ $(document).ready(function () {
     });
 
 
-
-
+    
 
 
     $("[data-set-theme]").click(function (b) {

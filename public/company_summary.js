@@ -1,5 +1,7 @@
+console.log("linked")
+
 // //handlebar setup
-var summaryTemplate = Handlebars.compile(
+let summaryTemplate = Handlebars.compile(
     `
     {{#each employee}}
     <div class='row d-flex justify-content-center align-items-center'>
@@ -29,5 +31,17 @@ $.ajax({
         $("#companySummary").html(summaryTemplate({
             employee: result
         }));
+//company calendar - show data
+
+
+//company calendar - edit data
+
+
+//company worker info - show data
+
+
+//company worker info - edit data
+
+
     }
 });
