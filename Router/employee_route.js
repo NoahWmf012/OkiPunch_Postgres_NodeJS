@@ -8,8 +8,6 @@ class nodeRouterEmployee {
     }
 
     router() {
-
-        //start from /employee
         let router = this.express.Router();
         router.use(this.auth.isLogged);
         router.get("/salary", this.EmployeeSummary.bind(this));
@@ -18,9 +16,11 @@ class nodeRouterEmployee {
         router.get("/punch", this.renderPunchPage.bind(this));
         router.get("/punchin", this.punchIn.bind(this)); //submit data: employee_id, date
         router.get("/punchout", this.punchOut.bind(this)); //submit data: employee_id, date
+        router.get("/punchout", this.punchOut.bind(this)); 
+        router.get("/punchout", this.punchOut.bind(this)); 
         router.get("/info", this.renderInfo.bind(this));
         router.get("/info/api", this.inputInfo.bind(this));
-        router.put("/info/update", this.editInfo.bind(this));
+        router.post("/info/update", this.editInfo.bind(this)); //form do not support put?
         return router;
     }
 
@@ -71,10 +71,10 @@ class nodeRouterEmployee {
 
     async editInfo(req, res) {
         let id = req.user.id;
-        let phone_number = req.body;
-        let address = req.body;
+        let phone_number = req.body.phone_number;
+        let address = req.body.addr;
         let data = await this.nodeServiceEmployee.updateEmployeeInfo(id, phone_number, address);
-        res.json(data);
+        res.end();
     }
 }
 
