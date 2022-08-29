@@ -18,9 +18,13 @@ class nodeRouterCompany {
         //need interface for adding new worker {username, email, password, department_id, title, salaries, fName, lName, alias varchar, phone_number, address, gender Enum('M', 'F'),date_of_brith date,image}
         router.get("/worker/addnew", this.renderAddNew.bind(this));
         router.post("/worker/addnew", this.addNew.bind(this)); //DB: employ , employ_information, department
-        router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
+
+        router.get("/worker/otp", this.renderOtp.bind(this));
+        router.post("/worker/otp/:id", this.submitOtp.bind(this))
+
+        router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
         router.put("/worker/:id/calendar", this.updateCalendar.bind(this)); //attendance
-        router.get("/worker/:id/info", this.showInfo.bind(this)); //employ_information
+        router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
         router.put("/worker/:id/info", this.updateInfo.bind(this)); //employ_information
         router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information
         return router;
@@ -37,13 +41,26 @@ class nodeRouterCompany {
     }
 
     async showAll(req, res) {
-        var data = await this.companyService.showWorkers("getAll employees")
+        var data = await this.companyService.showWorkers("getAll employees");
         res.json(data);
     }
 
     renderAddNew(req, res) {
         res.render("company_new_worker");
     }
+
+    renderOtp(req, res) {
+        res.render("company_otp");
+    }
+
+    async submitOtp(req, res) {
+        var id = req.params.id;
+        var otp = req.body.otp;
+        var data = await this.companyService.optVerification(id, otp);
+        console.log("data:", data)
+        res.json(data);
+    }
+
 
     async addNew(req, res) {
         console.log("addNew")
@@ -58,7 +75,7 @@ class nodeRouterCompany {
         // );
     }
 
-    async showCalendar(req, res) {
+    async renderCalendar(req, res) {
         var data = await this.companyService.showWorkerCanlendar(null, req.params.id);
         res.json(data);
     }
@@ -68,7 +85,7 @@ class nodeRouterCompany {
         res.json(data);
     }
 
-    async showInfo(req, res) {
+    async renderInfo(req, res) {
         var data = await this.companyService.showWorkerDayRecord();
         res.json(data);
     }

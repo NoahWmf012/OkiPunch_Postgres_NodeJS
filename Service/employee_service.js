@@ -33,6 +33,24 @@ class nodeServiceEmployee {
 
     /* POST /punchin/:id/:date */ //insert data in attendance // checked
     async employeePunchIn(id) {
+        //generate 4-digit password
+        (async () => {
+
+            const client = createClient();
+
+            client.on("error",
+                (err) => console.log("RedisClient Error", err));
+
+            await client.connect();
+
+            var otp = Math.floor(1000 + Math.random() * 8999)
+
+            await client.set("id1", otp);
+
+            const value = await client.get("id1");
+            console.log(value)
+        })();
+
         //in_date
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
@@ -268,7 +286,7 @@ class nodeServiceEmployee {
                 let date = rows[0].date_of_birth;
                 (date.setDate(date.getDate() + 1));
                 let date_of_birth = (date.toISOString().split('T')[0]);
-    
+
                 object.first_name = rows[0].first_name;
                 object.last_name = rows[0].last_name;
                 object.alias = rows[0].alias;
@@ -280,16 +298,16 @@ class nodeServiceEmployee {
                 object.hourly_rate = rows[0].hourly_rate;
                 object.title = rows[0].title;
             })
-            return object;
+        return object;
     };
 
 
 
     /* PUT /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
     async updateEmployeeInfo(id, phone_number, address) {
-            return this.knex("employee_information").where("employee_id", id).update({
-              phone_number: phone_number, address: address
-            });
+        return this.knex("employee_information").where("employee_id", id).update({
+            phone_number: phone_number, address: address
+        });
     };
 }
 
