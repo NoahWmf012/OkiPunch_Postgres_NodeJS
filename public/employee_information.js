@@ -3,7 +3,7 @@ $.ajax({
     type: "GET",
     url: `http://localhost:8000/employee/info/api`,
     success: function (result) {
-        console.log(result);
+        //show employee information
         $("#aliasEmployee").append(result.alias);
         $("#titleEmployee").append(result.title);
         $("#employee_punch_hourlyRate").append(result.hourly_rate);
@@ -14,5 +14,13 @@ $.ajax({
         $("#addressEmployee").append(result.address);
         $("#dateOfBirthEmployee").append(result.date_of_birth);
         $("#genderEmployee").append(result.gender);
+
+        //update form value
+        $("#editPhoneNo").val(result.phone_number);
+        $("#editAddress").val(result.address);
     }
 });
+
+
+
+//update employee information
