@@ -14,7 +14,9 @@ class nodeRouterCompany {
 
 
         //connecting DB
-        router.get("/showworkers", this.showAll.bind(this)); //employ
+        router.get("/showworkers", this.rendershowAll.bind(this)); //employ
+        router.get("/showworkers/api", this.showAll.bind(this));
+
         //need interface for adding new worker {username, email, password, department_id, title, salaries, fName, lName, alias varchar, phone_number, address, gender Enum('M', 'F'),date_of_brith date,image}
         router.get("/worker/addnew", this.renderAddNew.bind(this));
         router.post("/worker/addnew", this.addNew.bind(this)); //DB: employ , employ_information, department
@@ -40,8 +42,13 @@ class nodeRouterCompany {
         res.render("company_signup");
     }
 
+    rendershowAll(req, res) {
+        res.type(".html");
+        res.render("company_summary");
+    }
+
     async showAll(req, res) {
-        var data = await this.companyService.showWorkers("getAll employees");
+        var data = await this.companyService.showWorkers();
         res.json(data);
     }
 

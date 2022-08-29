@@ -271,14 +271,19 @@ in_date_result = "";
 // // command1();
 
 //number & address
-let id = 3;
-let phone_number = "12345678";
-let address = "Kowloon";
-
 let command1 = async function () {
-          return knex("employee_information").where("employee_id", id).update({
-            phone_number: phone_number, address: address
-          });
-};
 
+        let summaryObject;
+        knex
+            .select("alias", "last_name", "employee_id")
+            .from("employee_information")
+            .then((rows) => {
+                summaryObject = rows;
+            return           summaryObject;
+          })
+            console.log(summaryObject);
+        // return summaryObject;
+        // return this.knex("employee_information");
+
+}
 command1();

@@ -18,12 +18,15 @@
     <link rel="stylesheet" type="text/css" href="./library/calendar/evo-calendar.royal-navy.min.css"> --}}
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" />
-
     <!-- CSS -->
     <link href="/style.css" type="text/css" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    {{!-- CDN handlebars = for Handlebars.compile --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -33,28 +36,23 @@
         <footer class="footer">
             <p class="fixed-bottom text-center"><strong>&copy; okipunch</strong></p>
         </footer>
-        <br>
+        <br> <br>
     </div>
 
 
     <!--Calendar plugin-->
     {{!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> --}}
-    {{!-- <script src="./library/calendar/evo-calendar.min.js"></script> --}}
+    {{!--
+    <script src="./library/calendar/evo-calendar.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
-
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
-    {{!-- CDN handlebars = for Handlebars.compile --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
-        integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{!-- CDN axios = for sending API calls (promise based)--}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script src="/main.js"></script>
+    <script src="../main.js"></script>
 
 </body>
 

@@ -10,8 +10,16 @@ class nodeServiceCompany {
     }
 
     // /biz/showworkers (GET)
-    showWorkers(role) {
-        return this.knex("employee");
+     async showWorkers(id) {
+        let summaryObject = {};
+         await this.knex
+            .select("alias", "employee_id")
+            .from("employee_information")
+            .then((rows) => {
+                return summaryObject = rows;
+            })
+        return summaryObject;
+        // return this.knex("employee_information");
     }
 
     optVerification(id, otp) {
