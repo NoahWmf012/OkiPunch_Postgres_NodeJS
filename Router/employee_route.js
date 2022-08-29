@@ -20,7 +20,7 @@ class nodeRouterEmployee {
         router.get("/punchout", this.punchOut.bind(this)); //submit data: employee_id, date
         router.get("/info", this.renderInfo.bind(this));
         router.get("/info/api", this.inputInfo.bind(this));
-        router.put("/info/:id", this.editInfo.bind(this));
+        router.put("/info/update", this.editInfo.bind(this));
         return router;
     }
 
@@ -71,7 +71,9 @@ class nodeRouterEmployee {
 
     async editInfo(req, res) {
         let id = req.user.id;
-        let data = await this.nodeServiceEmployee.updateEmployeeInfo(id);
+        let phone_number = req.body;
+        let address = req.body;
+        let data = await this.nodeServiceEmployee.updateEmployeeInfo(id, phone_number, address);
         res.json(data);
     }
 }

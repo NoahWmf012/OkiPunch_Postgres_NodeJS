@@ -286,8 +286,10 @@ class nodeServiceEmployee {
 
 
     /* PUT /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
-    updateEmployeeInfo(id, phone_number, address) {
-
+    async updateEmployeeInfo(id, phone_number, address) {
+            return this.knex("employee_information").where("employee_id", id).update({
+              phone_number: phone_number, address: address
+            });
     };
 }
 
