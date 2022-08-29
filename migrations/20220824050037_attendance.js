@@ -5,7 +5,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('attendance', (table) => {
         table.increments();
-        table.integer("employee_id").unsigned().references("employee.id");
+        table.integer("employee_id").unsigned();
         table.date("in_date");
         table.date("out_date");
         table.time("in_time");

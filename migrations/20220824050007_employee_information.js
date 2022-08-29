@@ -4,9 +4,9 @@
  */
 exports.up = function (knex) {
     return knex.schema.createTable('employee_information', (table) => {
-        table.integer("employee_id").unsigned().references("employee.id");
-        table.string("fName");
-        table.string("lName");
+        table.integer("employee_id").unsigned();
+        table.string("first_name");
+        table.string("last_name");
         table.string("alias");
         table.integer("phone_number");
         table.string("address");

@@ -186,7 +186,7 @@ in_date_result = "";
 //                 for (j = 0; j < rows.length; j++) {
 
 //                         description.push(`IN:${rows[j].in_time}  OUT:${rows[j].out_time}`);
-                    
+
 //                 }
 //             } catch {
 //                 console.log("Employee Service Error - query_in_time");
@@ -231,43 +231,72 @@ in_date_result = "";
 // }
 // command();
 
-id =1;
-
-    let command1 = async function () {
-        //in_date
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-        today = yyyy + '/' + mm + '/' + dd;
-
-        //in_time
-        let d = new Date();
-        let n = d.toLocaleTimeString();
-        console.log(n)
-
-        
-        //status
-        let status = "";
-        if (n == null) {
-            status = "ABSENT";
-        } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
-            status = "ON_TIME"; //09:00:00 - 09:00:59
-        } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
-            status = "LATE"; //09:01:00 - 15:59:59
-        } else if ((((n).split(':')[0]) < 9)) {
-            status = "EARLY GOING"; // ... - 08:59:59
-        } else if ((((n).split(':')[0]) >= 16)) {
-            status = "HALF DAY"; // 16:00:00 - ...
-        }
-
-        await knex
-            .insert({ employee_id: id, in_date: today, in_time: n, status: status })
-            .into("attendance");
-
-        console.log("Punch In and insert data successfully")
-        
-    }
-    // command1();
 
 
+// let command1 = async function () {
+//     //in_date
+//     let today = new Date();
+//     let dd = String(today.getDate()).padStart(2, '0');
+//     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+//     let yyyy = today.getFullYear();
+//     today = yyyy + '/' + mm + '/' + dd;
+
+//     //in_time
+//     let d = new Date();
+//     let n = d.toLocaleTimeString();
+//     console.log(n)
+
+
+//     //status
+//     let status = "";
+//     if (n == null) {
+//         status = "ABSENT";
+//     } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+//         status = "ON_TIME"; //09:00:00 - 09:00:59
+//     } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+//         status = "LATE"; //09:01:00 - 15:59:59
+//     } else if ((((n).split(':')[0]) < 9)) {
+//         status = "EARLY GOING"; // ... - 08:59:59
+//     } else if ((((n).split(':')[0]) >= 16)) {
+//         status = "HALF DAY"; // 16:00:00 - ...
+//     }
+
+//     await knex
+//         .insert({ employee_id: id, in_date: today, in_time: n, status: status })
+//         .into("attendance");
+
+//     console.log("Punch In and insert data successfully")
+
+// }
+// // command1();
+
+let id = 3;
+
+let command1 = async function () {
+    let object = {};
+    await knex
+        .select("employee_information.first_name", "employee_information.last_name", "employee_information.alias", "employee_information.employee_id", "employee_information.phone_number", "employee_information.address", "employee_information.date_of_birth", "employee_information.gender", "salary.hourly_rate", "employee.title")
+        .from("employee_information")
+        .innerJoin("salary", "salary.employee_id", "employee_information.employee_id")
+        .innerJoin("employee", "salary.employee_id", "employee.employee_id")
+        .where("employee_information.employee_id", id)
+        .then((rows) => {
+            let date = rows[0].date_of_birth;
+            (date.setDate(date.getDate() + 1));
+            let date_of_birth = (date.toISOString().split('T')[0]);
+
+            object.first_name = rows[0].first_name;
+            object.last_name = rows[0].last_name;
+            object.alias = rows[0].alias;
+            object.employee_id = rows[0].employee_id;
+            object.phone_number = rows[0].phone_number;
+            object.address = rows[0].address;
+            object.date_of_birth = date_of_birth;
+            object.gender = rows[0].gender;
+            object.hourly_rate = rows[0].hourly_rate;
+            object.title = rows[0].title;
+        })
+    console.log(object);
+};
+
+command1();

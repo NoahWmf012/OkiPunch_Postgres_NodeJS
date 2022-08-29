@@ -1,6 +1,3 @@
-// //AJAX
-let id = 1;
-
 //Setting
 var today = new Date();
 
@@ -76,10 +73,10 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        url: `http://localhost:8000/employee/calendar/${id}`,
+        url: `http://localhost:8000/employee/calendar/api`,
         async:true,
         success: function (result) {
-            // console.log(result);
+            console.log(result);
             // console.log(result.date.length);
 
             let status_id;

@@ -5,12 +5,10 @@
 exports.up = function (knex) {
     return knex.schema.createTable('salary', (table) => {
         table.increments();
-        table.integer("employee_id").unsigned().references("employee.id");
+        table.integer("employee_id").unsigned();
         table.decimal("hourly_rate");
         table.decimal("month_working_hour");//current month
         table.decimal("month_salary"); //current month
-        table.decimal("accumulate_salary"); //accumulate
-        table.decimal("accumulate_working_hour"); //accumulate
     })
 };
 
