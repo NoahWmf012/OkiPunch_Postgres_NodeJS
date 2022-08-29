@@ -24,3 +24,11 @@ $.ajax({
 
 
 //update employee information
+// $.ajax({
+//     type: "PUT",
+//     url: `http://localhost:8000/employee/info/update`,
+//     success: function () {
+//         //update form value
+//     }
+// });
+
