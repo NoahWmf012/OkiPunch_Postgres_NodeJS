@@ -8,14 +8,16 @@ class nodeRouterEmployee {
     }
 
     router() {
+
+        //start from /employee
         let router = this.express.Router();
         router.use(this.auth.isLogged);
         router.get("/salary", this.EmployeeSummary.bind(this));
         router.get("/calendar", this.renderEmployeeCalendar.bind(this)); // should be "/calendar/:id/:date"
         router.get("/calendar/api", this.inputEmployeeCalendar.bind(this)); // should be "/calendar/:id/:date"
         router.get("/punch", this.renderPunchPage.bind(this));
-        router.get("/punchin", this.punchIn.bind(this));
-        router.get("/punchout", this.punchOut.bind(this));
+        router.get("/punchin", this.punchIn.bind(this)); //submit data: employee_id, date
+        router.get("/punchout", this.punchOut.bind(this)); //submit data: employee_id, date
         router.get("/info", this.renderInfo.bind(this));
         router.get("/info/api", this.inputInfo.bind(this));
         router.put("/info/:id", this.editInfo.bind(this));

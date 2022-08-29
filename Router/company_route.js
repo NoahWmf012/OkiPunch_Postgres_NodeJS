@@ -17,7 +17,7 @@ class nodeRouterCompany {
         router.get("/showworkers", this.showAll.bind(this)); //employ
         //need interface for adding new worker {username, email, password, department_id, title, salaries, fName, lName, alias varchar, phone_number, address, gender Enum('M', 'F'),date_of_brith date,image}
         router.get("/worker/addnew", this.renderAddNew.bind(this));
-        router.post("/worker/addnew", this.addNew.bind(this)); //employ , employ_information
+        router.post("/worker/addnew", this.addNew.bind(this)); //DB: employ , employ_information, department
         router.get("/worker/:id/calendar", this.showCalendar.bind(this)); //attendance
         router.put("/worker/:id/calendar", this.updateCalendar.bind(this)); //attendance
         router.get("/worker/:id/info", this.showInfo.bind(this)); //employ_information

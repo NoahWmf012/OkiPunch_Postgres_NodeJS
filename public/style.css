@@ -19,7 +19,7 @@ body {
 
 .select-box {
   display: flex;
-  width: 400px;
+  width: 320px;
   flex-direction: column;
 }
 
