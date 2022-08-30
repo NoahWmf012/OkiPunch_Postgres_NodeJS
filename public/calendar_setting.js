@@ -108,6 +108,7 @@ $(document).ready(function () {
             $("#evoCalendar").evoCalendar({
                 format: "yyyy/mm/dd", // default format: MM dd, yyyy
                 titleFormat: "MM",
+                // theme:"Midnight Blue",
                 calendarEvents:
                     cal_array 
             });

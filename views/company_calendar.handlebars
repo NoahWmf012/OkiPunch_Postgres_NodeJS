@@ -1,6 +1,9 @@
 <head>
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.<net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../library/calendar/evo-calendar.orange-coral.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../library/calendar/evo-calendar.midnight-blue.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../library/calendar/evo-calendar.royal-navy.min.css">
 </head>
 <section id="demos">
     <div class="section-content">
@@ -9,7 +12,7 @@
         </div>
         <br>
         <div class="d-flex justify-content-center align-items-center">
-            <button type="button" class="btn" id="editBtn" style="background-color: #b19cd9; color: white"><i
+            <button type="button" class="btn" id="editBtn" style="background-color: #edae0f; color: white"><i
                     class="fa-regular fa-pen-to-square"></i> Edit</button>
         </div>
 
@@ -102,6 +105,7 @@
             $("#evoCalendarCom").evoCalendar({
                 format: "yyyy/mm/dd", // default format: MM dd, yyyy
                 titleFormat: "MM",
+                theme: "Royal Navy", //Midnight Blue, Orange Coral, Royal Navy
                 calendarEvents:
                     cal_array
             });
