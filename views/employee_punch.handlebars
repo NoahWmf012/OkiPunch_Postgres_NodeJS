@@ -42,11 +42,11 @@
       <div class="toast-header">
         <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
     
-        <strong class="me-auto">Punch In successfully</strong>
+        <strong class="me-auto">One Time Password</strong>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <div id="punchInMessage" class="toast-body">
-        <p id="punchInMessage">Punch In Time:</p>
+      <div class="toast-body">
+        {{!-- <p id="punchInMessage">Punch In Time:</p> --}}
         <p id="punchInOTPW">One Time Passowrd:</p>
       </div>
     </div>
@@ -69,30 +69,17 @@
 
 <script>
 const time = new Date();
-console.log( 
-  time.toLocaleString('en-us', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true 
-  })
-); 
 
+/*
 $("#punchInMessage").append(time.toLocaleString('en-us', { 
     hour: '2-digit', 
     minute: '2-digit',
     second: '2-digit',
     hour12: true 
   }))
+  */
 
   $("#punchOutMessage").append(time.toLocaleString('en-us', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true 
-  }))
-
-    $("#punchInOTPW").append(time.toLocaleString('en-us', { 
     hour: '2-digit', 
     minute: '2-digit',
     second: '2-digit',

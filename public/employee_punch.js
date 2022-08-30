@@ -1,5 +1,3 @@
-
-
 //Show salary summary//
 $.ajax({
     type: "GET",
@@ -18,6 +16,7 @@ let employeePunchIn = function () {
         type: "GET",
         url: `http://localhost:8000/employee/punchin`,
         success: function (result) {
+            $("#punchInOTPW").append(" " + result);
             return true;
         }
     });

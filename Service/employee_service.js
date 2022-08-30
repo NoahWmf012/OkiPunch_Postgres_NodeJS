@@ -32,57 +32,22 @@ class nodeServiceEmployee {
 
 
 
-    /* POST /punchin/:id/:date */ //insert data in attendance // checked
+    /* GET /punchin/:id/:date */ //insert data in attendance // checked
     async employeePunchIn(id) {
         //generate 4-digit password
-        (async () => {
+        const client = createClient();
 
-            const client = createClient();
+        client.on("error",
+            (err) => console.log("RedisClient Error", err));
 
-            client.on("error",
-                (err) => console.log("RedisClient Error", err));
+        await client.connect();
 
-            await client.connect();
+        var otp = Math.floor(1000 + Math.random() * 8999)
+        await client.set(id.toString(), otp.toString());
 
-            var otp = Math.floor(1000 + Math.random() * 8999)
-            await client.set(id.toString(), otp.toString());
+        let value = await client.get(id.toString());
 
-            let value = await client.get(id.toString());
-
-            return value;
-        })();
-        console.log(value);
-        
-        //in_date
-        let today = new Date();
-        let dd = String(today.getDate()).padStart(2, '0');
-        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        let yyyy = today.getFullYear();
-        today = yyyy + '/' + mm + '/' + dd;
-
-        //in_time
-        let d = new Date();
-        let n = d.toLocaleTimeString();
-
-        //status
-        let status = "";
-        if (n == null) {
-            status = "ABSENT";
-        } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
-            status = "ON_TIME"; //09:00:00 - 09:00:59
-        } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
-            status = "LATE"; //09:01:00 - 15:59:59
-        } else if ((((n).split(':')[0]) < 9)) {
-            status = "EARLY GOING"; // ... - 08:59:59
-        } else if ((((n).split(':')[0]) >= 16)) {
-            status = "HALF DAY"; // 16:00:00 - ...
-        }
-
-        await this.knex
-            .insert({ employee_id: id, in_date: today, in_time: n, status: status })
-            .into("attendance");
-
-        console.log("Punch In and insert data successfully")
+        return value;
     };
 
 

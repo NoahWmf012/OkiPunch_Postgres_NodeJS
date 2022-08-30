@@ -49,7 +49,7 @@ class nodeRouterEmployee {
     async punchIn(req, res) {
         let id = req.user.id;
         let data = await this.nodeServiceEmployee.employeePunchIn(id);
-        res.json(data);
+        res.send(data);
     }
 
     async punchOut(req, res) {
