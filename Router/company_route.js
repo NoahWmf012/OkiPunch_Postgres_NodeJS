@@ -62,7 +62,7 @@ class nodeRouterCompany {
     async submitOtp(req, res) {
         var id = req.params.id;
         var otp = req.body.otp;
-        console.log(id, "\notp:", opt)
+        console.log("id:", id, "\notp:", otp)
         var data = await this.companyService.optVerification(id, otp);
         console.log("data:", data)
         res.json(data);
