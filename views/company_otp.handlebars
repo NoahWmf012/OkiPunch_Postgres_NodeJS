@@ -1,5 +1,5 @@
 <div class="container container-fluid col">
-    <form action="/biz/worker/:id/:otp" method="POST">
+    <form>
         <br>
         <h1 class="text-center">Type in 4-digit password</h1>
         <br>
@@ -21,8 +21,9 @@
     $(document).ready(function()=>{
         $("form").submit(function(e){
             e.preventDefault();
-
-            axios.post("/biz/worker/otp/1",{}); //dummy id:1
+            axios.post("/biz/worker/otp/1",{ //dummy id:1
+                otp:$('input[name=otp]').val(),
+            });
         })
     })
 </script>

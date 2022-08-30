@@ -11,16 +11,13 @@ class nodeRouterCompany {
     router() {
         let router = this.express.Router();
 
-        // router.use(this.auth.isAdminLogged);
+        router.use(this.auth.isAdminLogged);
 
-
-        //connecting DB
         router.get("/showworkers", this.rendershowAll.bind(this)); //employ
         router.get("/showworkers/api", this.showAll.bind(this));
 
         //need interface for adding new worker {username, email, password, department_id, title, salaries, fName, lName, alias varchar, phone_number, address, gender Enum('M', 'F'),date_of_brith date,image}
         router.get("/worker/addnew", this.renderAddNew.bind(this));
-        router.post("/worker/addnew", this.addNew.bind(this)); //DB: employ , employ_information, department
 
         router.get("/worker/otp", this.renderOtp.bind(this));
         router.post("/worker/otp/:id", this.submitOtp.bind(this))
@@ -63,24 +60,13 @@ class nodeRouterCompany {
     }
 
     async submitOtp(req, res) {
-        // var id = req.params.id;
-        // var otp = req.body.otp;
-        // var data = await this.companyService.optVerification(id, otp);
-        // console.log("data:", data)
-        // res.json(data);
+        var id = req.params.id;
+        var otp = req.body.otp;
+        console.log(id, "\notp:", opt)
+        var data = await this.companyService.optVerification(id, otp);
+        console.log("data:", data)
+        res.json(data);
 
-    }
-
-
-    async addNew(req, res) {
-        console.log("addNew")
-        // var data = await this.companyService.addNewWorker(req.body.worker);
-        // res.json(data);
-        this.passport.authenticate("add-new-employee", {
-            successRedirect: "/biz/showworkers",
-            failureRedirect: "/",
-            failureFlash: true,
-        });
     }
 
     renderCalendar(req, res) {

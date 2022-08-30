@@ -1,5 +1,5 @@
 <div class="container container-fluid col">
-    <form>
+    <form action="/biz/worker/addnew" method="POST">
         <br>
         <h1 class="text-center">New Worker</h1>
         <br>
@@ -105,7 +105,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text" name="phone-number"  class="form-control" placeholder="&#xf098   Phone_number" aria-label="text">
+                    <input type="text" name="phoneNumber"  class="form-control" placeholder="&#xf098   Phone_number" aria-label="text">
                 </p>
             </div>
         </div>
@@ -132,7 +132,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text" name="date-of-birth"  class="form-control" placeholder="&#xf073   Date of birth" aria-label="text">
+                    <input type="text" name="dateOfBirth"  class="form-control" placeholder="&#xf073   Date of birth" aria-label="text">
                 </p>
             </div>
         </div>
@@ -158,31 +158,6 @@
 </div>
 
 <script>
-    // new worker: Enter Department(option select)
-    $(document).ready(function(){
-        $("form").submit(function(e){
-            e.preventDefault();
-            var worker = {
-                username: $('input[name=username]').val(),
-                email: $('input[name=email]').val(),
-                password: $('input[name=password]').val,
-                department: $('input[name=department]').val(),
-                title:$('input[name=title]').val(),
-                salary:$('input[name=salary]').val(),
-                fName:$('input[name=fname]').val(),
-                lName:$('input[name=lname]').val(),
-                alias:$('input[name=alias]').val(),
-                phone:$('input[name=phone-number]').val(),
-                address:$('input[name=address]').val(),
-                gender:$('input[name=gender]').val(),
-                date_of_birth:$('input[name=date-of-birth]').val(),
-                image:$('input[name=image]').val()
-            }
-            axios.post("/biz/worker/addnew", {
-                worker
-            })
-        });
-    });
     const selected = document.querySelector(".selected");
     const optionsContainer = document.querySelector(".options-container");
 

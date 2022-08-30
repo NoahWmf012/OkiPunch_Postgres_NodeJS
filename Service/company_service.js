@@ -72,10 +72,6 @@ class nodeServiceCompany {
         })((res) => { msg = res });
     }
 
-    //  /biz/worker/addnew (POST)
-    async addNewWorker(worker) {
-    }
-
     // /biz/worker/:id/calendar (GET)
     async showWorkerCanlendar(id) {
         //acquire type

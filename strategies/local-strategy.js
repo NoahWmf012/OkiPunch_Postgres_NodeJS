@@ -15,7 +15,7 @@ module.exports = (passport, bcrypt, knex) => {
 
                 let userId = await knex("users").insert(newUser).returning("id");
                 newUser.id = userId[0].id;
-                done(null, newUser);
+                done();
             } catch (err) {
                 done(err);
             }
@@ -70,21 +70,29 @@ module.exports = (passport, bcrypt, knex) => {
     );
     passport.use(
         "add-new-employee",
-        new LocalStrategy(async (req, email, password, done) => {
+        new LocalStrategy({
+            usernameField: "email",
+            passReqToCallback: true
+        }, async (req, email, password, done) => {
             try {
-                console.log(req.username);
                 const user = await knex("users").where({ email }).first();
                 if (user) {
                     return done(null, false, { message: "email already taken" });
                 }
                 const hash = await bcrypt.hash(password, 10);
-                let newUser = { email, password: hash, role: 'employee' };
 
-                let userId = await knex("users").insert(newUser).returning("id");
-                newUser.id = userId[0].id;
-                done(null, newUser);
+                let newUser = { username: req.body.username, email, password: hash, role: 'employee' };
+                await knex("users").insert(newUser);
+
+                // let newInfo = { first_name: req.body.fName, last_name: req.body.lName, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
+                // await knex("employee_information").insert(newInfo);
+
+                // let newDepartment = { name: req.body.department }
+                // await knex("department").insert(newDepartment);
+
+                return done();
             } catch (err) {
-                done(err);
+                return done(err);
             }
         })
     );
