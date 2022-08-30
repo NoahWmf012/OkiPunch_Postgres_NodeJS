@@ -45,9 +45,9 @@ class nodeServiceEmployee {
 
             var otp = Math.floor(1000 + Math.random() * 8999)
 
-            await client.set("id1", otp);
+            await client.set(id, otp);
 
-            const value = await client.get("id1");
+            const value = await client.get(id);
             console.log(value)
         })();
 

@@ -70,22 +70,3 @@ app.listen(port, () => {
     employee site: http://localhost:${port}/employee
     root site: http://localhost:${port} `)
 });
-
-const { createClient } = require("redis");
-
-(async () => {
-
-    const client = createClient();
-
-    client.on("error",
-        (err) => console.log("RedisClient Error", err));
-
-    await client.connect();
-
-    var otp = Math.floor(1000 + Math.random() * 8999)
-
-    await client.set("id1", otp);
-
-    const value = await client.get("id1");
-    console.log(value)
-})();
