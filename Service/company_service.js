@@ -34,7 +34,7 @@ class nodeServiceCompany {
 
             await client.connect();
 
-            const value = await client.get(id);
+            const value = await client.get(id.toString());
             if (otp !== value) {
                 return "incorrect One-Time-Password";
             }
