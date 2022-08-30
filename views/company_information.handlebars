@@ -31,6 +31,8 @@
 
             <p id="hourlyrateCompany"> Hourly rate: </p>
 
+            <p id="active_statusCompany"> Active status: </p>
+
             <p id="phoneNoCompany">Phone no.: </p>
 
             <p id="addressCompany">Address: </p>
@@ -64,19 +66,23 @@
             <hr>
             <div class="mb-3">
                 <label for="editTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editTitle">
+                <input type="text" name="title" class="form-control" id="editTitle">
             </div>
             <div class="mb-3">
                 <label for="editHourlyRate" class="form-label">Hourly rate</label>
-                <input type="number" class="form-control" id="editHourlyRate">
+                <input type="number" name="hourly_rate" class="form-control" id="editHourlyRate">
+            </div>
+            <div class="mb-3">
+                <label for="editActiveStatus" class="form-label">Active status</label>
+                <input type="text" name="active_status" class="form-control" id="editActiveStatus">
             </div>
             <div class="mb-3">
                 <label for="editPhoneNo" class="form-label">Phone number</label>
-                <input type="tel" class="form-control" id="editPhoneNo">
+                <input type="tel" name="phone_number" class="form-control" id="editPhoneNo">
             </div>
             <div class="mb-3">
                 <label for="editAddress" class="form-label">Address</label>
-                <textarea class="form-control" id="editAddress" rows="3"></textarea>
+                <textarea class="form-control" name="address" id="editAddress" rows="3"></textarea>
             </div>
             <button type="submit" class="btn bg-light" id="submitInfoBtnCom"> <i class="fa-regular fa-circle-check"></i>
                 Submit
@@ -107,11 +113,9 @@
 
     id = window.location.href.split('/worker')[1].split('/')[1];
 
-$(document).ready(function(){
-
-    $("#formPost").attr("action", `/worker/${id}/info/update`);
-
-})
+    $(document).ready(function () {
+        $("#formPost").attr("action", `/biz/worker/${id}/info/update`);
+    })
 
 
     $.ajax({
@@ -125,6 +129,7 @@ $(document).ready(function(){
             $("#staffNoCompany").append(result.employee_id);
             $("#nameCompany").append(result.last_name + " " + result.first_name);
             $("#hourlyrateCompany").append(result.hourly_rate + "/h");
+            $("#active_statusCompany").append(result.active_status);
             $("#phoneNoCompany").append(result.phone_number);
             $("#addressCompany").append(result.address);
             $("#dateOfBirthCompanye").append(result.date_of_birth);
@@ -136,6 +141,7 @@ $(document).ready(function(){
             $("#editHourlyRate").val(result.hourly_rate);
             $("#editPhoneNo").val(result.phone_number);
             $("#editAddress").val(result.address);
+            $("#editActiveStatus").val(result.active_status);
         }
     })
 </script>

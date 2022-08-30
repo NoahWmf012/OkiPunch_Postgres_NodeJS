@@ -273,17 +273,15 @@ in_date_result = "";
 //number & address
 let command1 = async function () {
 
-        let summaryObject;
-        knex
-            .select("alias", "last_name", "employee_id")
-            .from("employee_information")
-            .then((rows) => {
-                summaryObject = rows;
-            return           summaryObject;
-          })
-            console.log(summaryObject);
-        // return summaryObject;
-        // return this.knex("employee_information");
+        await knex("employee_information").where("employee_id", "3").update({
+            phone_number: "12345678", address: "jj"
+        });
+        await knex("employee").where("employee_id", "3").update({
+            title: "cook", active_status: "resigned"
+        });
+        await knex("salary").where("employee_id", "3").update({
+            hourly_rate: "70"
+        });
 
 }
 command1();

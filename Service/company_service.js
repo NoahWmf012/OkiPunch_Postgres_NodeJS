@@ -2,12 +2,9 @@ const bcrypt = require("bcrypt");
 const { createClient } = require("redis");
 class nodeServiceCompany {
     constructor(knex) {
-        this.init();
         this.knex = knex;
     }
-    init() {
-        new Promise((resolve, reject) => { });
-    }
+
 
     // /biz/showworkers (GET)
     async showWorkers(id) {
@@ -21,6 +18,8 @@ class nodeServiceCompany {
         return summaryObject;
         // return this.knex("employee_information");
     }
+
+
 
     optVerification(id, otp) {
         //check the redis if id and otp match, then punch-in the record into DB
@@ -115,6 +114,7 @@ class nodeServiceCompany {
         summaryObject.description = description;
 
 
+
         //acquire date
         let queryDate = await this.knex.select("in_date").from("attendance")
             .where("employee_id", id)
@@ -137,11 +137,13 @@ class nodeServiceCompany {
 
     }
 
+
+
     // /biz/worker/:id/info (GET)
     async showWorkerDayRecord(id) {
         let object = {};
         await this.knex
-            .select("employee_information.first_name", "employee_information.last_name", "employee_information.alias", "employee_information.employee_id", "employee_information.phone_number", "employee_information.address", "employee_information.date_of_birth", "employee_information.gender", "salary.hourly_rate", "employee.title")
+            .select("employee_information.first_name", "employee_information.last_name", "employee_information.alias", "employee_information.employee_id", "employee_information.phone_number", "employee_information.address", "employee_information.date_of_birth", "employee_information.gender", "salary.hourly_rate", "employee.title", "employee.active_status")
             .from("employee_information")
             .innerJoin("salary", "salary.employee_id", "employee_information.employee_id")
             .innerJoin("employee", "salary.employee_id", "employee.employee_id")
@@ -155,6 +157,7 @@ class nodeServiceCompany {
                 object.last_name = rows[0].last_name;
                 object.alias = rows[0].alias;
                 object.employee_id = rows[0].employee_id;
+                object.active_status = rows[0].active_status;
                 object.phone_number = rows[0].phone_number;
                 object.address = rows[0].address;
                 object.date_of_birth = date_of_birth;
@@ -166,7 +169,9 @@ class nodeServiceCompany {
         // return this.knex("employee_information").where('employee_id', user);
     }
 
-    // /biz/worker/:id/info (PUT)
+
+
+    // /biz/worker/:id/info (POST)
     async updateWorkerInfo(id, title, active_status, hourly_rate, phone_number, address) {
         await this.knex("employee_information").where("employee_id", id).update({
             phone_number: phone_number, address: address

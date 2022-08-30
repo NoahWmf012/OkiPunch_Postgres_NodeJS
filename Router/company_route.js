@@ -98,9 +98,12 @@ class nodeRouterCompany {
     }
 
     async updateInfo(req, res) {
-        var id = req.body.id;
+        let id = req.params.id;
+        let title = req.body.title;
+        let active_status = req.body.active_status;
+        let hourly_rate = req.body.hourly_rate;
         let phone_number = req.body.phone_number;
-        let address = req.body.addr;
+        let address = req.body.address;
         var data = await this.companyService.updateWorkerInfo(id, title, active_status, hourly_rate, phone_number, address);
         res.end();
     }
