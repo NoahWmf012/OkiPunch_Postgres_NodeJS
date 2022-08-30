@@ -9,7 +9,6 @@ class nodeRouterCompany {
     }
     router() {
         let router = this.express.Router();
-
         router.use(this.auth.isAdminLogged);
 
 
@@ -24,7 +23,7 @@ class nodeRouterCompany {
         router.get("/worker/otp", this.renderOtp.bind(this));
         router.post("/worker/otp/:id", this.submitOtp.bind(this))
 
-        router.get("/worker/calendar", this.renderCalendar.bind(this)); //attendance
+        router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
         router.get("/worker/:id/calendar/api", this.showCalendarData.bind(this)); //attendance
         router.put("/worker/:id/calendar/update", this.updateCalendar.bind(this)); //attendance
         router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
@@ -86,6 +85,9 @@ class nodeRouterCompany {
     renderCalendar(req, res) {
         res.type(".html");
         res.render("company_calendar");
+        if (Number.isInteger(req.params.id)) {
+
+        }
     }
 
     async showCalendarData(req, res) {

@@ -15,25 +15,30 @@
     <br>
 
     {{#each employee}}
-    <div class='row d-flex justify-content-center align-items-center'>
-        <br><br><br><br><br><br><br><br><br><br>
+    <div class='row d-flex justify-content-center align-items-center'> <br><br><br><br><br><br><br><br><br><br>
         <img class="col-12" src="../images/company_employeeSum.jpg" style="max-width:150px; border-radius: 50%;">
-        <h1 class="text-center" id={{@index}} data-id="{{@index}}"> Name: {{alias}} {{employee_id}}</h1>
+        <h1 class="text-center" id={{@index}} data-id="{{@index}}"> Name: {{alias}}  #<span id="valueId{{employee_id}}">{{employee_id}}</span></h1>
         <div class='d-flex justify-content-center align-items-center'>
-            <div class='row'>
+            <div onclick="myFunction()" class='row'>
                 <div class="column col-6">
-                    <a href=""> <i class="fa-solid fa-calendar-days fa-xl"></i></a>
-                    {{!-- http://localhost:8000/biz/worker/{{employee_id}}/calendar --}}
+                    <a id="calendarEmployeeId{{employee_id}}" href="http://localhost:8000/biz/worker/{{employee_id}}/calendar"> <i
+                            class="fa-solid fa-calendar-days fa-xl"></i></a>
                 </div>
                 <div class="column col-6">
-                    <a href=""> <i class="fa-solid fa-user-pen fa-xl"></i></a>
-                    {{!-- http://localhost:8000/biz//worker/{{employee_id}}/info --}}
+                    <a id="" href=" http://localhost:8000/biz//worker/{{employee_id}}/info"> <i
+                            class="fa-solid fa-user-pen fa-xl"></i></a>
                 </div>
             </div>
-        </div>
-        <br> <br>
+        </div> <br> <br>
     </div>
     {{/each}}
 </div>
 
 <script type='text/javascript' rel='js/handlebars-v4.0.5.js' src="../company_summary.js"></script>
+
+<script>
+            function myFunction() {
+            let id = document.getElementById("#valueId4").innerHTML;
+            console.log(id);
+          }
+</script>
