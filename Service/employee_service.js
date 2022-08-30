@@ -47,10 +47,12 @@ class nodeServiceEmployee {
             var otp = Math.floor(1000 + Math.random() * 8999)
             await client.set(id.toString(), otp.toString());
 
-            const value = await client.get(id.toString());
-            console.log(value)
-        })();
+            let value = await client.get(id.toString());
 
+            return value;
+        })();
+        console.log(value);
+        
         //in_date
         let today = new Date();
         let dd = String(today.getDate()).padStart(2, '0');
