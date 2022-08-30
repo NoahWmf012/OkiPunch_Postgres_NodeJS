@@ -1,14 +1,23 @@
 <div class="container container-fluid col">
-    <form action="/biz/worker/addnew" method="POST">
+    <form>
         <br>
         <h1 class="text-center">New Worker</h1>
         <br>
+
+        <!-- Enter Username -->
+        <div class="row">
+            <div class="col">
+                <p class="wrapper">
+                    <input type="email" name="username" class="form-control" placeholder="&#xf040   Username" aria-label="Username">
+                </p>
+            </div>
+        </div>
 
         <!-- Enter Email -->
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="email" name="username" class="form-control" placeholder="&#xf003   Email" aria-label="Email">
+                    <input type="email" name="email" class="form-control" placeholder="&#xf003   Email" aria-label="Email">
                 </p>
             </div>
         </div>
@@ -27,18 +36,18 @@
             <div class="select-box">
                 <div class="options-container">
                     <div class="option">
-                        <input type="radio" class="radio" id="film" name="category" />
-                        <label for="film">Waiter</label>
+                        <input type="radio" class="radio" id="waiter" name="department" />
+                        <label for="waiter">Waiter</label>
                     </div>
 
                     <div class="option">
-                        <input type="radio" class="radio" id="science" name="category" />
-                        <label for="science">Cook</label>
+                        <input type="radio" class="radio" id="cook" name="department" />
+                        <label for="cook">Cook</label>
                     </div>
 
                     <div class="option">
-                        <input type="radio" class="radio" id="art" name="category" />
-                        <label for="art">Cleaner</label>
+                        <input type="radio" class="radio" id="cleaner" name="department" />
+                        <label for="cleaner">Cleaner</label>
                     </div>
                 </div>
 
@@ -52,7 +61,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf06d   Title" aria-label="text">
+                    <input type="text" name="title"  class="form-control" placeholder="&#xf06d   Title" aria-label="text">
                 </p>
             </div>
         </div>
@@ -60,7 +69,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf155   Salary" aria-label="text">
+                    <input type="text" name="salary"  class="form-control" placeholder="&#xf155   Salary" aria-label="text">
                 </p>
             </div>
         </div>
@@ -69,7 +78,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf040   Firstname" aria-label="text">
+                    <input type="text" name="fname"  class="form-control" placeholder="&#xf040   Firstname" aria-label="text">
                 </p>
             </div>
         </div>
@@ -78,7 +87,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf040   Lastname" aria-label="text">
+                    <input type="text" name="lname"  class="form-control" placeholder="&#xf040   Lastname" aria-label="text">
                 </p>
             </div>
         </div>
@@ -87,7 +96,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf040   Alias" aria-label="text">
+                    <input type="text" name="alias"  class="form-control" placeholder="&#xf040   Alias" aria-label="text">
                 </p>
             </div>
         </div>
@@ -96,7 +105,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf098   Phone_number" aria-label="text">
+                    <input type="text" name="phone-number"  class="form-control" placeholder="&#xf098   Phone_number" aria-label="text">
                 </p>
             </div>
         </div>
@@ -105,7 +114,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf124   Address" aria-label="text">
+                    <input type="text" name="address"  class="form-control" placeholder="&#xf124   Address" aria-label="text">
                 </p>
             </div>
         </div>
@@ -114,7 +123,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf183   Gender" aria-label="text">
+                    <input type="text" name="gender"  class="form-control" placeholder="&#xf183   Gender" aria-label="text">
                 </p>
             </div>
         </div>
@@ -123,7 +132,7 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf073   Date of birth" aria-label="text">
+                    <input type="text" name="date_of_birth"  class="form-control" placeholder="&#xf073   Date of birth" aria-label="text">
                 </p>
             </div>
         </div>
@@ -132,13 +141,13 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="text"  class="form-control" placeholder="&#xf007   Image" aria-label="text">
+                    <input type="text" name="image"  class="form-control" placeholder="&#xf007   Image" aria-label="text">
                 </p>
             </div>
         </div>
 
         <!--Submit Btn-->
-        <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-right fa-2xl" type="submit"></i></button>
+        <button type="submit" id="submit-new-worker" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-right fa-2xl"></i></button>
         <br>
         <br>
 
@@ -150,7 +159,19 @@
 
 <script>
     // new worker: Enter Department(option select)
-    console.log("Enter Department")
+    $(document).ready(function(){
+        $("form").submit(function(e){
+            var obj = {
+                name: $('input[name=name]').val(),
+                email: $('input[name=email]').val(),
+                password: $('input[name=]').val,
+                department: $('input[name=department]').val()
+            }
+            axios.post("/biz/worker/addnew", {
+                worker
+            })
+        });
+    });
     const selected = document.querySelector(".selected");
     const optionsContainer = document.querySelector(".options-container");
 

@@ -72,15 +72,8 @@ class nodeRouterCompany {
 
     async addNew(req, res) {
         console.log("addNew")
-        // router.post(
-        //     "/company_signup",
-        //     this.isNotLogged,
-        //     this.passport.authenticate("company-signup", {
-        //         successRedirect: "/company_login",
-        //         failureRedirect: "/company_signup",
-        //         failureFlash: true,
-        //     })
-        // );
+        var data = await this.companyService.addNewWorker(worker);
+        res.json(data);
     }
 
     renderCalendar(req, res) {

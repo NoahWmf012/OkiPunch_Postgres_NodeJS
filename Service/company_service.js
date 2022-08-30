@@ -10,9 +10,9 @@ class nodeServiceCompany {
     }
 
     // /biz/showworkers (GET)
-     async showWorkers(id) {
+    async showWorkers(id) {
         let summaryObject = {};
-         await this.knex
+        await this.knex
             .select("alias", "employee_id")
             .from("employee_information")
             .then((rows) => {
@@ -34,17 +34,47 @@ class nodeServiceCompany {
 
             await client.connect();
 
-            const value = await client.get("id1");
+            const value = await client.get(id);
             if (otp !== value) {
                 return "incorrect One-Time-Password";
             }
-            return `Correct One-Time-Password with ID:${id}`
+            /**
+        return `Correct One-Time-Password with ID:${id}`
+        //in_date
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        today = yyyy + '/' + mm + '/' + dd;
+
+        //in_time
+        let d = new Date();
+        let n = d.toLocaleTimeString();
+
+        //status
+        let status = "";
+        if (n == null) {
+            status = "ABSENT";
+        } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+            status = "ON_TIME"; //09:00:00 - 09:00:59
+        } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+            status = "LATE"; //09:01:00 - 15:59:59
+        } else if ((((n).split(':')[0]) < 9)) {
+            status = "EARLY GOING"; // ... - 08:59:59
+        } else if ((((n).split(':')[0]) >= 16)) {
+            status = "HALF DAY"; // 16:00:00 - ...
+        }
+
+        await this.knex
+            .insert({ employee_id: id, in_date: today, in_time: n, status: status })
+            .into("attendance");*/
+
         })((res) => { msg = res });
     }
 
     //  /biz/worker/addnew (POST)
-    async addNewWorker(email, password) {
-        //redirect err / exception
+    async addNewWorker(worker) {
+        console.log(worker);
     }
 
     // /biz/worker/:id/calendar (GET)
