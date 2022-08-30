@@ -46,7 +46,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
       <div id="punchInMessage" class="toast-body">
-       Punch In Time: 
+        <p id="punchInMessage">Punch In Time:</p>
+        <p id="punchInOTPW">One Time Passowrd:</p>
       </div>
     </div>
 </div>
@@ -85,6 +86,13 @@ $("#punchInMessage").append(time.toLocaleString('en-us', {
   }))
 
   $("#punchOutMessage").append(time.toLocaleString('en-us', { 
+    hour: '2-digit', 
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true 
+  }))
+
+    $("#punchInOTPW").append(time.toLocaleString('en-us', { 
     hour: '2-digit', 
     minute: '2-digit',
     second: '2-digit',
