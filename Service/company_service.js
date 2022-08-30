@@ -138,8 +138,32 @@ class nodeServiceCompany {
     }
 
     // /biz/worker/:id/info (GET)
-    showWorkerDayRecord(role, user) {
-        return this.knex("employee_information").where('employee_id', user);
+    async showWorkerDayRecord(id) {
+        let object = {};
+        await this.knex
+            .select("employee_information.first_name", "employee_information.last_name", "employee_information.alias", "employee_information.employee_id", "employee_information.phone_number", "employee_information.address", "employee_information.date_of_birth", "employee_information.gender", "salary.hourly_rate", "employee.title")
+            .from("employee_information")
+            .innerJoin("salary", "salary.employee_id", "employee_information.employee_id")
+            .innerJoin("employee", "salary.employee_id", "employee.employee_id")
+            .where("employee_information.employee_id", id)
+            .then((rows) => {
+                let date = rows[0].date_of_birth;
+                (date.setDate(date.getDate() + 1));
+                let date_of_birth = (date.toISOString().split('T')[0]);
+
+                object.first_name = rows[0].first_name;
+                object.last_name = rows[0].last_name;
+                object.alias = rows[0].alias;
+                object.employee_id = rows[0].employee_id;
+                object.phone_number = rows[0].phone_number;
+                object.address = rows[0].address;
+                object.date_of_birth = date_of_birth;
+                object.gender = rows[0].gender;
+                object.hourly_rate = rows[0].hourly_rate;
+                object.title = rows[0].title;
+            })
+        return object;
+        // return this.knex("employee_information").where('employee_id', user);
     }
 
     // /biz/worker/:id/info (PUT)
