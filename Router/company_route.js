@@ -79,14 +79,11 @@ class nodeRouterCompany {
     renderCalendar(req, res) {
         res.type(".html");
         res.render("company_calendar");
-        if (Number.isInteger(req.params.id)) {
-
-        }
     }
 
     async showCalendarData(req, res) {
         var data = await this.companyService.showWorkerCanlendar(req.params.id);
-        console.log(req.params.id);
+        console.log("showCalendarData" + req.params.id);
         res.json(data);
     }
 
