@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
 //set up node router
 app.use("/", new PageRouter(express).router());
 app.use("/", new comAuthRouter(express, passport).router());
-app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express).router());
+app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express, passport).router());
 app.use("/", new emAuthRouter(express, passport).router());
 app.use("/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), express).router());
 

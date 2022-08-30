@@ -2,9 +2,10 @@ const { json } = require("body-parser");
 const Auth = require("./company_AuthRouter");
 
 class nodeRouterCompany {
-    constructor(companyService, express) {
+    constructor(companyService, express, passport) {
         this.companyService = companyService;
         this.express = express;
+        this.passport = passport;
         this.auth = new Auth();
     }
     router() {
@@ -62,18 +63,24 @@ class nodeRouterCompany {
     }
 
     async submitOtp(req, res) {
-        var id = req.params.id;
-        var otp = req.body.otp;
-        var data = await this.companyService.optVerification(id, otp);
-        console.log("data:", data)
-        res.json(data);
+        // var id = req.params.id;
+        // var otp = req.body.otp;
+        // var data = await this.companyService.optVerification(id, otp);
+        // console.log("data:", data)
+        // res.json(data);
+
     }
 
 
     async addNew(req, res) {
         console.log("addNew")
-        var data = await this.companyService.addNewWorker(req.body.worker);
-        res.json(data);
+        // var data = await this.companyService.addNewWorker(req.body.worker);
+        // res.json(data);
+        this.passport.authenticate("add-new-employee", {
+            successRedirect: "/biz/showworkers",
+            failureRedirect: "/",
+            failureFlash: true,
+        });
     }
 
     renderCalendar(req, res) {
