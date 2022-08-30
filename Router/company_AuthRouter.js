@@ -30,37 +30,6 @@ class comAuthRouter {
 
     router() {
         let router = this.express.Router();
-        /* router.get(
-            "/auth/facebook",
-            this.isNotLogged,
-            this.passport.authenticate("facebook", {
-                scope: ["email", "public_profile"],
-            })
-        );
-
-        router.get(
-            "/auth/google",
-            // this.isNotLogged,
-            this.passport.authenticate("google", {
-                scope: ["profile", "email"],
-            })
-        );
-
-        router.get(
-            "/auth/facebook/callback",
-            this.passport.authenticate("facebook", {
-                successRedirect: "/",
-                failureRedirect: "/login",
-            })
-        );
-
-        router.get(
-            "/auth/google/callback",
-            this.passport.authenticate("google", {
-                successRedirect: "/",
-                failureRedirect: "/login",
-            })
-        ); */
 
         router.post(
             "/company_signup",

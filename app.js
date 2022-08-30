@@ -51,12 +51,6 @@ app.use(session({
 setupPassport(app, bcrypt, passport, knex);
 app.use(flash());
 
-//express server
-app.get("/", (req, res) => {
-    res.type(".html");
-    res.render("index");
-});
-
 //set up node router
 app.use("/", new PageRouter(express).router());
 app.use("/", new comAuthRouter(express, passport).router());

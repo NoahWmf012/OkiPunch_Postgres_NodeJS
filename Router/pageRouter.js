@@ -15,17 +15,24 @@ class PageRouter {
         res.redirect("/");
     }
 
+    redirectHomePage(req, res) {
+        if (req.isAuthenticated() && req.user.role === "company") {
+            res.redirect("/biz/showworkers");
+        } else if (req.isAuthenticated() && req.user.role === "employee") {
+            res.redirect("/employee/punch");
+        } else {
+            res.type(".html");
+            res.render("index");
+        }
+    }
+
     router() {
         let router = this.express.Router();
-        router.get("/", this.isLoggedIn, this.showAll.bind(this));
+        router.get("/", this.redirectHomePage.bind(this));
         router.get("/company_signup", this.isNotLogged, this.companySignup.bind(this));
         router.get("/company_login", this.isNotLogged, this.companyLogin.bind(this));
         router.get("/employee_login", this.isNotLogged, this.employeeLogin.bind(this));
         return router;
-    }
-
-    showAll(req, res) {
-        res.redirect("/biz/showworkers");
     }
 
     companySignup(req, res) {

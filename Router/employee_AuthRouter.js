@@ -31,7 +31,7 @@ class emAuthRouter {
             "/employee_login",
             this.isNotLogged,
             this.passport.authenticate("employee-login", {
-                successRedirect: "/employee/calendar", //not yet assign /:id
+                successRedirect: "/employee/punch",
                 failureRedirect: "/employee_login",
                 failureFlash: true,
             })

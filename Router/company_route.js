@@ -102,7 +102,7 @@ class nodeRouterCompany {
         let phone_number = req.body.phone_number;
         let address = req.body.addr;
         var data = await this.companyService.updateWorkerInfo(id, title, active_status, hourly_rate, phone_number, address);
-        res.end;
+        res.end();
     }
 
     async deleteOne(req, res) {
