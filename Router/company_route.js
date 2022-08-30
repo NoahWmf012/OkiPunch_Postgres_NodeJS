@@ -9,7 +9,8 @@ class nodeRouterCompany {
     }
     router() {
         let router = this.express.Router();
-        router.use(this.auth.isAdminLogged);
+
+        // router.use(this.auth.isAdminLogged);
 
 
         //connecting DB
@@ -71,7 +72,7 @@ class nodeRouterCompany {
 
     async addNew(req, res) {
         console.log("addNew")
-        var data = await this.companyService.addNewWorker(worker);
+        var data = await this.companyService.addNewWorker(req.body.worker);
         res.json(data);
     }
 

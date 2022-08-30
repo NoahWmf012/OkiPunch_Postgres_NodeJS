@@ -74,7 +74,11 @@ class nodeServiceCompany {
 
     //  /biz/worker/addnew (POST)
     async addNewWorker(worker) {
-        console.log(worker);
+        console.log("worker:");
+        console.log(worker.username);
+        console.log(worker.password);
+        console.log(worker.email);
+        console.log(worker.department)
     }
 
     // /biz/worker/:id/calendar (GET)

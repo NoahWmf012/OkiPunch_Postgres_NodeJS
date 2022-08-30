@@ -82,12 +82,12 @@ class comAuthRouter {
             })
         );
 
-        router.post("/biz/worker/addnew",
-            this.passport.authenticate("add-new-employee", {
-                successRedirect: "/company_signup",
-                failureRedirect: "/",
-                failureFlash: true,
-            }));
+        // router.post("/biz/worker/addnew",
+        //     this.passport.authenticate("add-new-employee", {
+        //         successRedirect: "/company_signup",
+        //         failureRedirect: "/",
+        //         failureFlash: true,
+        //     }));
 
         router.get("/logout", this.isLogged, (req, res) => {
             req.logout(function (err) {

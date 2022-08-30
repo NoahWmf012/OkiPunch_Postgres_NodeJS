@@ -3,8 +3,9 @@ const LocalStrategy = require("passport-local").Strategy;
 module.exports = (passport, bcrypt, knex) => {
     passport.use(
         "company-signup",
-        new LocalStrategy(async (email, password, done) => {
+        new LocalStrategy(async (req, email, password, done) => {
             try {
+                console.log(re)
                 const user = await knex("users").where({ email }).first();
                 if (user) {
                     return done(null, false, { message: "email already taken" });
@@ -87,6 +88,4 @@ module.exports = (passport, bcrypt, knex) => {
             }
         })
     );
-
-
 };
