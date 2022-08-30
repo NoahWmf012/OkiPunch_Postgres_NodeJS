@@ -7,7 +7,12 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
+                    {{!-- employee_id --}}
+                    <input type="text" class="form-control" name="employee-id" placeholder="&#xf127   Employee ID" aria-label="id">
+                    <br>
+                    {{!-- OTP  --}}
                     <input type="text" id="otp" class="form-control" name="otp" placeholder="&#xf127   4-digit password" aria-label="OTP">
+                    <br>
                     <!--Submit Btn-->
                     <button type="submit" id="submit-otp" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-right fa-2xl"></i></button>
                     <br>
@@ -21,8 +26,8 @@
     $(document).ready(function(){
         $("form").submit(function(e){
             e.preventDefault();
-            console.log($('input[name=otp]').val())
-            axios.post("/biz/worker/otp/1",{ //dummy id:1
+            axios.post("/biz/worker/otp",{
+                id:$('input[name=employee-id]').val(),
                 otp:$('input[name=otp]').val(),
             });
         })

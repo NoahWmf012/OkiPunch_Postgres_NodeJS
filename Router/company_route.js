@@ -20,7 +20,7 @@ class nodeRouterCompany {
         router.get("/worker/addnew", this.renderAddNew.bind(this));
 
         router.get("/worker/otp", this.renderOtp.bind(this));
-        router.post("/worker/otp/:id", this.submitOtp.bind(this))
+        router.post("/worker/otp", this.submitOtp.bind(this))
 
         router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
         router.get("/worker/:id/calendar/api", this.showCalendarData.bind(this)); //attendance
@@ -60,7 +60,7 @@ class nodeRouterCompany {
     }
 
     async submitOtp(req, res) {
-        var id = req.params.id;
+        var id = req.body.id;
         var otp = req.body.otp;
         console.log("id:", id, "\notp:", otp)
         var data = await this.companyService.optVerification(id, otp);
