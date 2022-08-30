@@ -9,8 +9,7 @@
     <br>
 
     <!--Each employee information-->
-    <div class='row'>
-        {{!-- {{#each employee}} --}}
+    <div class='row' id="eachEm">
         <div>
             <div class="text-center">
                 <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
@@ -19,15 +18,13 @@
                 <br>
                 <h2 id="titleCompany" class="text-secondary">title: </h2>
                 <br>
-                <button class="btn" id="editInfoBtn">
+                <button class="btn" id="editInfoBtnCom">
                     <i class="fa-solid fa-user-pen fa-xl"></i>
                 </button>
-
                 <br>
             </div>
-            <hr>
+            <hr> <br>
 
-            <br>
             <p id="staffNoCompany"> Staff no.: </p>
 
             <p id="nameCompany"> Name: </p>
@@ -43,47 +40,66 @@
             <p id="genderCompany">Gender: </p>
 
         </div>
-        {{!-- {{/each}} --}}
 
-    </div>
-
-    <div class="card" id="editForm" style="visibility: hidden; border:black;">
         <hr>
-        <div class="mb-3">
-            <label for="editTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="editTitle">
-        </div>
-        <div class="mb-3">
-            <label for="editHourlyRate" class="form-label">Hourly rate</label>
-            <input type="number" class="form-control" id="editHourlyRate">
-        </div>
-        <div class="mb-3">
-            <label for="editPhoneNo" class="form-label">Phone number</label>
-            <input type="tel" class="form-control" id="editPhoneNo">
-        </div>
-        <div class="mb-3">
-            <label for="editAddress" class="form-label">Address</label>
-            <textarea class="form-control" id="editAddress" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn bg-light" id="submitInfoBtn"> <i class="fa-regular fa-circle-check"></i> Submit
-        </button>
-        <br>
-        <br>
+
     </div>
+
+    {{!-- edit employee information form --}}
+    <style>
+        .hide {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 1px;
+            height: 1px;
+        }
+    </style>
+
+    <iframe name="hiddenFrame" class="hide"></iframe>
+
+    <form id="formPost" method="post" target="hiddenFrame">
+
+        <div class="card" id="editForm" style="visibility: hidden; border:black;">
+            <hr>
+            <div class="mb-3">
+                <label for="editTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="editTitle">
+            </div>
+            <div class="mb-3">
+                <label for="editHourlyRate" class="form-label">Hourly rate</label>
+                <input type="number" class="form-control" id="editHourlyRate">
+            </div>
+            <div class="mb-3">
+                <label for="editPhoneNo" class="form-label">Phone number</label>
+                <input type="tel" class="form-control" id="editPhoneNo">
+            </div>
+            <div class="mb-3">
+                <label for="editAddress" class="form-label">Address</label>
+                <textarea class="form-control" id="editAddress" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn bg-light" id="submitInfoBtnCom"> <i class="fa-regular fa-circle-check"></i>
+                Submit
+            </button>
+            <br> <br>
+        </div>
+    </form>
 </section>
 
 
 {{!-- for edit calendar --}}
 <script>
-    document.getElementById("editInfoBtn").onclick = function () {
+    document.getElementById("editInfoBtnCom").onclick = function () {
         document.getElementById("editForm").style.visibility = "visible";
     }
 
-    document.getElementById("submitInfoBtn").onclick = function () {
+    document.getElementById("submitInfoBtnCom").onclick = function () {
         var editForm = document.getElementById("editForm");
         editForm.style.visibility = "hidden";
     }
 </script>
+
+
 
 <script>
 
@@ -91,11 +107,19 @@
 
     id = window.location.href.split('/worker')[1].split('/')[1];
 
+$(document).ready(function(){
+
+    $("#formPost").attr("action", `/worker/${id}/info/update`);
+
+})
+
+
     $.ajax({
         type: "GET",
         url: `http://localhost:8000/biz/worker/${id}/info/api`,
         async: true,
         success: function (result) {
+            //show employee information
             $("#aliasCompany").append(result.alias);
             $("#titleCompany").append(result.title);
             $("#staffNoCompany").append(result.employee_id);
@@ -105,6 +129,13 @@
             $("#addressCompany").append(result.address);
             $("#dateOfBirthCompanye").append(result.date_of_birth);
             $("#genderCompany").append(result.gender);
+
+
+            //show update form value
+            $("#editTitle").val(result.title);
+            $("#editHourlyRate").val(result.hourly_rate);
+            $("#editPhoneNo").val(result.phone_number);
+            $("#editAddress").val(result.address);
         }
     })
 </script>

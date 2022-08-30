@@ -15,7 +15,7 @@ $.ajax({
         $("#dateOfBirthEmployee").append(result.date_of_birth);
         $("#genderEmployee").append(result.gender);
 
-        //update form value
+        //show update form value
         $("#editPhoneNo").val(result.phone_number);
         $("#editAddress").val(result.address);
     }

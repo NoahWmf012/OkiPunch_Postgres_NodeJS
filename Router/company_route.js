@@ -28,7 +28,7 @@ class nodeRouterCompany {
 
         router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
         router.get("/worker/:id/info/api", this.showInfo.bind(this)); //employ_information
-        router.put("/worker/:id/info/update", this.updateInfo.bind(this)); //employ_information
+        router.post("/worker/:id/info/update", this.updateInfo.bind(this)); //employ_information
         router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information
         return router;
     }
@@ -83,7 +83,7 @@ class nodeRouterCompany {
     }
 
     async updateCalendar(req, res) {
-        var data = await this.companyService.updateWorkerCanlendar();
+        var data = await this.companyService.updateWorkerCanlendar(req.params.id);
         res.json(data);
     }
 
@@ -98,8 +98,11 @@ class nodeRouterCompany {
     }
 
     async updateInfo(req, res) {
-        var data = await this.companyService.updateWorkerInfo();
-        res.json(data);
+        var id = req.body.id;
+        let phone_number = req.body.phone_number;
+        let address = req.body.addr;
+        var data = await this.companyService.updateWorkerInfo(id, title, active_status, hourly_rate, phone_number, address);
+        res.end;
     }
 
     async deleteOne(req, res) {

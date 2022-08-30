@@ -38,36 +38,36 @@ class nodeServiceCompany {
             if (otp !== value) {
                 return "incorrect One-Time-Password";
             } else {
-    
-            // return `Correct One-Time-Password with ID:${id}`
-            //in_date
-            let today = new Date();
-            let dd = String(today.getDate()).padStart(2, '0');
-            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            let yyyy = today.getFullYear();
-            today = yyyy + '/' + mm + '/' + dd;
-    
-            //in_time
-            let d = new Date();
-            let n = d.toLocaleTimeString();
-    
-            //status
-            let status = "";
-            if (n == null) {
-                status = "ABSENT";
-            } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
-                status = "ON_TIME"; //09:00:00 - 09:00:59
-            } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
-                status = "LATE"; //09:01:00 - 15:59:59
-            } else if ((((n).split(':')[0]) < 9)) {
-                status = "EARLY GOING"; // ... - 08:59:59
-            } else if ((((n).split(':')[0]) >= 16)) {
-                status = "HALF DAY"; // 16:00:00 - ...
-            }
-    
-            await this.knex
-                .insert({ employee_id: id, in_date: today, in_time: n, status: status })
-                .into("attendance");
+
+                // return `Correct One-Time-Password with ID:${id}`
+                //in_date
+                let today = new Date();
+                let dd = String(today.getDate()).padStart(2, '0');
+                let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                let yyyy = today.getFullYear();
+                today = yyyy + '/' + mm + '/' + dd;
+
+                //in_time
+                let d = new Date();
+                let n = d.toLocaleTimeString();
+
+                //status
+                let status = "";
+                if (n == null) {
+                    status = "ABSENT";
+                } else if (((n).split(':')[0]) == 9 && ((n).split(':')[1]) == 0) {
+                    status = "ON_TIME"; //09:00:00 - 09:00:59
+                } else if ((((n).split(':')[0]) > 9) && (((n).split(':')[0]) <= 15) || (((n).split(':')[0]) = 9) && (((n).split(':')[1]) > 0)) {
+                    status = "LATE"; //09:01:00 - 15:59:59
+                } else if ((((n).split(':')[0]) < 9)) {
+                    status = "EARLY GOING"; // ... - 08:59:59
+                } else if ((((n).split(':')[0]) >= 16)) {
+                    status = "HALF DAY"; // 16:00:00 - ...
+                }
+
+                await this.knex
+                    .insert({ employee_id: id, in_date: today, in_time: n, status: status })
+                    .into("attendance");
             }
         })((res) => { msg = res });
     }
@@ -167,8 +167,16 @@ class nodeServiceCompany {
     }
 
     // /biz/worker/:id/info (PUT)
-    updateWorkerInfo(role, body) {
-
+    async updateWorkerInfo(id, title, active_status, hourly_rate, phone_number, address) {
+        await this.knex("employee_information").where("employee_id", id).update({
+            phone_number: phone_number, address: address
+        });
+        await this.knex("employee").where("employee_id", id).update({
+            title: title, active_status: active_status
+        });
+        await this.knex("salary").where("employee_id", id).update({
+            hourly_rate: hourly_rate
+        });
     }
 
     // /biz/worker/:id/info (DELETE)

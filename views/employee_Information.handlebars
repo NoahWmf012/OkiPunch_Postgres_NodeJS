@@ -14,19 +14,17 @@
             <div class="text-center">
                 <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
                 <br>
-                <h1 id="aliasEmployee">  </h1>
+                <h1 id="aliasEmployee"> </h1>
                 <br>
-                <h2 id="titleEmployee" class="text-secondary">  </h2>
+                <h2 id="titleEmployee" class="text-secondary"> </h2>
                 <br>
                 <button class="btn" id="editInfoBtn">
-            <i class="fa-solid fa-user-pen fa-xl"></i>
+                    <i class="fa-solid fa-user-pen fa-xl"></i>
                 </button>
-
                 <br>
             </div>
-            <hr>
+            <hr> <br>
 
-            <br>
             <p id="staffNoEmployee"> Staff no.: </p>
 
             <p id="nameEmployee"> Name: </p>
@@ -47,32 +45,38 @@
 
     </div>
 
-{{!-- edit employee information form --}}
-<style>
-  .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
-</style>
+    {{!-- edit employee information form --}}
+    <style>
+        .hide {
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 1px;
+            height: 1px;
+        }
+    </style>
 
-<iframe name="hiddenFrame" class="hide"></iframe>
+    <iframe name="hiddenFrame" class="hide"></iframe>
 
 
-<form action="/employee/info/update" method="post" target="hiddenFrame">
+    <form action="/employee/info/update" method="post" target="hiddenFrame">
 
- <div class="card" id="editForm"  style="visibility: hidden; border:black;">
-        <div class="mb-3">
-            <label for="editPhoneNoEmployee" class="form-label">Phone number</label>
-            <input name="phone_number" type="tel" class="form-control" id="editPhoneNo">
+        <div class="card" id="editForm" style="visibility: hidden; border:black;">
+            <div class="mb-3">
+                <label for="editPhoneNoEmployee" class="form-label">Phone number</label>
+                <input name="phone_number" type="tel" class="form-control" id="editPhoneNo">
+            </div>
+            <div class="mb-3">
+                <label for="editAddressEmployee" class="form-label">Address</label>
+                <input name="addr" class="form-control" id="editAddress" rows="3"></textarea>
+            </div>
+            <input type="submit" value="Submit" class="btn bg-light" id="submitInfoBtn"> </label>
+
+
         </div>
-        <div class="mb-3">
-            <label for="editAddressEmployee" class="form-label">Address</label>
-            <input name="addr" class="form-control" id="editAddress" rows="3"></textarea>
-        </div>
-        <input type="submit" value="Submit" class="btn bg-light" id="submitInfoBtn"> </label> 
 
-        
-    </div>
 
-  
-</form>
+    </form>
 
 
 
