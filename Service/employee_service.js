@@ -1,7 +1,8 @@
 //not yet done -> 1.updateEmployeeInfo method  2.command function problem 3.await group as object 4.change date format(reference to showEmployeeInfo method)
 class nodeServiceEmployee {
-    constructor(knex) {
+    constructor(knex, createClient) {
         this.knex = knex;
+        this.createClient = createClient;
     }
 
 
@@ -36,7 +37,7 @@ class nodeServiceEmployee {
         //generate 4-digit password
         (async () => {
 
-            const client = createClient();
+            const client = this.createClient();
 
             client.on("error",
                 (err) => console.log("RedisClient Error", err));

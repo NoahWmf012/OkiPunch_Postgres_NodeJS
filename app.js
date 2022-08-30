@@ -10,6 +10,7 @@ const comAuthRouter = require("./Router/company_AuthRouter");
 const emAuthRouter = require("./Router/employee_AuthRouter")
 const PageRouter = require("./Router/pageRouter");
 const flash = require("express-flash");
+const { createClient } = require('redis');
 
 const { engine } = require('express-handlebars');
 
@@ -59,7 +60,7 @@ app.get("/", (req, res) => {
 //set up node router
 app.use("/", new PageRouter(express).router());
 app.use("/", new comAuthRouter(express, passport).router());
-app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex), express).router());
+app.use("/biz", new nodeRouterCompany(new nodeServiceCompany(knex, createClient), express).router());
 app.use("/", new emAuthRouter(express, passport).router());
 app.use("/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), express).router());
 
