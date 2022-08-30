@@ -16,6 +16,4 @@ module.exports = (app, bcrypt, passport, knex) => {
     });
 
     require("./strategies/local-strategy")(passport, bcrypt, knex);
-    // require("./strategies/facebook-strategy")(passport, knex);
-    // require("./strategies/google-strategy")(passport, knex);
 };
