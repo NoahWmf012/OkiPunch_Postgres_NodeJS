@@ -81,13 +81,14 @@ module.exports = (passport, bcrypt, knex) => {
                 const hash = await bcrypt.hash(password, 10);
 
                 let newUser = { username: req.body.username, email, password: hash, role: 'employee' };
-                await knex("users").insert(newUser);
+                let newID = await knex("users").insert(newUser).returning("id")
+                console.log(newID);
 
                 // let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
-                let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
+                let newInfo = { employee_id: newID[0].id, first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
                 console.log("new worker Info", newInfo)
-                let newID = await knex("employee_information").insert(newInfo).returning("employee_id");
-                let newSalary = { employee_id: newID[0].employee_id, hourly_rate: req.body.salary, month_working_hour: 0, month_salary: 0 };
+                await knex("employee_information").insert(newInfo);
+                let newSalary = { employee_id: newID[0].id, hourly_rate: req.body.salary, month_working_hour: 0, month_salary: 0 };
                 await knex("salary").insert(newSalary);
 
                 // let newDepartment = { name: req.body.department }
