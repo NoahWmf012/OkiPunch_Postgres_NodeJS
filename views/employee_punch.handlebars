@@ -1,70 +1,80 @@
 <div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
 
-    <div class="card text-center" style="width: 25rem;">
-        <div class="card-body">
-            <h5 class="card-title">Summary</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Welcome back!</h6>
-            <hr>
+  <div class="card text-center" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title">Summary</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Welcome back!</h6>
+      <hr>
 
-            <div class='row'>
-                {{!-- {{#each }} --}}
-             
-                    <br>
-                    <p id="employee_punch_workingHours" class="card-text"> Working Hours: </p>
-                    {{!-- <h3 class="card-text"> {{working_hours}} </h3> --}}
+      <div class='row'>
+        {{!-- {{#each }} --}}
 
-                    <p id="employee_punch_hourlyRate" class="card-text">Hourly Rate: </p>
-                    {{!-- <h3 class="card-text">{{hourly_rate}}</h3> --}}
+        <br>
+        <p id="employee_punch_workingHours" class="card-text"> Working Hours: </p>
+        {{!-- <h3 class="card-text"> {{working_hours}} </h3> --}}
 
-                    <p id="employee_punch_totalSalary" class="card-text">Total Salary: </p>
-                    {{!-- <h3 class="card-text">{{total_salary}}</h3> --}}
+        <p id="employee_punch_hourlyRate" class="card-text">Hourly Rate: </p>
+        {{!-- <h3 class="card-text">{{hourly_rate}}</h3> --}}
 
-                    <br>
-                    <br>
-      
-                {{!-- {{/each}} --}}
-            </div>
+        <p id="employee_punch_totalSalary" class="card-text">Total Salary: </p>
+        {{!-- <h3 class="card-text">{{total_salary}}</h3> --}}
 
-            <hr>
+        <br>
+        <br>
 
-            <button id="employee_punch_inBtn" type="submit" class="btn btn-primary btn-ml">Punch In</button>
-            <button id="employee_punch_outBtn" type="submit" class="btn btn-secondary btn-ml">Punch Out</button>
-        </div>
+        {{!-- {{/each}} --}}
+      </div>
+
+      <hr>
+
+      <button id="employee_punch_inBtn" type="submit" class="btn btn-primary btn-ml">Punch In</button>
+      <button id="employee_punch_outBtn" type="submit" class="btn btn-secondary btn-ml">Punch Out</button>
     </div>
+  </div>
 </div>
 
 <br>
 
 
 <div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
-      {{!-- alert for successful punchin --}}
-  <div id="punchIn_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
-    
-        <strong class="me-auto">One Time Password</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        {{!-- <p id="punchInMessage">Punch In Time:</p> --}}
-        <p id="punchInOTPW">One Time Passowrd:</p>
-      </div>
+  {{!-- alert for successful punchin --}}
+  <div id="punchIn_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header">
+      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <rect width="100%" height="100%" fill="#007aff"></rect>
+      </svg>
+
+      <strong class="me-auto">One Time Password</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
+    <div class="toast-body">
+      {{!-- <p id="punchInMessage">Punch In Time:</p> --}}
+      <p id="punchInEmId">Employee ID:</p>
+      <p id="punchInOTPW">One Time Passowrd:</p>
+
+    </div>
+  </div>
 </div>
 
 <div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
-      {{!-- alert for successful punchin --}}
-  <div id="punchOut_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#007aff"></rect></svg>
-    
-        <strong class="me-auto">Punch out successfully</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div id="punchOutMessage" class="toast-body">
-       Punch Out Time: 
-      </div>
+  {{!-- alert for successful punchin --}}
+  <div id="punchOut_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header">
+      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <rect width="100%" height="100%" fill="#007aff"></rect>
+      </svg>
+
+      <strong class="me-auto">Punch out successfully</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
+    <div id="punchOutMessage" class="toast-body">
+      Punch Out Time:
+    </div>
+  </div>
 </div>
 
 <div class="direction d-flex justify-content-center align-items-center ">
@@ -73,22 +83,22 @@
 </div>
 
 <script>
-const time = new Date();
+  const time = new Date();
 
-/*
-$("#punchInMessage").append(time.toLocaleString('en-us', { 
-    hour: '2-digit', 
+  /*
+  $("#punchInMessage").append(time.toLocaleString('en-us', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true 
+    }))
+    */
+
+  $("#punchOutMessage").append(time.toLocaleString('en-us', {
+    hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hour12: true 
-  }))
-  */
-
-  $("#punchOutMessage").append(time.toLocaleString('en-us', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true 
+    hour12: true
   }))
 </script>
 
@@ -130,4 +140,3 @@ if (toastTrigger) {
 -->
 
 <script src="../employee_punch.js"> </script>
-

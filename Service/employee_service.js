@@ -11,7 +11,7 @@ class nodeServiceEmployee {
         // acquire hourly rate
         let summaryObject = {};
         await this.knex
-            .select("hourly_rate", "month_working_hour", "month_salary")
+            .select("hourly_rate", "month_working_hour", "month_salary", "employee_id")
             .from("salary")
             .where("employee_id", id)
             .then((rows) => {
@@ -20,6 +20,7 @@ class nodeServiceEmployee {
                     summaryObject.hourly_rate = rows[0].hourly_rate;
                     summaryObject.month_working_hour = rows[0].month_working_hour;
                     summaryObject.month_salary = rows[0].month_salary;
+                    summaryObject.employee_id = rows[0].employee_id;
                 }
                 catch {
                     console.log("Employee Service: queryHourlyRate Error");

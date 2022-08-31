@@ -7,6 +7,7 @@ $.ajax({
         $("#employee_punch_workingHours").append(result.month_working_hour);
         $("#employee_punch_hourlyRate").append(result.hourly_rate);
         $("#employee_punch_totalSalary").append(result.month_salary);
+        $("#punchInEmId").append(" " + result.employee_id);
     }
 });
 
@@ -16,6 +17,7 @@ let employeePunchIn = function () {
         type: "GET",
         url: `http://localhost:8000/employee/punchin`,
         success: function (result) {
+            console.log(result)
             $("#punchInOTPW").append(" " + result);
             return true;
         }
