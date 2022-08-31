@@ -12,7 +12,7 @@ let summaryTemplate = Handlebars.compile(
                         class="fa-solid fa-calendar-days fa-xl"></i></a>
             </div>
             <div class="column col-6">
-                <a id="" href=" http://localhost:8000/biz//worker/{{employee_id}}/info"> <i
+                <a id="" href=" http://localhost:8000/biz/worker/{{employee_id}}/info"> <i
                         class="fa-solid fa-user-pen fa-xl"></i></a>
             </div>
         </div>

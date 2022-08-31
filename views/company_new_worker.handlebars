@@ -158,6 +158,10 @@
 </div>
 
 <script>
+    var selectedValues = $('.options-container').val();
+    $( ".options-container" ).change(function() {
+        console.log("selectedValues:", selectedValues)
+    })
     const selected = document.querySelector(".selected");
     const optionsContainer = document.querySelector(".options-container");
 

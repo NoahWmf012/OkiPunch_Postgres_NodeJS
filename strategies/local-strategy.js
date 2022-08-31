@@ -35,7 +35,7 @@ module.exports = (passport, bcrypt, knex) => {
                     if (user.role == "company") {
                         return done(null, user);
                     }
-                    else done(null, false, { message: "Invalid role" })
+                    else return done(null, false, { message: "Invalid role" })
                 } else {
                     return done(null, false, { message: "Incorrect password" });
                 }
@@ -58,8 +58,7 @@ module.exports = (passport, bcrypt, knex) => {
                     if (user.role == "employee") {
                         return done(null, user);
                     }
-                    else done(null, false, { message: "Invalid role" })
-                    return done(null, user);
+                    else return done(null, false, { message: "Invalid role" })
                 } else {
                     return done(null, false, { message: "Incorrect password" });
                 }
@@ -84,8 +83,10 @@ module.exports = (passport, bcrypt, knex) => {
                 let newUser = { username: req.body.username, email, password: hash, role: 'employee' };
                 await knex("users").insert(newUser);
 
-                // let newInfo = { first_name: req.body.fName, last_name: req.body.lName, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
-                // await knex("employee_information").insert(newInfo);
+                // let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
+                let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, image_icon: req.body.image }
+                console.log(newInfo)
+                await knex("employee_information").insert(newInfo);
 
                 // let newDepartment = { name: req.body.department }
                 // await knex("department").insert(newDepartment);
