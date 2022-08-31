@@ -132,9 +132,29 @@ class nodeServiceCompany {
         // return this.knex("attendance").where('employee_id', user);
     }
 
-    // /biz/worker/:id/calendar (PUT)
-    updateWorkerCanlendar(role, user) {
 
+
+    // /biz/worker/:id/calendar (POST, using old version form -> not support PUT method)
+    async updateWorkerCanlendar(id, old_in_date, old_in_time, old_out_time, new_status, new_in_time, new_out_time) {
+        // in_time -> change 21:39:26 to 77966s
+        let hmsInTime = new_in_time;
+        var aInTime = hmsInTime.split(':');
+        var inTimeSeconds = (+aInTime[0]) * 60 * 60 + (+aInTime[1]) * 60 + (+aInTime[2]);
+
+        //out_time -> change 21:39:26 to 77966s
+        let hmsOutTime = new_out_time;
+        var aOutTime = hmsOutTime.split(':');
+        var outTimeSeconds = (+aOutTime[0]) * 60 * 60 + (+aOutTime[1]) * 60 + (+aOutTime[2]);
+
+        //cal working hours for one day
+        let workingSecond = outTimeSeconds - inTimeSeconds;
+        let workinghhmmss = new Date(workingSecond * 1000).toISOString().slice(11, 19);
+
+        // update attendance table
+        await this.knex("attendance").where({ employee_id: id, in_date: old_in_date, in_time: old_in_time, out_time: old_out_time })
+            .update({
+                status: new_status, in_time: new_in_time, out_time: new_out_time, day_working_hour: workinghhmmss
+            });
     }
 
 

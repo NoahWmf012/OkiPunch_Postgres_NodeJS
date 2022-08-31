@@ -1,3 +1,5 @@
+{{!-- link to calendar css to change theme --}}
+
 <head>
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.<net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" />
@@ -5,6 +7,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../library/calendar/evo-calendar.midnight-blue.min.css">
     <link rel="stylesheet" type="text/css" href="../../../../library/calendar/evo-calendar.royal-navy.min.css">
 </head>
+
+
+
+{{!-- body --}}
 <section id="demos">
     <div class="section-content">
         <div class="log-content">
@@ -23,30 +29,58 @@
 
         <br>
 
-        <div class="card" id="card" style="visibility: hidden; border:black">
-            <div class="mb-3">
-                <label for="inputDate" class="form-label">Date</label>
-                <input type="date" class="form-control" id="inputDate" placeholder="name@example.com">
+        {{!-- hidden update form --}}
+        <form id="formPostCal" method="post" target="hiddenFrame">
+            
+            <div class="card" id="card" style="visibility: hidden; border:black">
+                <div class="mb-3">
+                    <label for="inputDate" class="form-label">Chooseing the date you want to update</label>
+                    <input name="in_date" type="date" class="form-control" id="inputDate"
+                        placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="editInTime" class="form-label">Chooseing the in time you want to update</label>
+                    <textarea name="in_time" class="form-control" id="editInTime" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="editOutTime" class="form-label">Chooseing the out time you want to update</label>
+                    <textarea name="out_time" class="form-control" id="editOutTime" rows="3"></textarea>
+                </div>
+
+
+
+
+                <div class="mb-3">
+                    <label for="inputDate" class="form-label">Date</label>
+                    <input name="in_date" type="date" class="form-control" id="inputDate"
+                        placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="editStatus" class="form-label">Status</label>
+                    <input name="status" type="text" class="form-control" id="editStatus" rows="3"></input>
+                </div>
+                <div class="mb-3">
+                    <label for="editInTime" class="form-label">In time</label>
+                    <textarea name="in_time" class="form-control" id="editInTime" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="editOutTime" class="form-label">Out time</label>
+                    <textarea name="out_time" class="form-control" id="editOutTime" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn bg-light" id="submitBtn"> <i class="fa-regular fa-circle-check"></i>
+                    Submit
+                </button>
+                <br>
             </div>
-            <div class="mb-3">
-                <label for="editTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editTitle" rows="3"></input>
-            </div>
-            <div class="mb-3">
-                <label for="editDescription" class="form-label">Description</label>
-                <textarea class="form-control" id="editDescription" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn bg-light" id="submitBtn"> <i class="fa-regular fa-circle-check"></i> Submit
-            </button>
-            <br>
-        </div>
+        </form>
 
     </div>
     <br>
 </section>
 
 
-{{!-- for edit calendar, showing the edit form--}}
+
+{{!-- showing the edit form--}}
 <script>
     document.getElementById("editBtn").onclick = function () {
         var card = document.getElementById("card");
@@ -60,10 +94,9 @@
 </script>
 
 
-<script src="../../../../company_calendar.js"></script>
 
+{{!-- compamny calendar - show data --}}
 <script>
-    //compamny_calendar - show data
     let id;
 
     id = window.location.href.split('/worker')[1].split('/')[1];
@@ -113,7 +146,14 @@
     });
 </script>
 
+
+
+{{!-- compamny_calendar - edit data --}}
 <script>
-        //compamny_calendar - edit data
 
 </script>
+
+
+
+{{!-- link to company calendar setting js --}}
+<script src="../../../../company_calendar.js"></script>
