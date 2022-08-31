@@ -149,13 +149,88 @@ class nodeServiceCompany {
 
         //cal working hours for one day
         let workingSecond = outTimeSeconds - inTimeSeconds;
-        let workinghhmmss = new Date(workingSecond * 1000).toISOString().slice(11, 19);
+        let workinghhmmss = new Date(workingSecond * 1000).toISOString().slice(11, 19);//e.g.09:00:00 -> 9 hours
 
         // update attendance table
-        await this.knex("attendance").where({ employee_id: id, in_date: old_in_date, in_time: old_in_time, out_time: old_out_time })
+        await this.knex("attendance").where({ employee_id: id, in_date: old_in_date, in_time: old_in_time })
             .update({
                 status: new_status, in_time: new_in_time, out_time: new_out_time, day_working_hour: workinghhmmss
             });
+
+
+
+
+
+        //attendance table data
+        console.log(workinghhmmss);
+        let day_working_hourArray = Number(workinghhmmss.split(":")[0]);
+        let day_working_minArray = Number(workinghhmmss.split(":")[1]) / 60;
+        let sumDayWorkHours = day_working_hourArray + day_working_minArray //working hours for one day
+
+        let attendance_id;
+        await this.knex
+            .select("id")
+            .from("attendance")
+            .where({ employee_id: id, in_date: old_in_date, in_time: new_in_time })
+            .then((rows) => {
+               return attendance_id = (rows[0].id); //attendance_id
+            })
+
+        // from salary table
+        let hourly_rate;
+        await this.knex
+            .select("hourly_rate")
+            .from("salary")
+            .where("employee_id", id)
+            .then((rows) => {
+                hourly_rate = rows[0].hourly_rate; //hourly rate
+            })
+
+        let dailySalary = hourly_rate * sumDayWorkHours; //one day salary
+        console.log(dailySalary);
+
+        //insert payroll table
+        function toMonthName(monthNumber) {
+            let date = new Date();
+            date.setMonth(monthNumber - 1);
+            return date.toLocaleString('en-US', {
+                month: 'long',
+            });
+        }
+        let currentMon = toMonthName((Number(old_in_date.split("-")[1]))).toLowerCase();
+        console.log(currentMon); //git english month
+        console.log(dailySalary);
+
+        await this.knex(`payroll_${currentMon}`).where("attendance_id", attendance_id)
+            .update("daily_salary", dailySalary);
+
+
+
+
+
+
+
+        //insert salary table
+        let sumWithInitialPayroll;
+        let payrollAllDaySalary = [];
+        await this.knex.select("daily_salary")
+            .from(`payroll_${currentMon}`)
+            .where("employee_id", id)
+            .then((rows) => {
+                for (let i = 0; i < rows.length; i++) {
+                    payrollAllDaySalary.push(Number(rows[i].daily_salary))
+                }
+                console.log(payrollAllDaySalary);
+                let initialValue = 0;
+                sumWithInitialPayroll = payrollAllDaySalary.reduce(
+                    (previousValue, currentValue) => previousValue + currentValue,
+                    initialValue
+                );
+                console.log(sumWithInitialPayroll);//total month salary
+            })
+
+        await this.knex("salary").where("employee_id", id)
+            .update({ month_working_hour: (sumWithInitialPayroll / hourly_rate), month_salary: sumWithInitialPayroll });
     }
 
 
