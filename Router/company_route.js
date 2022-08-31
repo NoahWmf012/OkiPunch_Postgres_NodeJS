@@ -24,7 +24,7 @@ class nodeRouterCompany {
 
         router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
         router.get("/worker/:id/calendar/api", this.showCalendarData.bind(this)); //attendance
-        router.put("/worker/:id/calendar/update", this.updateCalendar.bind(this)); //attendance
+        router.post("/worker/:id/calendar/update", this.updateCalendar.bind(this)); //attendance
 
         router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
         router.get("/worker/:id/info/api", this.showInfo.bind(this)); //employ_information
@@ -89,7 +89,8 @@ class nodeRouterCompany {
         let old_out_time = req.body.old_out_time;
         let new_status = req.body.new_status;
         let new_in_time = req.body.new_in_time;
-        let new_out_time = req.body.new_out_time
+        let new_out_time = req.body.new_out_time;
+        console.log(req.body);
         await this.companyService.updateWorkerCanlendar(id, old_in_date, old_in_time, old_out_time, new_status, new_in_time, new_out_time);
         res.end();
     }
