@@ -170,8 +170,9 @@ class nodeServiceCompany {
             .innerJoin("employee", "salary.employee_id", "employee.employee_id")
             .where("employee_information.employee_id", id)
             .then((rows) => {
+                console.log("rows:", rows)
                 let date = rows[0].date_of_birth;
-                (date.setDate(date.getDate() + 1));
+                date.setDate(date.getDate() + 1);
                 let date_of_birth = (date.toISOString().split('T')[0]);
 
                 object.first_name = rows[0].first_name;

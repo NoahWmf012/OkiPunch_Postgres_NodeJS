@@ -84,9 +84,11 @@ module.exports = (passport, bcrypt, knex) => {
                 await knex("users").insert(newUser);
 
                 // let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
-                let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, image_icon: req.body.image }
-                console.log(newInfo)
-                await knex("employee_information").insert(newInfo);
+                let newInfo = { first_name: req.body.fname, last_name: req.body.lname, alias: req.body.alias, phone_number: req.body.phoneNumber, address: req.body.address, gender: req.body.gender, date_of_birth: req.body.dateOfBirth, image_icon: req.body.image }
+                console.log("new worker Info", newInfo)
+                let newID = await knex("employee_information").insert(newInfo).returning("employee_id");
+                let newSalary = { employee_id: newID[0].employee_id, hourly_rate: req.body.salary, month_working_hour: 0, month_salary: 0 };
+                await knex("salary").insert(newSalary);
 
                 // let newDepartment = { name: req.body.department }
                 // await knex("department").insert(newDepartment);
