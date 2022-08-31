@@ -5,7 +5,6 @@ class nodeServiceCompany {
         this.knex = knex;
     }
 
-
     // /biz/showworkers (GET)
     async showWorkers(id) {
         let summaryObject = {};
@@ -19,15 +18,10 @@ class nodeServiceCompany {
         // return this.knex("employee_information");
     }
 
-
-
     optVerification(id, otp) {
         //check the redis if id and otp match, then punch-in the record into DB
-        var msg = "";
         return (async () => {
-
             const client = createClient();
-
             client.on("error",
                 (err) => console.log("RedisClient Error", err));
 
@@ -37,7 +31,6 @@ class nodeServiceCompany {
             if (otp !== value) {
                 return "incorrect One-Time-Password";
             } else {
-
                 // return `Correct One-Time-Password with ID:${id}`
                 //in_date
                 let today = new Date();
@@ -71,16 +64,6 @@ class nodeServiceCompany {
                 return "Correct One-Time-Password Punch In successfully!"
             }
         })();
-        // })((res) => { return res });
-    }
-
-    //  /biz/worker/addnew (POST)
-    async addNewWorker(worker) {
-        console.log("worker:");
-        console.log(worker.username);
-        console.log(worker.password);
-        console.log(worker.email);
-        console.log(worker.department)
     }
 
     // /biz/worker/:id/calendar (GET)
@@ -116,8 +99,6 @@ class nodeServiceCompany {
             });
         summaryObject.description = description;
 
-
-
         //acquire date
         let queryDate = await this.knex.select("in_date").from("attendance")
             .where("employee_id", id)
@@ -135,9 +116,7 @@ class nodeServiceCompany {
         // return this.knex("attendance").where('employee_id', user);
     }
 
-
-
-    // /biz/worker/:id/calendar (POST, using old version form -> not support PUT method)
+    // /biz/worker/:id/calendar/update (POST, using old version form -> not support PUT method)
     async updateWorkerCanlendar(id, old_in_date, old_in_time, new_status, new_in_time, new_out_time) {
         // in_time -> change 21:39:26 to 77966s
         let hmsInTime = new_in_time;
@@ -158,10 +137,6 @@ class nodeServiceCompany {
             .update({
                 status: new_status, in_time: new_in_time, out_time: new_out_time, day_working_hour: workinghhmmss
             });
-
-
-
-
 
         //attendance table data
         console.log(workinghhmmss);
@@ -206,12 +181,6 @@ class nodeServiceCompany {
         await this.knex(`payroll_${currentMon}`).where("attendance_id", attendance_id)
             .update("daily_salary", dailySalary);
 
-
-
-
-
-
-
         //insert salary table
         let sumWithInitialPayroll;
         let payrollAllDaySalary = [];
@@ -235,9 +204,7 @@ class nodeServiceCompany {
             .update({ month_working_hour: (sumWithInitialPayroll / hourly_rate), month_salary: sumWithInitialPayroll });
     }
 
-
-
-    // /biz/worker/:id/info (GET)
+    // get("biz/worker/:id/info/api")
     async showWorkerDayRecord(id) {
         let object = {};
         await this.knex
@@ -267,8 +234,6 @@ class nodeServiceCompany {
         return object;
         // return this.knex("employee_information").where('employee_id', user);
     }
-
-
 
     // /biz/worker/:id/info (POST)
     async updateWorkerInfo(id, title, active_status, hourly_rate, phone_number, address) {
