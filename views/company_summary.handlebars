@@ -34,6 +34,20 @@
     {{/each}}
 </div>
 
+<div class="direction d-flex justify-content-center align-items-center ">
+{{!-- 
+        router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
+        router.get("/worker/:id/calendar/api", this.showCalendarData.bind(this)); //attendance
+        router.put("/worker/:id/calendar/update", this.updateCalendar.bind(this)); //attendance
+
+        router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
+        router.get("/worker/:id/info/api", this.showInfo.bind(this)); //employ_information
+        router.post("/worker/:id/info/update", this.updateInfo.bind(this)); //employ_information
+        router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information --}}
+  <a href="/biz/worker/otp"><button class="btn btn-danger btn-l">PUNCH IN</button></a>
+  <a href="/biz/worker/addnew"><button class="btn btn-secondary btn-ml">Add New Worker</button></a>
+</div>
+
 <script type='text/javascript' src="../company_summary.js"></script>
 
 <script>

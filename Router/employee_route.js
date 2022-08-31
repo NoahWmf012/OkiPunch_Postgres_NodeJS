@@ -14,13 +14,11 @@ class nodeRouterEmployee {
         router.get("/calendar", this.renderEmployeeCalendar.bind(this)); // should be "/calendar/:id/:date"
         router.get("/calendar/api", this.inputEmployeeCalendar.bind(this)); // should be "/calendar/:id/:date"
         router.get("/punch", this.renderPunchPage.bind(this));
-        router.get("/punchin", this.punchIn.bind(this)); //submit data: employee_id, date
-        router.get("/punchout", this.punchOut.bind(this)); //submit data: employee_id, date
-        router.get("/punchout", this.punchOut.bind(this));
+        router.get("/punchin", this.punchIn.bind(this));
         router.get("/punchout", this.punchOut.bind(this));
         router.get("/info", this.renderInfo.bind(this));
         router.get("/info/api", this.inputInfo.bind(this));
-        router.post("/info/update", this.editInfo.bind(this)); //form do not support put?
+        router.post("/info/update", this.editInfo.bind(this));
         return router;
     }
 
