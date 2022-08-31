@@ -68,7 +68,8 @@ class nodeServiceCompany {
                     .insert({ employee_id: id, in_date: today, in_time: n, status: status })
                     .into("attendance");
             }
-        })((res) => { msg = res });
+        })();
+        // })((res) => { return res });
     }
 
     //  /biz/worker/addnew (POST)
