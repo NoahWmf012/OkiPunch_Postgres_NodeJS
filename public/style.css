@@ -48,7 +48,7 @@ body {
 
 .selected::after {
   content: "";
-  background: url("img/arrow-down.svg");
+  background: url("../img/arrow-down.svg");
   background-size: contain;
   background-repeat: no-repeat;
 
