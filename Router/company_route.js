@@ -68,7 +68,6 @@ class nodeRouterCompany {
         var data = await this.companyService.optVerification(id, otp);
         console.log("data:", data)
         res.json(data);
-
     }
 
     renderCalendar(req, res) {

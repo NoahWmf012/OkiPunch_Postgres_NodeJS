@@ -76,7 +76,7 @@ class nodeServiceEmployee {
 
 
         //insert attendance table
-        let queryPunchOutId = await this.knex.select("id").from("attendance")
+        await this.knex.select("id").from("attendance")
             .where("attendance.employee_id", id)
             .orderBy("id", "asyn")
             .then((data) => {
@@ -113,7 +113,7 @@ class nodeServiceEmployee {
 
         //insert payroll table
         let hourly_rate;
-        let payrollquery = await this.knex
+        await this.knex
             .select("hourly_rate")
             .from("salary")
             .where("employee_id", id)
@@ -129,7 +129,7 @@ class nodeServiceEmployee {
 
         //update salary table
         //find month_working_hour in salary
-        let querySalary = await this.knex
+        await this.knex
             .select("day_working_hour")
             .from("attendance")
             .where("employee_id", id)
@@ -152,6 +152,7 @@ class nodeServiceEmployee {
                     (previousValue, currentValue) => previousValue + currentValue,
                     initialValue
                 );
+                console.log(workHoursArray);
 
                 workinghhmmss = new Date(totalWorkHours * 1000).toISOString().slice(11, 19);
                 let working_hour = Number((workinghhmmss.split(":")[0]) * 60);
@@ -164,7 +165,7 @@ class nodeServiceEmployee {
                 console.log("month_working_hour: " + calHour);
                 console.log("calHour * hourly_rate: " + calHour * hourly_rate);
 
-                return this.knex("salary").where("id", id)
+                return this.knex("salary").where("employee_id", id)
                     .update({ month_working_hour: calHour, month_salary: calHour * hourly_rate });
             })
     };

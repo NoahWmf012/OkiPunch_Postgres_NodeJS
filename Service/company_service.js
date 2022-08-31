@@ -64,9 +64,11 @@ class nodeServiceCompany {
                     status = "HALF DAY"; // 16:00:00 - ...
                 }
 
-                return await this.knex
+                await this.knex
                     .insert({ employee_id: id, in_date: today, in_time: n, status: status })
                     .into("attendance");
+
+                return "Correct One-Time-Password Punch In successfully!"
             }
         })();
         // })((res) => { return res });
@@ -173,7 +175,7 @@ class nodeServiceCompany {
             .from("attendance")
             .where({ employee_id: id, in_date: old_in_date, in_time: new_in_time })
             .then((rows) => {
-               return attendance_id = (rows[0].id); //attendance_id
+                return attendance_id = (rows[0].id); //attendance_id
             })
 
         // from salary table
