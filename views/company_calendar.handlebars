@@ -43,7 +43,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="editInTime" class="form-label">Enter the in time you want to update</label>
-                    <input type="text" name="old_in_time" class="form-control" id="editInTime" rows="3" placeholder="12:30:00"></input>
+                    <input type="text" name="old_in_time" class="form-control" id="editInTime" rows="3"
+                        placeholder="12:30:00"></input>
                 </div>
 
                 <br>
@@ -51,15 +52,18 @@
                 <h4>Please enter the new attendance:</h4>
                 <div class="mb-3">
                     <label for="editStatus" class="form-label">Status</label>
-                    <input name="new_status" type="text" class="form-control" id="editStatus" rows="3" placeholder="ON_TIME / LATE / ABSENT / EARLY GOING / HALF DAY"></input>
+                    <input name="new_status" type="text" class="form-control" id="editStatus" rows="3"
+                        placeholder="ON_TIME / LATE / ABSENT / EARLY GOING / HALF DAY"></input>
                 </div>
                 <div class="mb-3">
                     <label for="editInTime" class="form-label">In time</label>
-                    <input name="new_in_time" class="form-control" id="editInTime" rows="3" placeholder="08:50:01"></input>
+                    <input name="new_in_time" class="form-control" id="editInTime" rows="3"
+                        placeholder="08:50:01"></input>
                 </div>
                 <div class="mb-3">
                     <label for="editOutTime" class="form-label">Out time</label>
-                    <input name="new_out_time" class="form-control" id="editOutTime" rows="3" placeholder="18:01:20"></input>
+                    <input name="new_out_time" class="form-control" id="editOutTime" rows="3"
+                        placeholder="18:01:20"></input>
                 </div>
                 <button type="submit" class="btn bg-light" id="submitBtn"> <i class="fa-regular fa-circle-check"></i>
                     Submit
@@ -115,18 +119,24 @@
             console.log(result);
 
             let status_id;
-            let cal_array = []
+            let cal_array = [];
+            let eventTypeArray2 = [];
             for (let c = 0; c < result.date.length; c++) {
                 if (result.status[c] == "ON_TIME") {
                     status_id = "1";
+                    eventTypeArray2.push("birthday");
                 } else if (result.status[c] == "LATE") {
                     status_id = "2";
+                    eventTypeArray2.push("event");
                 } else if (result.status[c] == "ABSENT") {
                     status_id = "3";
+                    eventTypeArray2.push("event");
                 } else if (result.status[c] == "EARLY GOING") {
                     status_id = "4";
+                    eventTypeArray2.push("holiday");
                 } else if (result.status[c] == "HALF DAY") {
                     status_id = "5";
+                    eventTypeArray2.push("holiday");
                 }
 
                 cal_array.push({
@@ -134,7 +144,7 @@
                     name: result.status[c],//"Punctual", "Late", "Absence"
                     description: result.description[c],//additional information e.g.late/absence reason
                     date: result.date[c], //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
-                    type: "event", //"punctual", "late", "absence" // color according to the type
+                    type: eventTypeArray2[c], //"punctual", "late", "absence" // color according to the type
                 })
 
                 c = c++

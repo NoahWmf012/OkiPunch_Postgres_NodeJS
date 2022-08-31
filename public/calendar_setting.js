@@ -81,17 +81,23 @@ $(document).ready(function () {
 
             let status_id;
             let cal_array = []
+            let eventTypeArray = [];
             for (let c = 0; c < result.date.length; c++) {
                 if (result.status[c] == "ON_TIME") {
                     status_id = "1";
+                    eventTypeArray.push("birthday");
                 } else if (result.status[c] == "LATE") {
                     status_id = "2";
+                    eventTypeArray.push("event");
                 } else if (result.status[c] == "ABSENT") {
                     status_id = "3";
+                    eventTypeArray.push("event");
                 } else if (result.status[c] == "EARLY GOING") {
                     status_id = "4";
+                    eventTypeArray.push("holiday");
                 } else if (result.status[c] == "HALF DAY") {
                     status_id = "5";
+                    eventTypeArray.push("holiday");
                 }
                 
                 cal_array.push({
@@ -99,7 +105,7 @@ $(document).ready(function () {
                     name: result.status[c],//"Punctual", "Late", "Absence"
                     description: result.description[c],//additional information e.g.late/absence reason
                     date: result.date[c], //default format: February/15/1999  ,or  [ today.getMonth() + 1 + "/" + week_date.start + "/" + today.getFullYear(), today.getMonth() + 1 + "/" + week_date.end + "/" + today.getFullYear() ]
-                    type: "event", //"punctual", "late", "absence" // color according to the type
+                    type: eventTypeArray[c], //"punctual", "late", "absence" // color according to the type
                 })
 
                 c = c++
