@@ -30,42 +30,40 @@
         <br>
 
         {{!-- hidden update form --}}
+        <iframe name="hiddenFrame" class="hide"></iframe>
+        
         <form id="formPostCal" method="post" target="hiddenFrame">
-            
             <div class="card" id="card" style="visibility: hidden; border:black">
+                {{!-- enter old info --}}
+                <h4>Please enter the info that you want to update:</h4>
                 <div class="mb-3">
                     <label for="inputDate" class="form-label">Chooseing the date you want to update</label>
-                    <input name="in_date" type="date" class="form-control" id="inputDate"
+                    <input name="old_in_date" type="date" class="form-control" id="inputDate"
                         placeholder="name@example.com">
                 </div>
                 <div class="mb-3">
-                    <label for="editInTime" class="form-label">Chooseing the in time you want to update</label>
-                    <textarea name="in_time" class="form-control" id="editInTime" rows="3"></textarea>
+                    <label for="editInTime" class="form-label">Enter the in time you want to update</label>
+                    <input type="text" name="old_in_time" class="form-control" id="editInTime" rows="3"></input>
                 </div>
                 <div class="mb-3">
-                    <label for="editOutTime" class="form-label">Chooseing the out time you want to update</label>
-                    <textarea name="out_time" class="form-control" id="editOutTime" rows="3"></textarea>
+                    <label for="editOutTime" class="form-label">Enter the out time you want to update</label>
+                    <input type="text" name="old_out_time" class="form-control" id="editOutTime" rows="3"></input>
                 </div>
 
-
-
-
-                <div class="mb-3">
-                    <label for="inputDate" class="form-label">Date</label>
-                    <input name="in_date" type="date" class="form-control" id="inputDate"
-                        placeholder="name@example.com">
-                </div>
+                <br>
+                {{!-- enter new info --}}
+                <h4>Please enter the new attendance:</h4>
                 <div class="mb-3">
                     <label for="editStatus" class="form-label">Status</label>
-                    <input name="status" type="text" class="form-control" id="editStatus" rows="3"></input>
+                    <input name="new_status" type="text" class="form-control" id="editStatus" rows="3"></input>
                 </div>
                 <div class="mb-3">
                     <label for="editInTime" class="form-label">In time</label>
-                    <textarea name="in_time" class="form-control" id="editInTime" rows="3"></textarea>
+                    <input name="new_in_time" class="form-control" id="editInTime" rows="3"></input>
                 </div>
                 <div class="mb-3">
                     <label for="editOutTime" class="form-label">Out time</label>
-                    <textarea name="out_time" class="form-control" id="editOutTime" rows="3"></textarea>
+                    <input name="new_out_time" class="form-control" id="editOutTime" rows="3"></input>
                 </div>
                 <button type="submit" class="btn bg-light" id="submitBtn"> <i class="fa-regular fa-circle-check"></i>
                     Submit
@@ -78,6 +76,15 @@
     <br>
 </section>
 
+<style>
+    .hide {
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 1px;
+        height: 1px;
+    }
+</style>
 
 
 {{!-- showing the edit form--}}
@@ -91,6 +98,8 @@
         var card = document.getElementById("card");
         card.style.visibility = "hidden";
     }
+
+
 </script>
 
 
@@ -150,8 +159,15 @@
 
 {{!-- compamny_calendar - edit data --}}
 <script>
+    let idUpdate;
+    idUpdate = window.location.href.split('/worker')[1].split('/')[1];
 
+    $(document).ready(function () {
+        $("#formPostCal").attr("action", `/biz/worker/${id}/calendar/update`);
+        $("#submitBtn").attr("href", `http://localhost:8000/biz/worker/${id}/calendar`);
+    })
 </script>
+
 
 
 
