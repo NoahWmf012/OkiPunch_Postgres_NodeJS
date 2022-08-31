@@ -67,7 +67,8 @@ app.use("/employee", new nodeRouterEmployee(new nodeServiceEmployee(knex), expre
 app.listen(port, () => {
     console.log(
         `
-    company site: http://localhost:${port}/biz
-    employee site: http://localhost:${port}/employee
+    company site: http://localhost:${port}/company_login
+    employee site: http://localhost:${port}/employee_login
+    logo site: http://localhost:${port}/logo
     root site: http://localhost:${port} `)
 });
