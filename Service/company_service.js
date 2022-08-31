@@ -64,7 +64,7 @@ class nodeServiceCompany {
                     status = "HALF DAY"; // 16:00:00 - ...
                 }
 
-                await this.knex
+                return await this.knex
                     .insert({ employee_id: id, in_date: today, in_time: n, status: status })
                     .into("attendance");
             }
