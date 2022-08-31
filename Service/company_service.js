@@ -136,7 +136,7 @@ class nodeServiceCompany {
 
 
     // /biz/worker/:id/calendar (POST, using old version form -> not support PUT method)
-    async updateWorkerCanlendar(id, old_in_date, old_in_time, old_out_time, new_status, new_in_time, new_out_time) {
+    async updateWorkerCanlendar(id, old_in_date, old_in_time, new_status, new_in_time, new_out_time) {
         // in_time -> change 21:39:26 to 77966s
         let hmsInTime = new_in_time;
         var aInTime = hmsInTime.split(':');
