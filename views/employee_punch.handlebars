@@ -1,4 +1,36 @@
-<div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
+{{!-- navbar --}}
+<nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center align-items-center fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="../images/navLogo.png" alt=""
+        style="max-height: 150px; max-width: 150px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {{!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/path">Home</a>
+        </li> --}}
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/calendar">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/info">Personal Information</a>
+        </li>
+        {{!-- <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li> --}}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+{{!-- punch in out card --}}
+<div
+  class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch translate-middle position-absolute top-50 start-50">
 
   <div class="card text-center" style="width: 25rem;">
     <div class="card-body">

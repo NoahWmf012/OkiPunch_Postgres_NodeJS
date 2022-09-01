@@ -1,4 +1,38 @@
-{{!-- nav bar --}}
+{{!-- navbar --}}
+<nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center align-items-center fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="../images/navLogo.png" alt=""
+        style="max-height: 150px; max-width: 150px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {{!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/path">Home</a>
+        </li> --}}
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/calendar">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/employee/punch">Punch</a>
+        </li>
+        {{!-- <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li> --}}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br>
+<br>
+<br>
+
+
+
+{{!-- nav bar
 <section>
     <nav class="navbar bg-light d-flex justify-content-center align-items-center fixed-top">
         <div class="container-fluid">
@@ -6,7 +40,7 @@
             <p class="position-absolute top-50 start-50 translate-middle">Employee Information</p>
         </div>
     </nav>
-    <br>
+    <br> --}}
 
     <!--Each employee information-->
     <div class='row'>
@@ -15,7 +49,6 @@
                 <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
                 <br>
                 <h1 id="aliasEmployee"> </h1>
-                <br>
                 <h2 id="titleEmployee" class="text-secondary"> </h2>
                 <br>
                 <button class="btn" id="editInfoBtn">
@@ -25,19 +58,19 @@
             </div>
             <hr> <br>
 
-            <p id="staffNoEmployee"> Staff no.: </p>
+            <p id="staffNoEmployee"><i class="fa-solid fa-hashtag"></i> Staff no.: </p>
 
-            <p id="nameEmployee"> Name: </p>
+            <p id="nameEmployee"><i class="fa-solid fa-a"></i> Name: </p>
 
-            <p id="hourlyrateEmployee"> Hourly rate: $</p>
+            <p id="hourlyrateEmployee"><i class="fa-solid fa-sack-dollar"></i> Hourly rate: $</p>
 
-            <p id="phoneNoEmployee">Phone no.: </p>
+            <p id="phoneNoEmployee"><i class="fa-solid fa-phone"></i> Phone no.: </p>
 
-            <p id="addressEmployee">Address: </p>
+            <p id="addressEmployee"><i class="fa-solid fa-house-chimney"></i> Address: </p>
 
-            <p id="dateOfBirthEmployee">Date of birth: </p>
+            <p id="dateOfBirthEmployee"><i class="fa-regular fa-calendar-days"></i> Date of birth: </p>
 
-            <p id="genderEmployee">Gender: </p>
+            <p id="genderEmployee"><i class="fa-solid fa-person-half-dress"></i> Gender: </p>
 
         </div>
 
