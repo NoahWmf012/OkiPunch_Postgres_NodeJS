@@ -1,34 +1,36 @@
 {{!-- navbar --}}
-<nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center align-items-center fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="../images/navLogoEm.png" alt=""
-        style="max-height: 150px; max-width: 150px;"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        {{!-- <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/path">Home</a>
-        </li> --}}
-        <li class="nav-item">
-          <a class="nav-link" href="/employee/punch">Punch</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/employee/info">Personal Information</a>
-        </li>
-        {{!-- <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li> --}}
-      </ul>
+<nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center align-items-center">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="../images/navLogoEm.png" alt=""
+                style="max-height: 150px; max-width: 150px;"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/employee/calendar">Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/info">Personal Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/punch">Punch</a>
+                </li>
+                {{!-- <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li> --}}
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
-<br><br><br><br>
+
+<br>
 
 
 {{!-- link to calendar css to change theme --}}
+
 <head>
     <link rel="stylesheet" type="text/css" href="../library/calendar/evo-calendar.midnight-blue.min.css">
 </head>
@@ -44,7 +46,6 @@
         <br>
     </div>
 </section>
-
 
 
 {{!-- link to company calendar setting js --}}
