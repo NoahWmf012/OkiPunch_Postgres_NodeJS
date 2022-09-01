@@ -1,14 +1,23 @@
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/logo">
+      <img src="/images/navLogoCom.png" alt="navLogoCom" class="d-inline-block align-text-top"  style="max-height: 130px; max-width: 130px;">
+    </a>
+  </div>
+</nav>
+
 <div class="container container-fluid col">
     <form action="/company_login" method="POST">
         <br>
-        <h1 class="text-center">Company Login</h1>
+        <h1 class="text-center" style="color:#3B4856">Company Login</h1>
         <br>
 
         <!-- Enter Email -->
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="email" class="form-control" name="email" placeholder="&#xf003   Email" aria-label="Email">
+                    <input type="email" class="form-control" name="email" placeholder="&#xf003   Email"
+                        aria-label="Email">
                 </p>
             </div>
         </div>
@@ -17,18 +26,22 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="password" class="form-control" name="password" placeholder="&#xf023   ********" aria-label="password">
+                    <input type="password" class="form-control" name="password" placeholder="&#xf023   ********"
+                        aria-label="password">
                 </p>
             </div>
         </div>
+        <br>
 
         <!--Submit Btn-->
-        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-circle-right fa-2xl"></i></button>
+        <button type="submit" class="btn" style="color:#205072; background-color:#b6bdc4"><i
+                class="fa-solid fa-circle-right fa-xl"></i> &nbsp;&nbsp; Submit</button>
         <br>
         <br>
         <!--signup Btn-->
         <a href="/company_signup">
-            <button type="button" class="btn btn-primary btn-sm">Signup</button>
+            <button type="button" class="btn btn-ml" style="color:#b6bdc4; background-color:#205072"><i
+                    class="fa-solid fa-user-plus fa-xl"></i> &nbsp;&nbsp; Signup</button>
         </a>
     </form>
 </div>

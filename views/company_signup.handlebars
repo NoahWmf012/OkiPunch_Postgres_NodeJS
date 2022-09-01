@@ -1,14 +1,15 @@
 <div class="container container-fluid col">
     <form action="/company_signup" method="POST">
         <br>
-        <h1 class="text-center">Register</h1>
+        <h1 class="text-center" style="color:#3B4856;">Register</h1>
         <br>
 
         <!-- Enter Username -->
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="email" name="username" class="form-control" placeholder="&#xf003   Email" aria-label="Email">
+                    <input type="email" name="username" class="form-control" placeholder="&#xf003   Email"
+                        aria-label="Email">
                 </p>
             </div>
         </div>
@@ -17,19 +18,23 @@
         <div class="row">
             <div class="col">
                 <p class="wrapper">
-                    <input type="password" name="password" class="form-control" placeholder="&#xf023   ********" aria-label="password">
+                    <input type="password" name="password" class="form-control" placeholder="&#xf023   ********"
+                        aria-label="password">
                 </p>
             </div>
         </div>
+        <br>
 
         <!--Submit Btn-->
-        <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-right fa-2xl"></i></button>
-        <br>
-        <br>
+        <button type="submit" class="btn btn-ml" style="color:#205072; background-color:#b6bdc4"><i class="fa-solid fa-circle-right fa-xl"></i> &nbsp;&nbsp;
+            Submit</button>
+            <br>
+            <br>
 
         <!--Login Btn-->
         <a href="/company_login">
-            <button type="button" class="btn btn-primary btn-sm">Login</button>
+            <button type="button" class="btn btn-ml" style="color:#b6bdc4; background-color:#205072"><i class="fa-solid fa-unlock-keyhole"></i> &nbsp;&nbsp;
+            Login</button>
         </a>
         <br>
     </form>
