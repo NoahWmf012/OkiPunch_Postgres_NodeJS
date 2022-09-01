@@ -10,13 +10,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-chevron-right"></i>   Punch </a>
+          <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-chevron-right"></i> Punch </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/employee/calendar"> <i class="fa-solid fa-chevron-right"></i>  Calendar </a>
+          <a class="nav-link" href="/employee/calendar"> <i class="fa-solid fa-chevron-right"></i> Calendar </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/employee/info"> <i class="fa-solid fa-chevron-right"></i>  Personal Information</a>
+          <a class="nav-link" href="/employee/info"> <i class="fa-solid fa-chevron-right"></i> Personal Information</a>
         </li>
         {{!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
@@ -33,7 +33,7 @@
 
 
 {{!-- punch in out card --}}
-<div>
+<div class="d-flex justify-content-center align-items-center">
 
   <div class="card text-center" style="width: 25rem;">
     <div class="card-body">
@@ -62,8 +62,13 @@
 
       <hr>
 
-      <button id="employee_punch_inBtn" type="submit" class="btn btn-primary btn-ml">Punch In</button>
-      <button id="employee_punch_outBtn" type="submit" class="btn btn-secondary btn-ml">Punch Out</button>
+
+      <button id="employee_punch_inBtn" type="submit" class="btn btn-ml"
+        style="background-color:#d1cfdd; color:#322975; "><i class="fa-solid fa-arrow-right-to-bracket"></i> Punch
+        In</button>
+      <button id="employee_punch_outBtn" type="submit" class="btn btn-ml"
+        style="background-color:#322975; color:#d1cfdd;">Punch Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
     </div>
   </div>
 </div>
@@ -75,11 +80,12 @@
   <div id="punchIn_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive"
     aria-atomic="true">
     <div class="toast-header">
-      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+      <i class="fa-solid fa-key"></i>
+      {{!-- <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
         <rect width="100%" height="100%" fill="#007aff"></rect>
-      </svg>
-
+      </svg> --}}
+      &nbsp;&nbsp;
       <strong class="me-auto">One Time Password</strong>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -99,11 +105,12 @@
   <div id="punchOut_alert" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive"
     aria-atomic="true">
     <div class="toast-header">
-      <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+      <i class="fa-solid fa-mug-saucer"></i>
+      {{!-- <svg class="bd-placeholder-img rounded me-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
         <rect width="100%" height="100%" fill="#007aff"></rect>
-      </svg>
-
+      </svg> --}}
+      &nbsp;&nbsp;
       <strong class="me-auto">Punch out successfully</strong>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -178,3 +185,10 @@ if (toastTrigger) {
 -->
 
 <script src="../employee_punch.js"> </script>
+
+<style>
+  body {
+    font-family: "Roboto", sans-serif;
+    background: #ebebee6e;
+  }
+</style>
