@@ -9,6 +9,14 @@
 </head>
 
 
+{{!-- nav bar --}}
+<nav class="navbar bg-light d-flex justify-content-center align-items-center">
+    <div class="container-fluid">
+        <a href="/"><i class="fa-solid fa-chevron-left fa-xl text-warning"></i></a>
+        <p class="position-absolute top-50 start-50 translate-middle">Employee Calendar</p>
+    </div>
+</nav>
+<br>
 
 {{!-- body --}}
 <section id="demos">
@@ -18,7 +26,7 @@
         </div>
         <br>
         <div class="d-flex justify-content-center align-items-center">
-            <button type="button" class="btn" id="editBtn" style="background-color: #edae0f; color: white"><i
+            <button type="button" class="btn" id="editBtn" style="background-color: #205072; color: white"><i
                     class="fa-regular fa-pen-to-square"></i> Edit</button>
         </div>
 
@@ -33,9 +41,9 @@
         <iframe name="hiddenFrame" class="hide"></iframe>
 
         <form id="formPostCal" method="post" target="hiddenFrame">
-            <div class="card" id="card" style="visibility: hidden; border:black">
+            <div class="card" id="card" style="visibility: hidden; border:black; color:#9EADBD">
                 {{!-- enter old info --}}
-                <h4>Please enter the info that you want to update:</h4>
+                <h4 style="color:#205072">Please enter the information that you want to update:</h4>
                 <div class="mb-3">
                     <label for="inputDate" class="form-label">Chooseing the date you want to update</label>
                     <input name="old_in_date" type="date" class="form-control" id="inputDate"
@@ -49,7 +57,7 @@
 
                 <br>
                 {{!-- enter new info --}}
-                <h4>Please enter the new attendance:</h4>
+                <h4 style="color:#205072"">Please enter the new attendance:</h4>
                 <div class="mb-3">
                     <label for="editStatus" class="form-label">Status</label>
                     <input name="new_status" type="text" class="form-control" id="editStatus" rows="3"
@@ -77,6 +85,9 @@
 </section>
 
 <style>
+    body{
+        background-color: rgb(241, 242, 242);
+    }
     .hide {
         position: absolute;
         top: -1px;
