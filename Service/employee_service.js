@@ -5,7 +5,6 @@ class nodeServiceEmployee {
         this.knex = knex;
     }
 
-
     /* GET /salary/:id */ //Working Hours, Hourly Rate, Total Salary
     async showEmployeeSummary(id) {
         // acquire hourly rate
@@ -26,12 +25,8 @@ class nodeServiceEmployee {
                     console.log("Employee Service: queryHourlyRate Error");
                 }
             });
-
         return (summaryObject);
-
     };
-
-
 
     /* GET /punchin/:id/:date */ //insert data in attendance // checked
     async employeePunchIn(id) {
@@ -50,8 +45,6 @@ class nodeServiceEmployee {
 
         return value;
     };
-
-
 
     /* POST /punchout/:id/:date */ //checked
     async employeePunchOut(id) {
@@ -73,7 +66,6 @@ class nodeServiceEmployee {
 
         let d = new Date();
         let n = d.toLocaleTimeString();
-
 
         //insert attendance table
         await this.knex.select("id").from("attendance")
@@ -107,9 +99,7 @@ class nodeServiceEmployee {
                 } else {
                     console.log("Employee Service Error - queryPunchInId");
                 }
-
             })
-
 
         //insert payroll table
         let hourly_rate;
@@ -125,8 +115,6 @@ class nodeServiceEmployee {
                     .into(`payroll_${toMonthName(mm).toLowerCase()}`);
             });
 
-
-
         //update salary table
         //find month_working_hour in salary
         await this.knex
@@ -135,7 +123,6 @@ class nodeServiceEmployee {
             .where("employee_id", id)
             .orderBy("id", "asc")
             .then((rows) => {
-
                 let workHoursArray = [];
                 for (let i = 0; i < rows.length; i++) {
                     let hmsInTime = rows[i].day_working_hour;
@@ -160,7 +147,6 @@ class nodeServiceEmployee {
                 let working_min = Number((workinghhmmss.split(":")[1]));
                 console.log("working_min: " + working_min);
                 let calHour = (((working_hour) + working_min) / 60).toFixed(2);
-                // console.log(`Employee Service - total working hours: ${calHour}`);
 
                 console.log("month_working_hour: " + calHour);
                 console.log("calHour * hourly_rate: " + calHour * hourly_rate);
@@ -189,8 +175,6 @@ class nodeServiceEmployee {
                 summaryObject.status = status;
             });
 
-
-
         //acquire in_time & out_time description
         let description = [];
         let query_in_time = await this.knex
@@ -204,7 +188,6 @@ class nodeServiceEmployee {
                 }
             });
         summaryObject.description = description;
-
 
         //acquire date
         let queryDate = await this.knex.select("in_date").from("attendance")
@@ -240,8 +223,6 @@ class nodeServiceEmployee {
         return summaryObject; // include status, description, time
     };
 
-
-
     /* GET /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
     async showEmployeeInfo(id) {
         let object = {};
@@ -269,8 +250,6 @@ class nodeServiceEmployee {
             })
         return object;
     };
-
-
 
     /* PUT /info/:id */ //Name, position, id, hourly rate, phone no, address, date of brith, gender
     async updateEmployeeInfo(id, phone_number, address) {

@@ -88,7 +88,6 @@ class nodeRouterCompany {
         let new_status = req.body.new_status;
         let new_in_time = req.body.new_in_time;
         let new_out_time = req.body.new_out_time;
-        console.log(req.body);
         await this.companyService.updateWorkerCanlendar(id, old_in_date, old_in_time, new_status, new_in_time, new_out_time);
         res.end();
     }
