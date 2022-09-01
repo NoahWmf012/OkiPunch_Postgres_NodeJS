@@ -24,37 +24,107 @@
 </nav>
 
 <div class="container container-fluid col">
-    <form>
-        <br>
-        <h1 class="text-center">Type in 4-digit password</h1>
-        <br>
-        <!-- Enter OTP -->
-        <div class="row">
-            <div class="col">
-                <p class="wrapper">
-                    {{!-- employee_id --}}
-                    <input type="text" class="form-control" name="employee-id" placeholder="&#xf127   Employee ID" aria-label="id">
-                    <br>
-                    {{!-- OTP  --}}
-                    <input type="text" id="otp" class="form-control" name="otp" placeholder="&#xf127   4-digit password" aria-label="OTP">
-                    <br>
-                    <!--Submit Btn-->
-                    <button type="submit" id="submit-otp" class="btn btn-primary btn-sm"><i class="fa-solid fa-circle-right fa-2xl"></i></button>
-                    <br>
-                </p>
-            </div>
-        </div>
-    </form>
+  <form>
+    <br>
+    <h1 class="text-center">Type in 4-digit password</h1>
+    <br>
+    <!-- Enter OTP -->
+    <div class="row">
+      <div class="col">
+        <p class="wrapper">
+          {{!-- employee_id --}}
+          <input type="text" class="form-control" name="employee-id" placeholder="&#xf127   Employee ID"
+            aria-label="id">
+          <br>
+          {{!-- OTP --}}
+          <input type="text" id="otp" class="form-control" name="otp" placeholder="&#xf127   4-digit password"
+            aria-label="OTP">
+          <br>
+          <!--Submit Btn-->
+          <button type="submit" id="submit-otp" class="btn btn-primary btn-sm"><i
+              class="fa-solid fa-circle-right fa-2xl"></i></button>
+          <br>
+        </p>
+      </div>
+    </div>
+  </form>
+</div>
+
+<br>
+
+
+{{!-- alert for successful punchin --}}
+<div class="container container-fluid col d-flex justify-content-center align-items-center align-items-stretch">
+  <div id="punchIn_alertCom" class="toast fade show" style="visibility: hidden;" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header">
+      <i id="punchInStatusComIcon"></i>
+      &nbsp;&nbsp;
+      <strong id="punchInStatusCom" class="me-auto"></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p id="punchInEmIdCom"> </p>
+      <p id="punchInMessage"> </p>
+
+
+    </div>
+  </div>
 </div>
 
 <script>
-    $(document).ready(function(){
-        $("form").submit(function(e){
-            e.preventDefault();
-            axios.post("/biz/worker/otp",{
-                id:$('input[name=employee-id]').val(),
-                otp:$('input[name=otp]').val(),
-            });
-        })
+  $(document).ready(function () {
+    $("form").submit(function (e) {
+      e.preventDefault();
+      axios.post("/biz/worker/otp", {
+        id: $('input[name=employee-id]').val(),
+        otp: $('input[name=otp]').val(),
+      })
+        .then(function (result) {
+          console.log(result.data);
+          $("#punchIn_alertCom").css("visibility", "visible")
+
+          if (result.data != "incorrect One-Time-Password") {
+            $("#punchInStatusCom").html("")
+
+            $("#punchInMessage").html("");
+
+            $("#punchInStatusComIcon").attr("class", "fa-solid fa-circle-check")
+
+            $("#punchInStatusCom").append("Punch In Successfully")
+
+            $("#punchInEmIdCom").append("Employee ID: " + result.data);
+
+            const time = new Date();
+            $("#punchInMessage").append("Punch In Time: " + time.toLocaleString('en-us', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: true
+            }))
+
+            $("#submit-otp").attr('disabled', true);
+
+          } else {
+            $("#punchInStatusCom").html("")
+
+            $("#punchInMessage").html("");
+
+            $("#punchInStatusComIcon").attr("class", "fa-solid fa-circle-xmark")
+
+            $("#punchInStatusCom").append("Punch In Fail")
+
+            $("#punchInMessage").append("Please try again");
+
+
+          }
+
+
+        });
     })
+  })
+</script>
+
+<script>
+
 </script>

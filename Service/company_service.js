@@ -61,7 +61,7 @@ class nodeServiceCompany {
                     .insert({ employee_id: id, in_date: today, in_time: n, status: status })
                     .into("attendance");
 
-                return "Correct One-Time-Password Punch In successfully!"
+                return id;
             }
         })();
     }
