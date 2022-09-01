@@ -41,7 +41,7 @@
         <iframe name="hiddenFrame" class="hide"></iframe>
 
         <form id="formPostCal" method="post" target="hiddenFrame">
-            <div class="card" id="card" style="visibility: hidden; border:black; color:#9EADBD">
+            <div id="card" style="visibility: hidden; border:black; color:#9EADBD">
                 {{!-- enter old info --}}
                 <h4 style="color:#205072">Please enter the information that you want to update:</h4>
                 <div class="mb-3">
@@ -57,7 +57,7 @@
 
                 <br>
                 {{!-- enter new info --}}
-                <h4 style="color:#205072"">Please enter the new attendance:</h4>
+                <h4 style="color:#205072">Please enter the new attendance:</h4>
                 <div class="mb-3">
                     <label for="editStatus" class="form-label">Status</label>
                     <input name="new_status" type="text" class="form-control" id="editStatus" rows="3"
@@ -73,9 +73,12 @@
                     <input name="new_out_time" class="form-control" id="editOutTime" rows="3"
                         placeholder="18:01:20"></input>
                 </div>
-                <button type="submit" class="btn bg-light" id="submitBtn"> <i class="fa-regular fa-circle-check"></i>
-                    Submit
-                </button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button type="submit" class="btn bg-light" id="submitBtn"> <i
+                            class="fa-regular fa-circle-check"></i>
+                        Submit
+                    </button>
+                </div>
                 <br>
             </div>
         </form>
@@ -85,9 +88,10 @@
 </section>
 
 <style>
-    body{
+    body {
         background-color: rgb(241, 242, 242);
     }
+
     .hide {
         position: absolute;
         top: -1px;

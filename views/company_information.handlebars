@@ -1,8 +1,16 @@
+{{!-- CSS google font --}}
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+</head>
+
 {{!-- nav bar --}}
 <section>
     <nav class="navbar bg-light d-flex justify-content-center align-items-center">
         <div class="container-fluid">
-            <a href="/"><i class="fa-solid fa-chevron-left fa-xl"></i></a>
+            <a href="/"><i class="fa-solid fa-chevron-left fa-xl" style="color:#3B4856"></i></a>
             <p class="position-absolute top-50 start-50 translate-middle">Employee Information</p>
         </div>
     </nav>
@@ -12,34 +20,39 @@
     <div class='row' id="eachEm">
         <div>
             <div class="text-center">
-                <img src="{{image}}" style="max-width:250px; border-radius: 50%;">
+                <img class="col-12" src="../../../../images/company_employeeSum.jpg"
+                    style="max-width:150px; border-radius: 50%;">
                 <br>
-                <h1 id="aliasCompany"> name: </h1>
                 <br>
-                <h2 id="titleCompany" class="text-secondary">title: </h2>
-                <br>
-                <button class="btn" id="editInfoBtnCom">
-                    <i class="fa-solid fa-user-pen fa-xl"></i>
+                <h1 id="aliasCompany"> </h1>
+                <h2 id="titleCompany" class="text-secondary"> </h2>
+                <button class="btn" id="editInfoBtnCom" style="background-color: #d2dce4;">
+                    <i class="fa-solid fa-user-pen fa-xl" style="color:#3B4856"></i>
                 </button>
                 <br>
             </div>
             <hr> <br>
 
-            <p id="staffNoCompany"> Staff no.: </p>
+            <p id="staffNoCompany"><i class="fa-solid fa-hashtag" style="color:#9EADBD"></i> Staff no.: &nbsp;&nbsp;</p>
 
-            <p id="nameCompany"> Name: </p>
+            <p id="nameCompany"><i class="fa-solid fa-a" style="color:#9EADBD"></i> Name: &nbsp;&nbsp;</p>
 
-            <p id="hourlyrateCompany"> Hourly rate: </p>
+            <p id="hourlyrateCompany"><i class="fa-solid fa-sack-dollar" style="color:#9EADBD"></i> Hourly rate:
+                &nbsp;&nbsp;</p>
 
-            <p id="active_statusCompany"> Active status: </p>
+            <p id="active_statusCompany"><i class="fa-solid fa-clipboard-user" style="color:#9EADBD"></i> Active status:
+                &nbsp;&nbsp;</p>
 
-            <p id="phoneNoCompany">Phone no.: </p>
+            <p id="phoneNoCompany"><i class="fa-solid fa-phone" style="color:#9EADBD"></i> Phone no.: &nbsp;&nbsp;</p>
 
-            <p id="addressCompany">Address: </p>
+            <p id="addressCompany"><i class="fa-solid fa-house-chimney" style="color:#9EADBD"></i> Address: &nbsp;&nbsp;
+            </p>
 
-            <p id="dateOfBirthCompanye">Date of birth: </p>
+            <p id="dateOfBirthCompanye"><i class="fa-regular fa-calendar-days" style="color:#9EADBD"></i> Date of birth:
+                &nbsp;&nbsp;</p>
 
-            <p id="genderCompany">Gender: </p>
+            <p id="genderCompany"><i class="fa-solid fa-person-half-dress" style="color:#9EADBD"></i> Gender:
+                &nbsp;&nbsp;</p>
 
         </div>
 
@@ -49,6 +62,13 @@
 
     {{!-- edit employee information form --}}
     <style>
+        body {
+            background-color: #f5f5f5;
+            color: #3B4856;
+            font-family: 'Source Serif Pro', serif;
+
+        }
+
         .hide {
             position: absolute;
             top: -1px;
@@ -62,8 +82,7 @@
 
     <form id="formPost" method="post" target="hiddenFrame">
 
-        <div class="card" id="editForm" style="visibility: hidden; border:black;">
-            <hr>
+        <div id="editForm" style="visibility: hidden; border:black;">
             <div class="mb-3">
                 <label for="editTitle" class="form-label">Title</label>
                 <input type="text" name="title" class="form-control" id="editTitle">
@@ -84,9 +103,12 @@
                 <label for="editAddress" class="form-label">Address</label>
                 <textarea class="form-control" name="address" id="editAddress" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn bg-light" id="submitInfoBtnCom"> <i class="fa-regular fa-circle-check"></i>
-                Submit
-            </button>
+            <div class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn" id="submitInfoBtnCom"
+                    style="background-color: #205072; color:#9EADBD "> <i class="fa-regular fa-circle-check"></i>
+                    Submit
+                </button>
+            </div>
             <br> <br>
         </div>
     </form>
