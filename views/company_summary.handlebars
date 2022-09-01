@@ -1,4 +1,29 @@
-<!--Search bar-->
+{{!-- navbar --}}
+<nav class="navbar navbar-expand-lg bg-light d-flex justify-content-center align-items-center fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><img src="../images/navLogo.png" alt=""
+        style="max-height: 150px; max-width: 150px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/biz/showworkers">Show All Workers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/biz/worker/otp">Punch In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/biz/worker/addnew">Add New Worker</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{{!-- <!--Search bar-->
 <nav class="navbar bg-light d-flex justify-content-center align-items-center fixed-top">
     <div class="container-fluid">
         <form class="d-flex" role="search">
@@ -7,7 +32,7 @@
         </form>
     </div>
 </nav>
-<br>
+<br> --}}
 
 <!--Each employee information-->
 <div id="companySummary">
@@ -15,7 +40,7 @@
     <br>
 
     {{#each employee}}
-    <div class='row d-flex justify-content-center align-items-center'> <br><br><br><br><br><br><br><br><br><br>
+    <div class='row d-flex justify-content-center align-items-center employee-item'> <br><br><br><br><br><br><br><br><br><br>
         <img class="col-12" src="../images/company_employeeSum.jpg" style="max-width:150px; border-radius: 50%;">
         <h1 class="text-center" id={{@index}} data-id="{{@index}}"> Name: {{alias}}  #<span id="valueId{{employee_id}}">{{employee_id}}</span></h1>
         <div class='d-flex justify-content-center align-items-center'>
@@ -32,20 +57,6 @@
         </div> <br> <br>
     </div>
     {{/each}}
-</div>
-
-<div class="direction d-flex justify-content-center align-items-center ">
-{{!-- 
-        router.get("/worker/:id/calendar", this.renderCalendar.bind(this)); //attendance
-        router.get("/worker/:id/calendar/api", this.showCalendarData.bind(this)); //attendance
-        router.put("/worker/:id/calendar/update", this.updateCalendar.bind(this)); //attendance
-
-        router.get("/worker/:id/info", this.renderInfo.bind(this)); //employ_information
-        router.get("/worker/:id/info/api", this.showInfo.bind(this)); //employ_information
-        router.post("/worker/:id/info/update", this.updateInfo.bind(this)); //employ_information
-        router.delete("/worker/:id", this.deleteOne.bind(this)); //employ , employ_information --}}
-  <a href="/biz/worker/otp"><button class="btn btn-danger btn-l">PUNCH IN</button></a>
-  <a href="/biz/worker/addnew"><button class="btn btn-secondary btn-ml">Add New Worker</button></a>
 </div>
 
 <script type='text/javascript' src="../company_summary.js"></script>
