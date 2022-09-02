@@ -17,5 +17,5 @@
 
 ### Start the App:
 
-`logo site: http://localhost:${port}/logo`
-`root site: http://localhost:${port} `
+`logo site: http://localhost:8000/logo`
+`root site: http://localhost:8000 `
