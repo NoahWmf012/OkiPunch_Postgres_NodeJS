@@ -117,42 +117,24 @@ class nodeServiceEmployee {
 
         //update salary table
         //find month_working_hour in salary
+        let dailySalaryPayroll = [];
         await this.knex
-            .select("day_working_hour")
-            .from("attendance")
-            .where("employee_id", id)
-            .orderBy("id", "asc")
+            .select("daily_salary", "hourly_rate")
+            .from(`payroll_${toMonthName(mm).toLowerCase()}`)
+            .innerJoin('salary', `payroll_${toMonthName(mm).toLowerCase()}.employee_id`, 'salary.employee_id')
+            .where(`payroll_${toMonthName(mm).toLowerCase()}.employee_id`, id)
             .then((rows) => {
-                let workHoursArray = [];
                 for (let i = 0; i < rows.length; i++) {
-                    let hmsInTime = rows[i].day_working_hour;
-                    if (hmsInTime === null) {
-                        console.log("Employee Service - querySalary no working hours, no need push in array");
-                    } else {
-                        let bInTime = hmsInTime.split(':');
-                        let inTimeSeconds = (+bInTime[0]) * 60 * 60 + (+bInTime[1]) * 60 + (+bInTime[2]);
-                        workHoursArray.push(inTimeSeconds);
-                    }
+                    dailySalaryPayroll.push(Number(rows[i].daily_salary));
                 }
                 const initialValue = 0;
-                const totalWorkHours = workHoursArray.reduce(
+                const sumWithInitialPayroll = dailySalaryPayroll.reduce(
                     (previousValue, currentValue) => previousValue + currentValue,
                     initialValue
                 );
-                console.log(workHoursArray);
-
-                workinghhmmss = new Date(totalWorkHours * 1000).toISOString().slice(11, 19);
-                let working_hour = Number((workinghhmmss.split(":")[0]) * 60);
-                console.log("working_hour: " + working_hour);
-                let working_min = Number((workinghhmmss.split(":")[1]));
-                console.log("working_min: " + working_min);
-                let calHour = (((working_hour) + working_min) / 60).toFixed(2);
-
-                console.log("month_working_hour: " + calHour);
-                console.log("calHour * hourly_rate: " + calHour * hourly_rate);
-
+                console.log(`Total monthly salary for ${toMonthName(mm).toLowerCase()}: $` + sumWithInitialPayroll);
                 return this.knex("salary").where("employee_id", id)
-                    .update({ month_working_hour: calHour, month_salary: calHour * hourly_rate });
+                    .update({ month_working_hour: (sumWithInitialPayroll / rows[0].hourly_rate), month_salary: sumWithInitialPayroll });
             })
     };
 
